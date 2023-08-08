@@ -15,5 +15,6 @@ public class Main2 {
             i = i/100+1;
         }else {i = i/100;}
         System.out.println(i);
+        
     }
 }

@@ -155,17 +155,15 @@ public class LinkList implements List {
     @Override
     public Object set(int index, Object element) {
         if (!legalIndex(index)) return null;
-        Node point = first;
-        for (int i = 0; i < size; i++) {
-            if (i == index) {
-                Node tempPoint = (Node) element;
-                tempPoint.next = point.next.next;
-                point.next = tempPoint;
-                return point.value;
-            }
-            point = point.next;
+        Node c = first;
+
+        // 找到 index 位的 节点  0 不需要 next   1 进行 .next
+        for (int i = 0; i < index; i++) {
+            c = c.next;
         }
-        return null;
+        Object old = c.value; // 旧值
+        c.value = element;
+        return old;
     }
 
     /**
@@ -176,16 +174,21 @@ public class LinkList implements List {
      */
     @Override
     public void add(int index, Object element) {
-        if (!legalIndex(index)) ;
-        else {
-            Node point = first;
-            for (int i = 0; i < size; i++) {
-                if (i == index) {
-                    Node tempPoint = (Node) element;
-                    tempPoint.next = point.next;
-                    point.next = tempPoint;
+        if (index < 0 || index > size + 1) {
+        } else {
+            if (index == 0) {
+                first = new Node(element, first);
+            } else {
+                Node pre = first;
+                Node c = first.next;
+
+                // 原来这个位置的元素. 找到 index 位的 Node 节点
+                for (int i = 1; i < index; i++) {
+                    pre = c;
+                    c = c.next;
                 }
-                point = point.next;
+                // 插入值
+                pre.next = new Node(element, c);
             }
             size++;
         }
@@ -261,10 +264,11 @@ public class LinkList implements List {
     }
 
     /**
-     /**
+     * /**
      * 截取给定范围的元素
+     *
      * @param fromIndex low endpoint (inclusive) of the subList （起始）
-     * @param toIndex high endpoint (exclusive) of the subList （结尾）
+     * @param toIndex   high endpoint (exclusive) of the subList （结尾）
      * @return 下标合法，返回给定范围元素 不合法返回 null
      */
     @Override
@@ -274,7 +278,7 @@ public class LinkList implements List {
         LinkList linkTemp = new LinkList();
         for (int i = 0; i <= toIndex; i++) {
             if (i >= fromIndex) {
-              linkTemp.add(point.value);
+                linkTemp.add(point.value);
             }
             point = point.next;
         }
@@ -303,26 +307,28 @@ public class LinkList implements List {
 
     /**
      * 下标是否合法
+     *
      * @param index
      * @return
      */
-    private boolean legalIndex(int index){
+    private boolean legalIndex(int index) {
         if (index < 0 || index > size - 1) return false;
         else return true;
     }
 
     /**
      * 重写 toString
+     *
      * @return
      */
     @Override
-    public String toString(){
-        if (first == null){
+    public String toString() {
+        if (first == null) {
             return "Linked[]";
         } else {
             StringBuilder sb = new StringBuilder("Linked[");
             Node c = first;
-            while (c.next != null){
+            while (c.next != null) {
                 sb.append(c.value); // 当前节点的值
                 sb.append(", ");
                 c = c.next; // 指向下一个元素
@@ -334,6 +340,7 @@ public class LinkList implements List {
         }
 
     }
+
     /**
      * 链表中的 节点对象
      */
@@ -352,24 +359,26 @@ public class LinkList implements List {
             this.value = value;
             this.next = next;
         }
+
         /**
          * 判断 node 节点是否一样
-         *  node 的值是否一样
+         * node 的值是否一样
+         *
          * @param obj
          * @return
          */
         @Override
-        public boolean equals(Object obj){
-            if (obj == null){
+        public boolean equals(Object obj) {
+            if (obj == null) {
                 return false;
             }
 
-            if (obj == this){
+            if (obj == this) {
                 return true;
             }
 
-            if (obj instanceof Node node){
-                if (this.value == null){
+            if (obj instanceof Node node) {
+                if (this.value == null) {
                     return node.value == null;
                 } else {
                     return value.equals(node.value);

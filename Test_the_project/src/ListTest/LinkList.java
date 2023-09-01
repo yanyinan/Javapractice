@@ -1,5 +1,7 @@
 package ListTest;
 
+import org.w3c.dom.Node;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -52,9 +54,20 @@ public class LinkList implements List {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] objects = new Object[size]; // 创建一个Object类型的数组
+        Node c = first; // 从链表的头部开始遍历
+        int index = 0; // 数组索引
+        while (c != null) {
+            objects[index++] = c.value; // 将当前节点的值赋给数组中相应位置
+            c = c.next; // 移动到下一个节点
+        }
+        return objects; // 返回填充好的数组
     }
 
     /**
@@ -73,6 +86,7 @@ public class LinkList implements List {
             while (c.next != null) {//判断为空的 next
                 c = c.next;
             }
+            c.next = current;
             c.next = current;
         }
         size++;//计数加1
@@ -136,13 +150,10 @@ public class LinkList implements List {
     public Object get(int index) {
         if (!legalIndex(index)) return null;
         Node point = first;
-        for (int i = 0; i < size; i++) {
-            if (i == index) {
-                return point.value;
-            }
+        for (int i = 0; i < index; i++) {
             point = point.next;
         }
-        return null;
+        return point.value;
     }
 
     /**
@@ -150,14 +161,12 @@ public class LinkList implements List {
      *
      * @param index   index of the element to replace
      * @param element element to be stored at the specified position
-     * @return
      */
     @Override
     public Object set(int index, Object element) {
         if (!legalIndex(index)) return null;
         Node c = first;
-
-        // 找到 index 位的 节点  0 不需要 next   1 进行 .next
+        // 找到 index 位的节点  0 不需要 next   1 进行 .next
         for (int i = 0; i < index; i++) {
             c = c.next;
         }
@@ -181,7 +190,6 @@ public class LinkList implements List {
             } else {
                 Node pre = first;
                 Node c = first.next;
-
                 // 原来这个位置的元素. 找到 index 位的 Node 节点
                 for (int i = 1; i < index; i++) {
                     pre = c;
@@ -202,18 +210,22 @@ public class LinkList implements List {
      */
     @Override
     public Object remove(int index) {
-        if (legalIndex(index)) return null;
+        if (!legalIndex(index)) return null;
         Node point = first;
-        for (int i = 0; i < size; i++) {
-            if (i == index) {
-                Object temp = point.value;
-                point.next = point.next.next;
-                return temp;
-            }
+        if (index == 0) {
             point = point.next;
+            size--;
+            return point.value;
+        } else {
+            for (int i = 1; i < index - 1; i++) {
+                point = point.next;
+            }
+            Node temp = point.next;
+            point.next = point.next.next;
+            temp.next = null;
+            size--;
+            return temp.value;
         }
-        size--;
-        return null;
     }
 
     /**
@@ -238,7 +250,7 @@ public class LinkList implements List {
      * 找到指定元素的位置（从后往前走）
      *
      * @param o element to search for
-     * @return
+     * @return flag
      */
     @Override
     public int lastIndexOf(Object o) {
@@ -300,9 +312,17 @@ public class LinkList implements List {
         return false;
     }
 
+    /**
+     *
+     * @param a the array into which the elements of this list are to
+     *          be stored, if it is big enough; otherwise, a new array of the
+     *          same runtime type is allocated for this purpose.
+     * @return 返回数组
+     */
     @Override
     public Object[] toArray(Object[] a) {
-        return new Object[0];
+
+        return null;
     }
 
     /**
@@ -385,6 +405,14 @@ public class LinkList implements List {
                 }
             }
             return false;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    ", next=" + next +
+                    '}';
         }
     }
 }

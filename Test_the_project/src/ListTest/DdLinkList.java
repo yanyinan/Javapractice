@@ -100,19 +100,20 @@ public class DdLinkList implements List {
                 first = next;  // 将第一个节点指向下一个节点
                 nodetemp.pre = null;  // 将前一个节点置空引用
                 nodetemp.next = null;  // 将下一个节点置空引用
-                return true;  // 删除成功，返回true
+            }else if (nodetemp.equals(last)){
+                last = last.pre;
+                last.next.pre = null;
+                last.next = null;
             } else {  // 如果找到的节点不是链表的第一个节点
-//                DdNode pre = nodetemp.pre;  // 获取前一个节点
-//                DdNode next = nodetemp.next;  // 获取下一个节点
                 nodetemp.pre.next = nodetemp.next;  // 前一个节点指向后一个节点
                 nodetemp.next.pre = nodetemp.pre;;  // 后一个节点指向前一个节点
                 nodetemp.pre = null;  // 将前一个节点置空引用
                 nodetemp.next = null;  // 将下一个节点置空引用
-                return true;  // 删除成功，返回true
             }
+            return true;  // 删除成功，返回true
+        }else {
+            return false;  // 如果链表中不包含指定元素，删除失败，返回false
         }
-
-        return false;  // 如果链表中不包含指定元素，删除失败，返回false
     }
 
 
@@ -144,19 +145,19 @@ public class DdLinkList implements List {
     @Override
     public Object get(int index) {
         LegalIndex(index);
-        DdNode nodetemp;
-        int mid = size /2;//中间节点位置
-        if (index < mid){//前半位置
-            nodetemp = first;
-            for (int i = 0; i < index; i++) {
-                nodetemp = nodetemp.next;
-            }
-        }else {//后半位置
-            nodetemp = last;
-            for (int i = size-1; i >index ; i--) {
-                nodetemp = nodetemp.pre;
-            }
-        }
+        DdNode nodetemp = indexNode(index);
+//        int mid = size /2;//中间节点位置
+//        if (index < mid){//前半位置
+//            nodetemp = first;
+//            for (int i = 0; i < index; i++) {
+//                nodetemp = nodetemp.next;
+//            }
+//        }else {//后半位置
+//            nodetemp = last;
+//            for (int i = size-1; i >index ; i--) {
+//                nodetemp = nodetemp.pre;
+//            }
+//        }
         return nodetemp.value;
     }
 
@@ -223,13 +224,24 @@ public class DdLinkList implements List {
     public Object remove(int index) {
         LegalIndex(index);
         DdNode nodetemp = indexNode(index);//调用indexNode方法找到指定下标断点
-        DdNode pre = nodetemp.pre; // 获取前一个节点
-        DdNode next = nodetemp.next; // 获取下个节点
-        pre.next = next; //  pre 指向后节点
-        next.pre = pre; //  next 指向前节点
         Object old = nodetemp.value;//返回值
-        nodetemp.pre = null;//置空引用
-        nodetemp.next = null;
+        if (nodetemp.equals(first)) {  // 如果找到的节点是链表的第一个节点
+            DdNode next = nodetemp.next;  // 获取下一个节点
+            first = next;  // 将第一个节点指向下一个节点
+            nodetemp.pre = null;  // 将前一个节点置空引用
+            nodetemp.next = null;  // 将下一个节点置空引用
+        } else if (nodetemp.equals(last)) {
+            last = last.pre;
+            last.next.pre = null;
+            last.next = null;
+        } else {
+            DdNode pre = nodetemp.pre; // 获取前一个节点
+            DdNode next = nodetemp.next; // 获取下个节点
+            pre.next = next; //  pre 指向后节点
+            next.pre = pre; //  next 指向前节点
+            nodetemp.pre = null;//置空引用
+            nodetemp.next = null;
+        }
         size--; // 链表大小计数器
         return old;
     }

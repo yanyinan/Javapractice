@@ -1,7 +1,7 @@
 package Morse;
 
+
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -98,16 +98,17 @@ public class Morse {
      * @return 长度相同个数
      */
     private static int MorseMach(String[] words) {
-        HashSet<String> hashSet = new HashSet<>();
+        HashMap<String,Integer> map = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
             char[] chars =  words[i].toCharArray();
             String strTemp = "";
             for(char ch :chars){
                 strTemp += morseCodeMap.get(ch);
             }
-            hashSet.add(strTemp);
+            map.put(strTemp,map.getOrDefault(strTemp,0)+1);
         }
-        return hashSet.size();
+//        System.out.println(map);
+        return map.size();
     }
     public static void main(String[] args) {
         String[] words = {"gin", "zen", "gig", "msg"};

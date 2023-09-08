@@ -35,8 +35,9 @@ public class FightLandlord {
                 .collect(Collectors.toList());
         pokerList.add("Joker");
         pokerList.add("joker");
-        /* System.out.println(pokerList);*/
+        System.out.println(pokerList);
         Collections.shuffle(pokerList);
+        System.out.println(pokerList);
         // 玩家一
         List<String> player1 = new ArrayList<>();
         // 玩家二
@@ -46,53 +47,56 @@ public class FightLandlord {
         // 底牌
         List<String> bottom = new ArrayList<>();
         for (int i = 0; i < pokerList.size(); i++) {
-            if (pokerList.size()-3 > i) {
+            if (pokerList.size() - 3 > i) {
                 switch (i % 3) {
                     case 0 -> player2.add(pokerList.get(i));
                     case 1 -> player1.add(pokerList.get(i));
                     default -> player3.add(pokerList.get(i));
                 }
-            }else {
+            } else {
                 bottom.add(pokerList.get(i));
             }
-
         }
-        System.out.println("Player1"+player1);
-        System.out.println("Player1"+player2);
-        System.out.println("Player1"+player3);
-        System.out.println("Bottom"+bottom);
+        player1.stream().sorted().forEach(e -> System.out.print(e + " "));
+        System.out.println();
+        System.out.println("Player1" + player1);
+        System.out.println("Player1" + player2);
+        System.out.println("Player1" + player3);
+        System.out.println("Bottom" + bottom);
 
     }
 }
 
 class PokerCards {
-    private List<String> suits = new ArrayList<>();
-    private List<String> ranks = new ArrayList<>();
-
-    public PokerCards() {
-        suits.add("\u2665");
-        // 红心 (Heart)
-        suits.add("\u2660");
+    private static final List<String> suits = new ArrayList<>();
+    private static final List<String> ranks = new ArrayList<>();
+    static {
         // 黑桃 (Spade)
-        suits.add("\u2663");
+        suits.add("\u2660");
+        // 红心 (Heart)
+        suits.add("\u2665");
         // 梅花 (Club)
-        suits.add("\u2666");
+        suits.add("\u2663");
         // 方块 (Diamond)
-        ranks.add("A");
-        ranks.add("2");
-        ranks.add("3");
-        ranks.add("4");
-        ranks.add("5");
-        ranks.add("6");
-        ranks.add("7");
-        ranks.add("8");
-        ranks.add("9");
-        ranks.add("10");
-        ranks.add("J");
-        ranks.add("Q");
-        ranks.add("K");
-    }
+        suits.add("\u2666");
 
+        ranks.add("2");
+        ranks.add("A");
+        ranks.add("K");
+        ranks.add("Q");
+        ranks.add("J");
+        ranks.add("10");
+        ranks.add("9");
+        ranks.add("8");
+        ranks.add("7");
+        ranks.add("6");
+        ranks.add("5");
+        ranks.add("4");
+        ranks.add("3");
+    }
+    public PokerCards() {
+
+    }
     public List<String> getRanks() {
         return ranks;
     }

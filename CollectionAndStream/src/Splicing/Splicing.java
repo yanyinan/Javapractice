@@ -25,18 +25,22 @@ public class Splicing {
         String[] arr = {"a", "b", "c"};
 
         //外部变量存储
-        StringBuilder temp = new StringBuilder();
-        Arrays.stream(arr).forEach(e -> {
-            temp.append(e); // 在Lambda表达式中修改外部变量
-        });
-        System.out.println(temp.toString());
+//        StringBuilder temp = new StringBuilder();
+//        Arrays.stream(arr).forEach(e -> {
+//            temp.append(e); // 在Lambda表达式中修改外部变量
+//        });
+//        System.out.println(temp.toString());
 
-        //错误
-//        String temp = "";
+        //错误示例
+//        String temp = ""; //字符串不能改变
 //        Arrays.stream(arr).forEach(e -> temp = temp + e);
 //        System.out.println(temp);
 
-        //数组流
+        //reduce方法
+//        System.out.println(Arrays.stream(arr).reduce("", (a, n) -> a + n));
+
+
+        //Collectors.joining() 方法
 //        String result = Arrays.stream(arr).collect(Collectors.joining());
 //        System.out.println(result);
     }

@@ -8,6 +8,7 @@ public class Main {
 //        bookManager.addBookInfo();
 //        bookManager.removeBook();
 //        bookManager.modifyBookQuantity();
+        bookManager.modifyBookQuantity();
         bookManager.showAllBooks();
         bookManager.close();
     }

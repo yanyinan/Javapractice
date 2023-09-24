@@ -95,8 +95,10 @@ public class BookManager {
         quantity = input.nextInt();
         if (bookSql.insert(sql,book_title,publication_date,author,price,quantity) ==-1){
             System.out.println("添加失败");
+            log(user+"\t执行"+sql+"成功");
         }else {
             System.out.println("添加成功");
+            log(user+"\t执行"+sql+"失败");
         }
     }
     public void removeBook() throws SQLException {
@@ -104,24 +106,38 @@ public class BookManager {
         String content = input.nextLine();
         if(bookSql.delete(sql,content)>0){
             System.out.println("删除成功");
+            log(user+"\t执行"+sql+"成功");
         }else {
             System.out.println("删除失败");
+            log(user+"\t执行"+sql+"失败");
         }
     }
     public void modifyBookQuantity() throws SQLException {
         String sql ="update books set quantity = ? where id =?;";
+        System.out.println("数量");
         int quantity = input.nextInt();
+        System.out.println("书名id");
         int id = input.nextInt();
-
         //Todo 判断是否超过原有数量
+        int n = bookSql.selectId("select quantity from books where id = "+ id);
+        if (n>id){
+            bookSql.update(sql,quantity,id);
+            log(user+"\t执行"+sql+"成功");
+        }else {
+            log(user+"\t执行"+sql+"失败");
+        }
 
-        bookSql.update(sql,quantity,id);
     }
     public void showAllBooks() throws SQLException {
         String sql = "select * from books;";
         List<Books> books = bookSql.selectAll(sql,new BooksMapper());
-        books.forEach(e->e.toString());
+        books.forEach(e-> System.out.println(e.toString()));
+        log(user+"\t执行"+sql);
     }
-    public void log(String desc) {}
+    public void log(String desc) throws SQLException {
+        String sql = "insert into operation_log(description) values(?)";
+        String description = desc;
+        bookSql.insert(sql,description);
+    }
 
 }

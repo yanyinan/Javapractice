@@ -121,7 +121,7 @@ public class SqlUtils {
 
         // 解析结果
         List<T> list = new ArrayList<>();
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             T t = resultmapper.mapper(resultSet);
             list.add(t);
         }
@@ -187,5 +187,18 @@ public class SqlUtils {
                 prestate.setObject(j, params[i]);
             }
         }
+    }
+
+    public int selectId(String sql) throws SQLException {
+        conn();
+
+//        prestate = conn.prepareStatement(sql);
+        // 执行操作
+        Statement statement = conn.createStatement();
+        int n = statement.executeQuery(sql).getInt("quantity");
+        statement.close();
+//        return prestate.executeQuery().getInt("quantity");
+        return n;
+
     }
 }

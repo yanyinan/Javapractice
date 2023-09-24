@@ -1,6 +1,8 @@
 package test0932;
 
 
+import test0932.bookmanagerclass.Books;
+import test0932.bookmapper.BooksMapper;
 import test0932.utils.SqlUtils;
 
 import java.io.File;
@@ -58,6 +60,7 @@ public class BookManager {
         for (int i = 0; i< string.length;i++){
             bookSql.initialize(string[i]);
         }
+        System.out.println("初始化成功");
     }
 
     /**
@@ -90,21 +93,35 @@ public class BookManager {
         price = input.nextDouble();
         System.out.println("数量");
         quantity = input.nextInt();
-        bookSql.insert(sql,book_title,publication_date,author,price,quantity);
-//        bookSql.grud(sql,1,"book_title","2023/2/2","author",12.1,1);
+        if (bookSql.insert(sql,book_title,publication_date,author,price,quantity) ==-1){
+            System.out.println("添加失败");
+        }else {
+            System.out.println("添加成功");
+        }
     }
     public void removeBook() throws SQLException {
         String sql ="delete from books where id =?";
         String content = input.nextLine();
-        bookSql.delete(sql,content);
+        if(bookSql.delete(sql,content)>0){
+            System.out.println("删除成功");
+        }else {
+            System.out.println("删除失败");
+        }
     }
     public void modifyBookQuantity() throws SQLException {
         String sql ="update books set quantity = ? where id =?;";
         int quantity = input.nextInt();
         int id = input.nextInt();
+
+        //Todo 判断是否超过原有数量
+
         bookSql.update(sql,quantity,id);
     }
-    public void showAllBooks(){}
+    public void showAllBooks() throws SQLException {
+        String sql = "select * from books;";
+        List<Books> books = bookSql.selectAll(sql,new BooksMapper());
+        books.forEach(e->e.toString());
+    }
     public void log(String desc) {}
 
 }

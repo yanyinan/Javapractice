@@ -90,20 +90,19 @@ public class BookManager {
         price = input.nextDouble();
         System.out.println("数量");
         quantity = input.nextInt();
-        bookSql.grud(sql,book_title,publication_date,author,price,quantity);
+        bookSql.insert(sql,book_title,publication_date,author,price,quantity);
 //        bookSql.grud(sql,1,"book_title","2023/2/2","author",12.1,1);
     }
     public void removeBook() throws SQLException {
         String sql ="delete from books where id =?";
         String content = input.nextLine();
-        bookSql.grud(sql,content);
+        bookSql.delete(sql,content);
     }
     public void modifyBookQuantity() throws SQLException {
         String sql ="update books set quantity = ? where id =?;";
         int quantity = input.nextInt();
         int id = input.nextInt();
-        bookSql.grud(sql,quantity,id);
-        System.out.println("修改成功");
+        bookSql.update(sql,quantity,id);
     }
     public void showAllBooks(){}
     public void log(String desc) {}

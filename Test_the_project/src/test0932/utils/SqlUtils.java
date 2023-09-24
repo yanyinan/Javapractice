@@ -68,7 +68,8 @@ public class SqlUtils {
      * @throws SQLException
      */
     public void initialize(String sql) throws SQLException {
-        prestate = conn().prepareStatement(sql);
+        conn();
+        prestate = conn.prepareStatement(sql);
         prestate.execute();
     }
     //TODO 查询单个
@@ -103,7 +104,8 @@ public class SqlUtils {
      * @throws SQLException
      */
     public int grud(String sql,Object... params) throws SQLException {
-        prestate = conn().prepareStatement(sql);
+        conn();
+        prestate = conn.prepareStatement(sql);
         setParams(params);
         System.out.println(prestate);
         return prestate.executeUpdate();

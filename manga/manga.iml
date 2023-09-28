@@ -7,8 +7,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="hutool-http-5.8.9" level="project" />
-    <orderEntry type="library" name="jsoup-1.16.1" level="project" />
-    <orderEntry type="library" name="hutool-core-5.8.9" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

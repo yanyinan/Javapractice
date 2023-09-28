@@ -21,7 +21,9 @@ public class ReflectDemo1 {
 //        for (Field field : t.getDeclaredFields()) {
 //            System.out.println(field);
 //        }
-        System.out.println(t.getPermittedSubclasses());
+        for (Class declaredClass : t.getDeclaredClasses()) {
+            System.out.println(declaredClass.isMemberClass());
+        }
     }
 }
 class testDemo{

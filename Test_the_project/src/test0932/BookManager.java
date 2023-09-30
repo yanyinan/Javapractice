@@ -130,7 +130,9 @@ public class BookManager {
     }
     public void showAllBooks() throws SQLException {
         String sql = "select * from books;";
-        List<Books> books = bookSql.selectAll(sql,new BooksMapper());
+//        List<Books> books = bookSql.selectAll(sql,new BooksMapper());
+
+        List<Books> books = bookSql.selectAll(sql,Books.class);
         books.forEach(e-> System.out.println(e.toString()));
         log(user+"\t执行"+sql);
     }

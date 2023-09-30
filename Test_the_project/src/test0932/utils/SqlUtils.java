@@ -1,5 +1,10 @@
 package test0932.utils;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +106,88 @@ public class SqlUtils {
 
         return null;
     }
+    public <T> T selectOne(String sql, Class<T> tClass, Object... params) throws SQLException {
+        conn();
+        prestate = conn.prepareStatement(sql);
+        setParams(params);
+        // 执行操作
+        resultSet = prestate.executeQuery();
+        // 解析结果
+        if (resultSet.next()) {
+            return mapper(resultSet,tClass);
+        }
+
+        return null;
+    }
+
+    private <T> T mapper(ResultSet resultSet, Class<T> tClass) {
+        try {
+            //获取构造
+            Constructor<T> constructor = tClass.getDeclaredConstructor();
+            //设置权限
+            constructor.setAccessible(true);
+            //创建对象
+            T t = constructor.newInstance();
+
+            //解析结果集
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            //获取列数
+            int columnCount = metaData.getColumnCount();
+
+            for (int i = 1; i <= columnCount; i++) {
+                //获取列名
+                String columnLabel = metaData.getColumnLabel(i);
+
+                //处理列名 小驼峰命名
+                if (columnLabel.contains("_")){
+                    columnLabel = toCamelCase(columnLabel);
+                }
+
+                try{
+                    //获取方法
+                    PropertyDescriptor propertyDescriptor = new PropertyDescriptor(columnLabel,tClass);
+                    Method writeMethod = propertyDescriptor.getWriteMethod();
+                    //设置权限
+                    writeMethod.setAccessible(true);
+
+                    //获取结果值
+                    Object values = resultSet.getObject(i);
+                    writeMethod.invoke(t, values);
+                } catch (Exception e){
+                    // 没有对应的属性
+                    System.err.println("没有对应的属性："+columnLabel+"跳过");
+                }
+
+            }
+            return t;
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 处理列名 小驼峰命名
+     *
+     * @param columnLabel
+     * @return
+     */
+    private  String toCamelCase(String columnLabel) {
+        String[] split = columnLabel.split("_");
+        StringBuffer stringBuffer = new StringBuffer(split[0].toLowerCase());
+        for (int i = 1; i < split.length; i++) {
+            stringBuffer.append(split[i].substring(0,1).toUpperCase()).append(split[i].substring(1).toLowerCase());
+        }
+        return stringBuffer.toString();
+    }
+
 
 
     /**
@@ -127,7 +214,30 @@ public class SqlUtils {
         }
         return list;
     }
+    /**
+     * 查询多个
+     *
+     * @param sql
+     * @param params
+     * @param <T>
+     * @return
+     */
+    public <T> List<T> selectAll(String sql, Class<T> tClass, Object... params) throws SQLException {
+        conn();
+        prestate = conn.prepareStatement(sql);
+        setParams(params);
 
+        // 执行操作
+        resultSet = prestate.executeQuery();
+
+        // 解析结果
+        List<T> list = new ArrayList<>();
+        while (resultSet.next()) {
+            T t = mapper(resultSet,tClass);
+            list.add(t);
+        }
+        return list;
+    }
     /**
      * @param sql
      * @param params

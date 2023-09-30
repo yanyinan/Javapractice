@@ -15,7 +15,7 @@ public class OperationLogMapper implements Resultmappable<OperationLog> {
     @Override
     public OperationLog mapper(ResultSet set) throws SQLException {
         OperationLog operationLog = new OperationLog();
-        operationLog.setLog_id(set.getInt("log_id"));
+        operationLog.setLogId(set.getInt("log_id"));
         operationLog.setDescription(set.getString("description"));
         operationLog.setDescription(set.getString("operation_time"));
         return operationLog;

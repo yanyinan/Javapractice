@@ -1,5 +1,6 @@
 package test0932.bookmanagerclass;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -9,11 +10,23 @@ import java.util.Date;
  */
 public class Books {
     private Integer id;
-    private String book_title;
-    private Date publication_date;
+    private String bookTitle;
+    private Date publicationDate;
     private String author;
-    private Double price;
+    private BigDecimal price;
     private Integer quantity;
+
+    @Override
+    public String toString() {
+        return "Books{" +
+                "id=" + id +
+                ", bookTitle='" + bookTitle + '\'' +
+                ", publicationDate=" + publicationDate +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -23,20 +36,20 @@ public class Books {
         this.id = id;
     }
 
-    public String getBook_title() {
-        return book_title;
+    public String getBookTitle() {
+        return bookTitle;
     }
 
-    public void setBook_title(String book_title) {
-        this.book_title = book_title;
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 
-    public Date getPublication_date() {
-        return publication_date;
+    public Date getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setPublication_date(Date publication_date) {
-        this.publication_date = publication_date;
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
     public String getAuthor() {
@@ -47,11 +60,11 @@ public class Books {
         this.author = author;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -63,15 +76,5 @@ public class Books {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "Books{" +
-                "id=" + id +
-                ", book_title='" + book_title + '\'' +
-                ", publication_date=" + publication_date +
-                ", author='" + author + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                '}';
-    }
+
 }

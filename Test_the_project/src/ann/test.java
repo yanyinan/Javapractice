@@ -6,8 +6,7 @@ package ann;
  * @date:
  */
 
-public class test {
-    String sql;
+public class Test {
     @TestAnnotation(id = 1,msg = "ss")
     public void f(){}
 }

@@ -1,6 +1,5 @@
 package ann;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 /**
@@ -10,13 +9,14 @@ import java.lang.reflect.Method;
  */
 public class TestDemo {
     public static void main(String[] args) throws NoSuchMethodException {
-        Class<test> testClass = test.class;
+        Class<Test> testClass = Test.class;
         Method f = testClass.getMethod("f");
         TestAnnotation annotation = f.getAnnotation(TestAnnotation.class);
         if (annotation != null){
-            // 有 Log 注解
+
             int id = annotation.id();
             String msg = annotation.msg();
+            System.out.println(id);
             System.out.println(msg);
         }
     }

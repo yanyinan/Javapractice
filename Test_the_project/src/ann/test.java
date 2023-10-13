@@ -7,7 +7,6 @@ import java.lang.annotation.Documented;
  * @author:nanzhou
  * @date:
  */
-@Documented
 public class Test {
     @TestAnnotation(id = 1,msg = "ss")
     public void f(){}

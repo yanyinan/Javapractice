@@ -17,7 +17,7 @@ import java.util.Base64;
 public class SocketDemo01 {
     static final int SINGLE_TRANSFER_NUM = 1;
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\26481\\Pictures\\linux.png");
+        File file = new File("C:\\Users\\26481\\Pictures\\Camera Roll\\1.jpg");
         try(Socket client = new Socket("localhost",1231);
             OutputStream outputStream = client.getOutputStream();
             InputStream inputStream = client.getInputStream();

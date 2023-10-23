@@ -1,7 +1,7 @@
 package com.example.springboot.dao;
 
-import entity.daoentity.KfmFile;
-import utils.dao.basesoperations.DbUtilsHelper;
+import com.example.springboot.entity.daoentity.KfmFile;
+import com.example.springboot.utils.dao.basesoperations.DbUtilsHelper;
 
 import java.util.List;
 

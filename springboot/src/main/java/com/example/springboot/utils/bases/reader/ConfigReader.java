@@ -1,6 +1,6 @@
 package com.example.springboot.utils.bases.reader;
 
-import entity.utilentity.BasicDataSource;
+import com.example.springboot.entity.utilentity.BasicDataSource;
 
 import java.io.IOException;
 import java.io.InputStream;

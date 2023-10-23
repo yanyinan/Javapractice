@@ -1,7 +1,7 @@
 package com.example.springboot.dao;
 
-import entity.daoentity.KfmUser;
-import utils.dao.basesoperations.DbUtilsHelper;
+import com.example.springboot.entity.daoentity.KfmUser;
+import com.example.springboot.utils.dao.basesoperations.DbUtilsHelper;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +19,7 @@ public class UserDao {
      * @param password 密码
      * @return 查询到的用户. 如果没有查询到, 返回 null
      */
-    public KfmUser selectByUsernameAndPassword(String username,String password){
+    public KfmUser selectByUsernameAndPassword(String username, String password){
         String sql = "select id, username, name from kfm_user where username = ? and password = ?";
         return DbUtilsHelper.queryOne(sql, KfmUser.class,username,password);
     }

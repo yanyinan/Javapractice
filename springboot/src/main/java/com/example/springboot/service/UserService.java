@@ -1,8 +1,9 @@
 package com.example.springboot.service;
 
+import com.example.springboot.dao.UserDao;
+import com.example.springboot.entity.daoentity.KfmUser;
 import com.mysql.cj.util.StringUtils;
-import dao.UserDao;
-import entity.daoentity.KfmUser;
+
 
 /**
  * UserService 用于处理用户相关的业务逻辑

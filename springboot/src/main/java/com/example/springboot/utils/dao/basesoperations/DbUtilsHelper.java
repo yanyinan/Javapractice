@@ -1,16 +1,17 @@
 package com.example.springboot.utils.dao.basesoperations;
 
-import entity.utilentity.BasicDataSource;
+import com.example.springboot.entity.utilentity.BasicDataSource;
+import com.example.springboot.utils.bases.reader.ConfigReader;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import utils.bases.reader.ConfigReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+
 
 /**
  * 定义一个工具类，封装了常用的数据库操作方法

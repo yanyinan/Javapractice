@@ -1,8 +1,8 @@
 package com.example.springboot.service;
 
 
-import dao.FileDao;
-import entity.daoentity.KfmFile;
+import com.example.springboot.dao.FileDao;
+import com.example.springboot.entity.daoentity.KfmFile;
 
 import java.util.List;
 

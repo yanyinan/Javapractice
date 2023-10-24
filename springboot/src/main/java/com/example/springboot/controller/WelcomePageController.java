@@ -21,7 +21,7 @@ public class WelcomePageController {
             return "redirect:/login";
         }
         // 请求转发到 /WEB-INF/welcome.html 页面
-        return "redirect:/WEB-INF/index.html";
+        return "/WEB-INF/index";
     }
 
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -26,8 +25,8 @@ public class LoginController {
 
     @RequestMapping(value = { "/login"}, method = RequestMethod.POST)
     public String login(HttpServletRequest request) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter("name");
+        String password = request.getParameter("pass");
         String captcha = request.getParameter("captcha");
         // 校验验证码
         if (!CaptchaUtil.ver(captcha, request)) {

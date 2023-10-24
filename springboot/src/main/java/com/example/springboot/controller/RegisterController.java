@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -21,7 +20,7 @@ import java.time.LocalDate;
 public class RegisterController {
     private UserService userService = new UserService();
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String register(HttpServletRequest req, HttpServletResponse resp){
+    public String register(HttpServletRequest req){
         KfmUser kfmUser = new KfmUser();
         // 获取请求数据
         kfmUser.setName(req.getParameter("nickname"));

@@ -7,7 +7,7 @@ import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,12 +21,14 @@ public class LoginController {
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        return "login1";
     }
 
-    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.POST)
-    public String login(@RequestParam("username") String username, String password, String captcha, HttpServletRequest request) {
-
+    @RequestMapping(value = { "/login"}, method = RequestMethod.POST)
+    public String login(HttpServletRequest request) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String captcha = request.getParameter("captcha");
         // 校验验证码
         if (!CaptchaUtil.ver(captcha, request)) {
             // 验证码错误

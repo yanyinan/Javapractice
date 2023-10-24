@@ -20,7 +20,7 @@ public class UserDao {
      * @return 查询到的用户. 如果没有查询到, 返回 null
      */
     public KfmUser selectByUsernameAndPassword(String username, String password){
-        String sql = "select id, username, name from kfm_user where username = ? and password = ?";
+        String sql = "select id, username, password from kfm_user where username = ? and password = ?";
         return DbUtilsHelper.queryOne(sql, KfmUser.class,username,password);
     }
 

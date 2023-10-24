@@ -11,10 +11,9 @@
 <body>
 
 <div class="materialContainer">
-	<form action="login" method="post">
+	<form th:action="@{login}" method="post">
 		<div class="box">
 			<div class="title">登录</div>
-
 			<div class="input">
 				<label for="name">用户名</label>
 				<input type="text" name="name" id="name">
@@ -31,7 +30,7 @@
 				<span class="spin"></span>
 			</div>
 			<div class="input">
-				<img src="captcha" alt="验证码" >
+				<img src="/captcha" alt="验证码" >
 			</div>
 			<div class="button login">
 				<button>
@@ -42,7 +41,7 @@
 			<a href="javascript:" class="pass-forgot">忘记密码？</a>
 		</div>
 	</form>
-	<form action="register" method="post">
+	<form th:action="@{register}" method="post">
 		<div class="overbox">
 			<div class="material-button alt-2">
 				<span class="shape"></span>

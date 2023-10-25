@@ -1,14 +1,15 @@
 package com.satrt.springweb.login.controller;
 
-import com.wf.captcha.utils.CaptchaUtil;
 import com.satrt.springweb.core.constant.Constant;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.login.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * @author: Nanzhou
@@ -25,19 +26,19 @@ public class LoginController {
     }
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.POST)
-    public String login(String username, String password, String captcha, HttpServletRequest request) {
+    public String login(@RequestParam() String username, String password, HttpServletRequest request) {
 
         // 校验验证码
-        if (!CaptchaUtil.ver(captcha, request)) {
-            // 验证码错误
-            // 清除验证码
-            CaptchaUtil.clear(request);
-            // 重定向到登录页面
-            return "redirect:/login";
-        }
-
-        // 清除验证码
-        CaptchaUtil.clear(request);
+//        if (!CaptchaUtil.ver(captcha, request)) {
+//            // 验证码错误
+//            // 清除验证码
+//            CaptchaUtil.clear(request);
+//            // 重定向到登录页面
+//            return "redirect:/login";
+//        }
+//
+//        // 清除验证码
+//        CaptchaUtil.clear(request);
 
         // 校验用户名密码
         UserEntity user = userService.login(username, password);

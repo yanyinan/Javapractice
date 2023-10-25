@@ -5,7 +5,6 @@ import com.satrt.springweb.core.utils.db.MD5Util;
 import com.satrt.springweb.login.dao.UserDao;
 import org.springframework.util.StringUtils;
 
-import java.sql.SQLException;
 
 /**
  * @author: Nanzhou
@@ -28,10 +27,8 @@ public class UserService {
                 || !StringUtils.hasText(password) ) {
             return null;
         }
-
         // 密码加密
         password = MD5Util.encodePassword(password, username);
-
         // 查询数据库
         return userDao.selectByUsernameAndPassword(username, password);
     }

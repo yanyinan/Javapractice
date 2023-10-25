@@ -1,22 +1,25 @@
-package com.satrt.springweb.login.service;
+package com.satrt.springweb.useroperation.servise;
 
 import com.satrt.springweb.core.exception.login.LoginException;
 import com.satrt.springweb.core.exception.login.RegisterException;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.core.utils.db.MD5Util;
-import com.satrt.springweb.login.dao.UserDao;
+import com.satrt.springweb.useroperation.dao.UserDao;
 import org.springframework.util.StringUtils;
+
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * 用户业务
+ *
  * @author: Nanzhou
  * @version: v0.0.1
  * @date: 2023 2023/10/25 17:03
  */
 public class UserService {
     private UserDao userDao = new UserDao();
-
-
+    
     /**
      * 用户登录
      *
@@ -38,14 +41,15 @@ public class UserService {
 
     /**
      * 用户注册
+     *
      * @param userEntity
      * @param password
      * @param rePassword
      * @return
      * @throws RegisterException
      */
-    public int register(UserEntity userEntity, String password, String rePassword) throws RegisterException {
-        // 参数校验
+    public void register(UserEntity userEntity, String password, String rePassword) throws RegisterException {
+        //参数校验
         if (!StringUtils.isEmpty(userEntity)
                 || !StringUtils.hasText(password)
                 || !StringUtils.hasText(rePassword)) {
@@ -58,20 +62,34 @@ public class UserService {
 
         // 用户名是否存在
         UserEntity entity = userDao.selectByUsername(userEntity.getUserName());
-        if (entity!=null){
-            throw new RegisterException("用户已存在",1);
+        if (entity != null) {
+            throw new RegisterException("用户已存在", 1);
         }
         // 密码加密
-        String encodePassword = MD5Util.encodePassword(password,userEntity.getUserName());
+        String encodePassword = MD5Util.encodePassword(password, userEntity.getUserName());
 
         userEntity.setPassword(encodePassword);
 
         // 插入数据
         int rows = userDao.insert(userEntity);
 
-        if (rows != 1){
-            throw new RegisterException("未知错误",3);
+        if (rows != 1) {
+            throw new RegisterException("未知错误", 3);
         }
-        return rows;
+    }
+
+    /**
+     * 用户列表
+     * @return 返回用户列表
+     */
+    public List<UserEntity> userDirectory() {
+        return userDao.selectAllUser();
+    }
+
+
+    public void update(UserEntity user) {
+    }
+
+    public void delete(Integer id) {
     }
 }

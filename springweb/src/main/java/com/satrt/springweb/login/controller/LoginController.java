@@ -3,7 +3,7 @@ package com.satrt.springweb.login.controller;
 import com.satrt.springweb.core.constant.Constant;
 import com.satrt.springweb.core.exception.login.LoginException;
 import com.satrt.springweb.core.model.entity.UserEntity;
-import com.satrt.springweb.login.service.UserService;
+import com.satrt.springweb.useroperation.servise.UserService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +59,6 @@ public class LoginController {
 
     @RequestMapping("/index")
     public String index() {
-        return "index";
+        return "backgrounder/index";
     }
 }

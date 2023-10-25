@@ -44,7 +44,9 @@ public class UserEditController {
     public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         // 删除 id 为 1的用户，/user/delete/1
         // 删除用户信息
-        userService.delete(id);
+        if (userService.delete(id)<0){
+            //抛出错误信息
+        }
         return "backgrounder/useroperate/userdirectory";
     }
 }

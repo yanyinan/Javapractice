@@ -2,9 +2,7 @@ package com.satrt.springweb.useroperation.dao;
 
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.core.utils.db.DbUtilsHelper;
-import com.satrt.springweb.useroperation.servise.UserService;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -35,13 +33,45 @@ public class UserDao {
         return DbUtilsHelper.queryOne(sql, UserEntity.class, userName);
     }
 
+    /**
+     * 用户注册
+     * @param userEntity 用户
+     * @return 返回修改行数
+     */
     public int insert(UserEntity userEntity) {
         String sql = "insert into sys_user(user_name, nick_name, password) values(?, ?, ?)";
         return DbUtilsHelper.update(sql,userEntity.getUserName(),userEntity.getNickName(),userEntity.getPassword());
     }
 
+    /**
+     * 查询所用用户信息
+     * @return 返回用户信息集合
+     */
     public List<UserEntity> selectAllUser() {
-        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName,status as ,email,phonenumber,sex,avatar,user_type,create_by,create_time,update_by,update_time,del_flag FROM sys_user";
+        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName,status as status, email as email,phonenumber as phoneNumber,sex as sex,,user_type as userType,create_by as createBY,create_time as createTime,update_by as updateBy,update_time as updateTime,del_flag as delFlag FROM sys_user";
         return DbUtilsHelper.queryList(sql,UserEntity.class);
+    }
+
+    /**
+     * 更新用户信息
+     * @param sqlParams 用户信息
+     * @param id 用户id
+     */
+    public void update(StringBuilder sqlParams, Long id) {
+        StringBuilder sql = new StringBuilder("update user set ");
+        sql.append(sqlParams);
+        sql.append(" where id = ?");
+        //todo sql测试
+        DbUtilsHelper.update(String.valueOf(sql));
+    }
+
+    /**
+     * 删除用户信息
+     * @param id
+     * @return
+     */
+    public int delete(Integer id) {
+        String sql = "delete * from where id = ?";
+        return DbUtilsHelper.update(sql);
     }
 }

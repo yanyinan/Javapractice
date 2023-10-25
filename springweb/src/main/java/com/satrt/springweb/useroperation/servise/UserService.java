@@ -8,6 +8,7 @@ import com.satrt.springweb.useroperation.dao.UserDao;
 import org.springframework.util.StringUtils;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,10 +87,34 @@ public class UserService {
         return userDao.selectAllUser();
     }
 
-
+    /**
+     * 修改用户信息
+     * @param user 修改用户
+     */
     public void update(UserEntity user) {
+        StringBuilder sqlParams = null;
+        List params = new ArrayList();
+        if (user.getUserName() != null){
+            sqlParams.append("username = ?, ");
+            params.add(user.getUserType());
+        }
+        if (user.getNickName() != null){
+            sqlParams.append("nick_name = ?, ");
+            params.add(user.getNickName());
+        }
+        // 其他字段同理
+
+        // 最后会多一个 , 需要去掉
+        sqlParams.deleteCharAt(sqlParams.length() - 1);
+
+        userDao.update(sqlParams,user.getId());
     }
 
-    public void delete(Integer id) {
+    /**
+     * 根据用户Id删除用户
+     * @param id 用户id
+     */
+    public int delete(Integer id) {
+        return userDao.delete(id);
     }
 }

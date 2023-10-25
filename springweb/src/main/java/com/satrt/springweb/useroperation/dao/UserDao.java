@@ -48,7 +48,7 @@ public class UserDao {
      * @return 返回用户信息集合
      */
     public List<UserEntity> selectAllUser() {
-        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName,status as status, email as email,phonenumber as phoneNumber,sex as sex,,user_type as userType,create_by as createBY,create_time as createTime,update_by as updateBy,update_time as updateTime,del_flag as delFlag FROM sys_user";
+        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName,status as status, email as email,phonenumber as phoneNumber,sex as sex,user_type as userType,create_by as createBY,create_time as createTime,update_by as updateBy,update_time as updateTime,del_flag as delFlag FROM sys_user\n";
         return DbUtilsHelper.queryList(sql,UserEntity.class);
     }
 
@@ -58,7 +58,7 @@ public class UserDao {
      * @param id 用户id
      */
     public void update(StringBuilder sqlParams, Long id) {
-        StringBuilder sql = new StringBuilder("update user set ");
+        StringBuilder sql = new StringBuilder("update sys_user set ");
         sql.append(sqlParams);
         sql.append(" where id = ?");
         //todo sql测试
@@ -71,7 +71,12 @@ public class UserDao {
      * @return
      */
     public int delete(Integer id) {
-        String sql = "delete * from where id = ?";
-        return DbUtilsHelper.update(sql);
+        String sql = "delete * from sys_user where id = ?";
+        return DbUtilsHelper.update(sql,id);
+    }
+
+    public UserEntity selectById(Integer id) {
+        String sql = "select * from sys_user where id = ?";
+        return DbUtilsHelper.queryOne(sql,UserEntity.class,id);
     }
 }

@@ -7,6 +7,7 @@
     /* 添加一些基本的样式 */
     body {
       font-family: Arial, sans-serif;
+      background-image: url(/assests/images/bg.png);
     }
     table {
       border-collapse: collapse;
@@ -53,9 +54,20 @@
   <thead>
   <tr>
     <th>序号</th>
+    <th>账号状态（0正常 1停用）</th>
     <th>头像</th>
     <th>用户名</th>
     <th>昵称</th>
+    <th>性别（0男，1女，2未知）</th>
+    <th>邮箱</th>
+    <th>电话</th>
+    <th>用户类型（0管理员，1普通用户）</th>
+    <th>创建人</th>
+    <th>创建时间</th>
+    <th>更新操作人</th>
+    <th>更新时间</th>
+    <th>是否删除（0代表未删除，1代表已删除）</th>
+    <th>操作</th>
   </tr>
   </thead>
   <tbody>
@@ -65,16 +77,24 @@
   -->
   <tr th:each="useroperate, stat : ${list}">
     <td th:text="${stat.count}"></td>
+    <td th:text="${useroperate.status}"></td>
     <td class="img"><img th:src="@{${useroperate.getAvatar()}}" /></td>
     <td th:text="${useroperate.userName}"></td>
     <td th:text="${useroperate.nickName}"></td>
     <td th:text="${useroperate.sex}"></td>
-
-<!--    <td class="table-button">-->
-<!--      <a th:href="@{/user/edit(id=${user.id})}">修改</a>-->
-<!--      <a th:href="@{'/user/delete/' + ${user.id}}">删除</a>-->
-<!--      <a th:href="@{/user/delete/{id}(id=${user.id})}">删除</a>-->
-<!--    </td>-->
+    <td th:text="${useroperate.email}"></td>
+    <td th:text="${useroperate.phoneNumber}"></td>
+    <td th:text="${useroperate.userType}"></td>
+    <td th:text="${useroperate.createBy}"></td>
+    <td th:text="${useroperate.createTime}"></td>
+    <td th:text="${useroperate.updateBy}"></td>
+    <td th:text="${useroperate.updateTime}"></td>
+    <td th:text="${useroperate.delFlag}"></td>
+    <td class="table-button">
+<!--      <a th:href="@{useroperate/edit(id=${user.id})}">修改</a>-->
+<!--      <a th:href="@{'/useroperate/delete/' + ${user.id}}">删除</a>-->
+<!--      <a th:href="@{/useroperate/delete/{id}(id=${user.id})}">删除</a>-->
+    </td>
   </tr>
   <!-- 添加更多用户行 -->
   </tbody>

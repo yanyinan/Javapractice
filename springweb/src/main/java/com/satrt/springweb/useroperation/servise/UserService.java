@@ -117,4 +117,13 @@ public class UserService {
     public int delete(Integer id) {
         return userDao.delete(id);
     }
+
+    /**
+     * 根据Id查找用户
+     * @param id 用户Id
+     * @return 返回用户
+     */
+    public UserEntity getById(Integer id) {
+        return userDao.selectById(id);
+    }
 }

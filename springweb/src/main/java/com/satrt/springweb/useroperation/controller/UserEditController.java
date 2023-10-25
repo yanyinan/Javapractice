@@ -23,7 +23,7 @@ import java.util.List;
 public class UserEditController {
     private UserService userService = new UserService();
 
-    @RequestMapping(value = "/directory", method = RequestMethod.GET)
+    @RequestMapping(value = "/userdirectory", method = RequestMethod.GET)
     public String list(Model model) {
         // templates/user/list.html
         // 查询用户列表
@@ -33,7 +33,15 @@ public class UserEditController {
         return "backgrounder/useroperate/userdirectory";
     }
 
-    @RequestMapping(value = "/directory", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String edit(Model model, Integer id) {
+        // 查询用户信息
+        UserEntity byId = userService.getById(id);
+        // 存到域中
+        model.addAttribute("user", byId);
+        return "backgrounder/useroperate/userdirectory";
+    }
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String edit(UserEntity user, RedirectAttributes redirectAttributes) {
         // 修改用户信息
         userService.update(user);

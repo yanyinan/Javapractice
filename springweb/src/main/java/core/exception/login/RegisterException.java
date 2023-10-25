@@ -3,6 +3,7 @@ package core.exception.login;
 import lombok.Getter;
 
 /**
+ * 注册异常处理
  * @author: Nanzhou
  * @version: v0.0.1
  * @date: 2023 2023/10/25 14:52
@@ -18,6 +19,10 @@ public class RegisterException extends Exception{
     private Integer code;
     public RegisterException() {
         this("参数校验失败",0);
+    }
+
+    public RegisterException(String message) {
+        this(message,3);
     }
 
     public RegisterException(String message, Integer code) {

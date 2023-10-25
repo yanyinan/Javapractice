@@ -1,7 +1,7 @@
-package core.utils.db;
+package com.satrt.springweb.core.utils.db;
 
-import core.utils.model.BasicDataModel;
-import core.utils.reader.ConfigReader;
+import com.satrt.springweb.core.utils.model.BasicDataModel;
+import com.satrt.springweb.core.utils.reader.ConfigReader;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;

@@ -1,4 +1,4 @@
-package core.exception.login;
+package com.satrt.springweb.core.exception.login;
 
 import lombok.Getter;
 

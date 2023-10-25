@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title>登录注册</title>
 
-    <link rel="stylesheet" href="../../static/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../static/login/css/style.css">
+    <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/login/css/style.css">
 
 </head>
 <body>
 
 <div class="materialContainer">
     <!--登录-->
-    <form action="login" method="post">
+    <form th:action="@{/login}" method="post">
         <div class="box">
             <div class="title">登录</div>
             <div class="input">
@@ -31,7 +31,7 @@
                 <span class="spin"></span>
             </div>
             <div class="input">
-                <img src="captcha" alt="验证码">
+                <img th:src="@{captcha}" alt="验证码">
             </div>
             <div class="button login">
                 <button>
@@ -43,7 +43,7 @@
         </div>
     </form>
     <!--注册-->
-    <form action="register" method="post">
+    <form th:action="@{/register}" method="post">
         <div class="overbox">
             <div class="material-button alt-2">
                 <span class="shape"></span>
@@ -88,8 +88,8 @@
         </div>
     </form>
 </div>
-<script src="../../static/login/js/jquery.min.js"></script>
-<script src="../../static/login/js/index.js"></script>
+<script src="/login/js/jquery.min.js"></script>
+<script src="c/login/js/index.js"></script>
 
 </body>
 </html>

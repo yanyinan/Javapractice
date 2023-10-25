@@ -1,8 +1,8 @@
-package core.utils.reader;
+package com.satrt.springweb.core.utils.reader;
 
 
 
-import core.utils.model.BasicDataModel;
+import com.satrt.springweb.core.utils.model.BasicDataModel;
 
 import java.io.IOException;
 import java.io.InputStream;

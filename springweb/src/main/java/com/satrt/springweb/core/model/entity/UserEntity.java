@@ -1,4 +1,4 @@
-package core.model.entity;
+package com.satrt.springweb.core.model.entity;
 
 import lombok.Data;
 

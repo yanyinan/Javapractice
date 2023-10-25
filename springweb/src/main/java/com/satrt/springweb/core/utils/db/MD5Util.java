@@ -80,8 +80,4 @@ public class MD5Util {
         return md5(md5(password, salt));
     }
 
-    public static void main(String[] args) {
-        String md5 = md5(md5("123456", "zhangsan"));
-        System.out.println(md5);
-    }
 }

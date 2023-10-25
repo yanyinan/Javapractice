@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 验证码
+ * @author: Nanzhou
+ * @version: v0.0.1
+ * @date: 2023 2023/10/25 17:00
+ */
 @Controller
 public class CaptchaController {
 

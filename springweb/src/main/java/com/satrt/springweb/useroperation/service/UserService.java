@@ -1,10 +1,12 @@
 package com.satrt.springweb.useroperation.service;
 
-import com.satrt.springweb.core.exception.login.LoginException;
-import com.satrt.springweb.core.exception.login.RegisterException;
+import com.satrt.springweb.exception.login.LoginException;
+import com.satrt.springweb.exception.login.RegisterException;
+import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.core.utils.db.MD5Util;
 import com.satrt.springweb.useroperation.dao.UserDao;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -17,9 +19,13 @@ import java.util.List;
  * @version: v0.0.1
  * @date: 2023 2023/10/25 17:03
  */
+@Service
 public class UserService {
-    private UserDao userDao = new UserDao();
-    
+
+    private UserDao userDao;
+    UserService(UserDao userDao){
+        this.userDao = userDao;
+    }
     /**
      * 用户登录
      *
@@ -27,7 +33,7 @@ public class UserService {
      * @param password 密码
      * @return 登录成功返回 User 对象，登录失败返回 null
      */
-    public UserEntity login(String username, String password) throws LoginException {
+    public UserEntity login(String username, String password) throws LoginException, SqlServiceException {
         // 参数校验
         if (!StringUtils.hasText(username)
                 || !StringUtils.hasText(password)) {
@@ -48,13 +54,13 @@ public class UserService {
      * @return
      * @throws RegisterException
      */
-    public void register(UserEntity userEntity, String password, String rePassword) throws RegisterException {
+    public void register(UserEntity userEntity, String password, String rePassword) throws RegisterException, SqlServiceException {
         //参数校验
-//        if (!StringUtils.isEmpty(userEntity)
-//                || !StringUtils.hasText(password)
-//                || !StringUtils.hasText(rePassword)) {
-//            throw new RegisterException("参数校验失败", 0);
-//        }
+        if (!StringUtils.isEmpty(userEntity)
+                || !StringUtils.hasText(password)
+                || !StringUtils.hasText(rePassword)) {
+            throw new RegisterException("参数校验失败", 0);
+        }
         //密码校验
         if (!password.equals(rePassword)) {
             throw new RegisterException("密码重复", 0);
@@ -82,7 +88,7 @@ public class UserService {
      * 用户列表
      * @return 返回用户列表
      */
-    public List<UserEntity> userDirectory() {
+    public List<UserEntity> userDirectory() throws SqlServiceException {
         return userDao.selectAllUser();
     }
 
@@ -90,7 +96,7 @@ public class UserService {
      * 修改用户信息
      * @param user 修改用户
      */
-    public void update(UserEntity user) {
+    public void update(UserEntity user) throws SqlServiceException {
         StringBuilder sqlParams = null;
         List params = new ArrayList();
         if (user.getAvatar() != null){
@@ -139,7 +145,7 @@ public class UserService {
      * 根据用户Id删除用户
      * @param id 用户id
      */
-    public int delete(Integer id) {
+    public int delete(Integer id) throws SqlServiceException {
         return userDao.delete(id);
     }
 
@@ -148,7 +154,7 @@ public class UserService {
      * @param id 用户Id
      * @return 返回用户
      */
-    public UserEntity getById(Integer id) {
+    public UserEntity getById(Integer id) throws SqlServiceException {
         return userDao.selectById(id);
     }
 }

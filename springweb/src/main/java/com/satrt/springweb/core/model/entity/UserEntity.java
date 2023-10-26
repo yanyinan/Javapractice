@@ -3,6 +3,7 @@ package com.satrt.springweb.core.model.entity;
 import com.satrt.springweb.core.constant.Constant;
 import lombok.Data;
 
+import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -53,7 +54,7 @@ public class UserEntity implements Serializable {
     private String avatar;
 
     public String getAvatar() {
-        return Constant.UPLOAD_PATH + avatar;
+        return Constant.UPLOAD_PATH  + userName+  avatar;
     }
 
     /**

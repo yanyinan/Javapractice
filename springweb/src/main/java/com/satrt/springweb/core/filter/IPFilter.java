@@ -5,6 +5,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * ip 过滤
+ * @author 26481
+ */
 @WebFilter("/*")
 public class IPFilter implements Filter {
     @Override

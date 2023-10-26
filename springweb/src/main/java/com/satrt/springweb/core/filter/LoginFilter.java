@@ -1,8 +1,6 @@
 package com.satrt.springweb.core.filter;
 
-
 import com.satrt.springweb.core.constant.Constant;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * 登录过滤
  * @author 26481
  */
 @WebFilter("/*")
@@ -55,7 +54,6 @@ public class LoginFilter implements Filter {
             resp.sendRedirect(contextPath + "/login");
             return;
         }
-
         chain.doFilter(request, response);
     }
 }

@@ -1,5 +1,6 @@
 package com.satrt.springweb.useroperation.controller;
 
+import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.useroperation.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/useroperate")
 public class UserEditController {
-    private UserService userService = new UserService();
+    private UserService userService;
+    UserEditController(UserService userService){
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/userdirectory", method = RequestMethod.GET)
-    public String list(Model model) {
+    public String list(Model model) throws SqlServiceException {
         // 查询用户列表
         List<UserEntity> list = userService.userDirectory();
         // 存到域中
@@ -31,7 +35,7 @@ public class UserEditController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String edit(Model model, Integer id) {
+    public String edit(Model model, Integer id) throws SqlServiceException {
         // 查询用户信息
         UserEntity byId = userService.getById(id);
         // 存到域中
@@ -39,18 +43,19 @@ public class UserEditController {
         return "backgrounder/useroperate/edit";
     }
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String edit(UserEntity user, RedirectAttributes redirectAttributes) {
+    public String edit(UserEntity user, RedirectAttributes redirectAttributes) throws SqlServiceException {
         // 修改用户信息
         userService.update(user);
         return "backgrounder/useroperate/userdirectory";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(Integer id, RedirectAttributes redirectAttributes) {
+    public String delete(Integer id, RedirectAttributes redirectAttributes) throws SqlServiceException {
         System.out.println("删除");
         // 删除用户信息
        if (userService.delete(id)>0){
-           //抛出问题 todo
+           //抛出
+
        }
         return "backgrounder/useroperate/userdirectory";
     }

@@ -1,4 +1,4 @@
-package com.satrt.springweb.core.exception.login;
+package com.satrt.springweb.exception.login;
 
 /**
  * @author: Nanzhou

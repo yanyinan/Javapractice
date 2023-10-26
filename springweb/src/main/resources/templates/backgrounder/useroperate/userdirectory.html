@@ -77,7 +77,7 @@
   <tr th:each="useroperate, stat : ${list}">
     <td th:text="${stat.count}"></td>
 <!--    <td th:text="${useroperate.status}"></td>-->
-    <td class="img"><img th:src="@{${useroperate.getAvatar()}}" /></td>
+    <td class="img"><img th:src="@{${useroperate.avatar}}" /></td>
     <td th:text="${useroperate.userName}"></td>
     <td th:text="${useroperate.nickName}"></td>
     <td th:text="${useroperate.sex}"></td>

@@ -1,12 +1,13 @@
 package com.satrt.springweb.login.controller;
 
 import com.satrt.springweb.core.constant.Constant;
-import com.satrt.springweb.core.exception.login.LoginException;
+import com.satrt.springweb.exception.login.LoginException;
+import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.useroperation.service.UserService;
 import com.wf.captcha.utils.CaptchaUtil;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class LoginController {
-    private UserService userService = new UserService();
+    /**
+     * ioc 构造器注入
+     */
+    private UserService userService;
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String loginPage() {
@@ -30,7 +37,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.POST)
-    public String login(@RequestParam("name") String username, @RequestParam("password") String password, String captcha, HttpServletRequest request, Model model) throws LoginException {
+    public String login(@RequestParam("name") String username, @RequestParam("password") String password, String captcha, HttpServletRequest request) throws LoginException, SqlServiceException {
 
 //         校验验证码
         if (!CaptchaUtil.ver(captcha, request)) {

@@ -1,5 +1,6 @@
 package com.satrt.springweb.core.utils.db;
 
+import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.core.utils.model.BasicDataModel;
 import com.satrt.springweb.core.utils.reader.ConfigReader;
 import org.apache.commons.dbutils.DbUtils;
@@ -38,7 +39,7 @@ public class DbUtilsHelper {
      * 定义一个公共的静态方法，获取数据库连接
      * @return 返回连接
      */
-    private static Connection getConnection() throws SQLException {
+    private static Connection getConnection() throws SQLException, SqlServiceException {
 
         // 获取数据源
         BasicDataModel basicDataSource = ConfigReader.basicData;
@@ -47,9 +48,7 @@ public class DbUtilsHelper {
         try {
             Class.forName(basicDataSource.getDriverClassName());
         } catch (ClassNotFoundException e) {
-            System.out.println("注册异常");
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            throw new SqlServiceException(" Driver 注册异常",e,4);
         }
         return DriverManager.getConnection(basicDataSource.getUrl(), basicDataSource.getUsername(), basicDataSource.getPassword());
     }
@@ -60,14 +59,12 @@ public class DbUtilsHelper {
      * @param params 参数
      * @return 返回值
      */
-    public static int update(String sql, Object... params)  {
+    public static int update(String sql, Object... params) throws SqlServiceException {
         // 获取数据库连接
         Connection conn;
         try {
             conn = getConnection();
         } catch (SQLException e) {
-            System.out.println("增删改操作连接数据库异常");
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
         try {
@@ -75,9 +72,7 @@ public class DbUtilsHelper {
             return queryRunner.update(conn, sql, params);
         } catch (SQLException e) {
             // 处理异常
-            System.out.println("增删改操作异常");
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            throw new SqlServiceException("更新错误",e,3);
         } finally {
             // 关闭连接
             DbUtils.closeQuietly(conn);
@@ -92,24 +87,20 @@ public class DbUtilsHelper {
      * @param <T> 泛型
      * @return 查询结果
      */
-    public static <T> T queryOne(String sql, Class<T> type, Object... params)  {
+    public static <T> T queryOne(String sql, Class<T> type, Object... params) throws SqlServiceException {
         // 获取数据库连接
         Connection conn;
         try {
             conn = getConnection();
-        } catch (SQLException e) {
-            System.out.println("查询单个操作连接数据库异常");
-            e.printStackTrace();
-            throw new RuntimeException(e);
+        } catch (SqlServiceException | SQLException e) {
+            throw new SqlServiceException("连接错误",e,4);
         }
         try {
             // 调用QueryRunner的query方法，执行SQL语句，使用BeanHandler处理结果集，返回单个对象
             return queryRunner.query(conn, sql, new BeanHandler<>(type), params);
         } catch (SQLException e) {
             // 处理异常
-            System.out.println("查询数据库异常");
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            throw new SqlServiceException("查询错误",e,1);
         } finally {
             // 关闭连接
             DbUtils.closeQuietly(conn);
@@ -124,24 +115,20 @@ public class DbUtilsHelper {
      * @param <T> 泛型
      * @return 查询结果
      */
-    public static <T> List<T> queryList(String sql, Class<T> type, Object... params) {
+    public static <T> List<T> queryList(String sql, Class<T> type, Object... params) throws SqlServiceException {
         // 获取数据库连接
         Connection conn;
         try {
             conn = getConnection();
-        } catch (SQLException e) {
-            System.out.println("查询多个操作连接数据库异常");
-            e.printStackTrace();
-            throw new RuntimeException(e);
+        } catch (SqlServiceException | SQLException e) {
+            throw new SqlServiceException("连接错误",e,4);
         }
         try {
             // 调用QueryRunner的query方法，执行SQL语句，使用BeanListHandler处理结果集，返回多个对象
             return queryRunner.query(conn, sql, new BeanListHandler<>(type), params);
         } catch (SQLException e) {
             // 处理异常
-            System.out.println("查询数据库异常");
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            throw new SqlServiceException("查询错误",e,1);
         } finally {
             // 关闭连接
             DbUtils.closeQuietly(conn);

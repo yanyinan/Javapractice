@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version: v0.0.1
  * @date: 2023 2023/10/25 19:09
  */
+
 @Controller
 public class RegisterController {
     private UserService userService ;

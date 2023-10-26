@@ -53,7 +53,7 @@ public class UserService {
      */
     public void register(UserEntity userEntity, String password, String rePassword) throws RegisterException, SqlServiceException {
         //参数校验
-        if (!StringUtils.isEmpty(userEntity)
+        if ((userEntity ==null)
                 || !StringUtils.hasText(password)
                 || !StringUtils.hasText(rePassword)) {
             throw new RegisterException("参数校验失败", 0);
@@ -94,7 +94,7 @@ public class UserService {
      * @param user 修改用户
      */
     public void update(UserEntity user) throws SqlServiceException {
-        StringBuilder sqlParams = null;
+        StringBuilder sqlParams = new StringBuilder("");
         List params = new ArrayList();
         if (user.getAvatar() != null){
             sqlParams.append("avatar = ?, ");
@@ -135,8 +135,9 @@ public class UserService {
         // 最后会多一个 , 需要去掉
         assert sqlParams != null;
         sqlParams.deleteCharAt(sqlParams.length() - 1);
-
-        userDao.update(sqlParams,user.getId());
+        sqlParams.append(" where id = ?");
+        params.add(user.getId());
+        userDao.update(sqlParams,params);
     }
 
     /**

@@ -58,15 +58,14 @@ public class UserDao {
 
     /**
      * 更新用户信息
+     *
      * @param sqlParams 用户信息
-     * @param id 用户id
+     * @param params
      */
-    public void update(StringBuilder sqlParams, Long id) throws SqlServiceException {
+    public void update(StringBuilder sqlParams, List params) throws SqlServiceException {
         StringBuilder sql = new StringBuilder("update sys_user set ");
         sql.append(sqlParams);
-        sql.append(" where id = ?");
-        //todo sql测试
-        DbUtilsHelper.update(String.valueOf(sql));
+        DbUtilsHelper.update(String.valueOf(sql),params.toArray());
     }
 
     /**

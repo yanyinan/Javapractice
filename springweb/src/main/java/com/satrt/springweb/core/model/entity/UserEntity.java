@@ -19,7 +19,7 @@ public class UserEntity implements Serializable {
     /**
      * 用户id
      */
-    private Long id;
+    private int id;
     /**
      * 用户名
      */

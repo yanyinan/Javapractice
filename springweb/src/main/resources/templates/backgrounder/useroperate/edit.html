@@ -6,12 +6,12 @@
 </head>
 <body>
 <div class="login-container">
-    <h2>修改用户信息</h2>
+    <h2>修改<span th:text="${user.userName}"></span>用户信息</h2>
     <form th:action="@{/useroperate/edit}" method="post">
         <input type="hidden" name="id" th:value="${user.id}" readonly/>
         <div class="form-group">
-            <label for="name">真实姓名:</label>
-            <input type="text" id="name" name="name" required th:value="${user.name}">
+            <label for="nickname">真实姓名:</label>
+            <input type="text" id="nickname" name="nickname" required >
         </div>
         <div class="form-group">
             <p class="error" th:text="${message}"></p>

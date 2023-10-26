@@ -94,6 +94,10 @@ public class UserService {
     public void update(UserEntity user) {
         StringBuilder sqlParams = null;
         List params = new ArrayList();
+        if (user.getAvatar() != null){
+            sqlParams.append("avatar = ?, ");
+            params.add(user.getAvatar());
+        }
         if (user.getUserName() != null){
             sqlParams.append("username = ?, ");
             params.add(user.getUserType());
@@ -102,8 +106,30 @@ public class UserService {
             sqlParams.append("nick_name = ?, ");
             params.add(user.getNickName());
         }
-        // 其他字段同理
-
+        if (user.getPassword() != null){
+            sqlParams.append("password = ?, ");
+            params.add(user.getPassword());
+        }
+        if (user.getStatus() != null){
+            sqlParams.append("status = ?, ");
+            params.add(user.getStatus());
+        }
+        if (user.getEmail() != null){
+            sqlParams.append("email = ?, ");
+            params.add(user.getEmail());
+        }
+        if (user.getPhoneNumber() != null){
+            sqlParams.append("password = ?, ");
+            params.add(user.getPassword());
+        }
+        if (user.getSex() != null){
+            sqlParams.append("sex = ?, ");
+            params.add(user.getSex());
+        }
+        if (user.getUserType() != null){
+            sqlParams.append("user_type = ?, ");
+            params.add(user.getUserType());
+        }
         // 最后会多一个 , 需要去掉
         sqlParams.deleteCharAt(sqlParams.length() - 1);
 

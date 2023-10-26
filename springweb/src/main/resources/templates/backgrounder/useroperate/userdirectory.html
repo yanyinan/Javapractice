@@ -90,8 +90,8 @@
 <!--    <td th:text="${useroperate.updateTime}"></td>-->
     <td th:text="${useroperate.delFlag}"></td>
     <td class="table-button">
-      <a th:href="@{useroperate/edit(id=${useroperate.id})}">修改</a>
-      <a th:href="@{/useroperate/delete(id=${useroperate.id})}">删除</a>
+      <a th:href="@{'' + edit(id=${useroperate.id})}">修改</a>
+      <a th:href="@{'' + delete(id=${useroperate.id})}">删除</a>
     </td>
   </tr>
   <!-- 添加更多用户行 -->

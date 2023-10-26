@@ -1,6 +1,5 @@
 package com.satrt.springweb.useroperation.controller;
 
-
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.useroperation.servise.UserService;
 import org.springframework.stereotype.Controller;
@@ -38,7 +37,7 @@ public class UserEditController {
         UserEntity byId = userService.getById(id);
         // 存到域中
         model.addAttribute("user", byId);
-        return "backgrounder/useroperate/userdirectory";
+        return "backgrounder/useroperate/edit";
     }
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String edit(UserEntity user, RedirectAttributes redirectAttributes) {
@@ -51,9 +50,7 @@ public class UserEditController {
     public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         System.out.println("删除");
         // 删除用户信息
-        if (userService.delete(id)<0){
-            //抛出错误信息
-        }
-        return "backgrounder/useroperate/userdirectory";
+       userService.delete(id);
+        return "redirect:backgrounder/useroperate/userdirectory";
     }
 }

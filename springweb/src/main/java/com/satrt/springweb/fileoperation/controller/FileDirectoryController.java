@@ -1,5 +1,6 @@
 package com.satrt.springweb.fileoperation.controller;
 
+import com.satrt.springweb.core.model.entity.FileEntity;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.fileoperation.service.FileService;
@@ -25,9 +26,9 @@ public class FileDirectoryController {
     @RequestMapping(value = "/filedirectory", method = RequestMethod.GET)
     public String list(Model model) throws SqlServiceException {
         // 查询用户列表
-        List<UserEntity> list = FileService.fileDirectory();
+        List<FileEntity> list = fileService.fileDirectory();
         // 存到域中
-        model.addAttribute("list", list);
+        model.addAttribute("filelist", list);
         return "backgrounder/useroperate/userdirectory";
     }
 

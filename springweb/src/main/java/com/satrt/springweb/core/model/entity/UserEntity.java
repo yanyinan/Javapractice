@@ -1,5 +1,6 @@
 package com.satrt.springweb.core.model.entity;
 
+import com.satrt.springweb.core.constant.Constant;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -50,6 +51,11 @@ public class UserEntity implements Serializable {
      * 头像
      */
     private String avatar;
+
+    public String getAvatar() {
+        return Constant.UPLOAD_PATH + avatar;
+    }
+
     /**
      * 用户类型（0管理员，1普通用户）
      */

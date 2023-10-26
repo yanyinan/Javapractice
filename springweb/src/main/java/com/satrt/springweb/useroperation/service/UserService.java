@@ -1,4 +1,4 @@
-package com.satrt.springweb.useroperation.servise;
+package com.satrt.springweb.useroperation.service;
 
 import com.satrt.springweb.core.exception.login.LoginException;
 import com.satrt.springweb.core.exception.login.RegisterException;
@@ -7,7 +7,6 @@ import com.satrt.springweb.core.utils.db.MD5Util;
 import com.satrt.springweb.useroperation.dao.UserDao;
 import org.springframework.util.StringUtils;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

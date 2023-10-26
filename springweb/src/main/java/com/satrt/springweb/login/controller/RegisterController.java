@@ -2,7 +2,7 @@ package com.satrt.springweb.login.controller;
 
 import com.satrt.springweb.core.exception.login.RegisterException;
 import com.satrt.springweb.core.model.entity.UserEntity;
-import com.satrt.springweb.useroperation.servise.UserService;
+import com.satrt.springweb.useroperation.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

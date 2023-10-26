@@ -71,7 +71,7 @@ public class UserDao {
      * @return
      */
     public int delete(Integer id) {
-        String sql = "delete * from sys_user where id = ?";
+        String sql = "delete  from sys_user where id = ?";
         return DbUtilsHelper.update(sql,id);
     }
 

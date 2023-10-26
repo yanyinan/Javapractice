@@ -46,11 +46,13 @@ public class UserEditController {
         return "backgrounder/useroperate/userdirectory";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(Integer id, RedirectAttributes redirectAttributes) {
         System.out.println("删除");
         // 删除用户信息
-       userService.delete(id);
-        return "redirect:backgrounder/useroperate/userdirectory";
+       if (userService.delete(id)>0){
+           //抛出问题 todo
+       }
+        return "backgrounder/useroperate/userdirectory";
     }
 }

@@ -119,7 +119,7 @@ public class UserService {
             params.add(user.getEmail());
         }
         if (user.getPhoneNumber() != null){
-            sqlParams.append("password = ?, ");
+            sqlParams.append("phonenumber = ?, ");
             params.add(user.getPassword());
         }
         if (user.getSex() != null){

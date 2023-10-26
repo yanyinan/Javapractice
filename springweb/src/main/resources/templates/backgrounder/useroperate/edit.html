@@ -10,8 +10,28 @@
     <form th:action="@{/useroperate/edit}" method="post">
         <input type="hidden" name="id" th:value="${user.id}" readonly/>
         <div class="form-group">
-            <label for="nickname">真实姓名:</label>
+            <label for="username">用户名:</label>
+            <input type="text" id="username" name="username" required >
+        </div>
+        <div class="form-group">
+            <label for="nickname">昵称:</label>
             <input type="text" id="nickname" name="nickname" required >
+        </div>
+        <div class="form-group">
+            <label for="sex">性别:</label>
+            <input type="text" id="sex" name="sex" required >
+        </div>
+        <div class="form-group">
+            <label for="email">邮箱:</label>
+            <input type="email" id="email" name="email" required >
+        </div>
+        <div class="form-group">
+            <label for="phonenumber">电话:</label>
+            <input type="number" id="phonenumber" name="phonenumber" required >
+        </div>
+        <div class="form-group">
+            <label for="password">密码:</label>
+            <input type="text" id="password" name="password" required >
         </div>
         <div class="form-group">
             <p class="error" th:text="${message}"></p>

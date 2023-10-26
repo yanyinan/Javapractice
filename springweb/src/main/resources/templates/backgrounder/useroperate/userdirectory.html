@@ -75,24 +75,24 @@
     for(User user : list){
     }
   -->
-  <tr th:each="useroperate, stat : ${list}">
+  <tr th:each="user, stat : ${userlist}">
     <td th:text="${stat.count}"></td>
-<!--    <td th:text="${useroperate.status}"></td>-->
-    <td class="img"><img th:src="@{${useroperate.avatar}}" /></td>
-    <td th:text="${useroperate.userName}"></td>
-    <td th:text="${useroperate.nickName}"></td>
-    <td th:text="${useroperate.sex}"></td>
-    <td th:text="${useroperate.email}"></td>
-    <td th:text="${useroperate.phoneNumber}"></td>
-<!--    <td th:text="${useroperate.userType}"></td>-->
-<!--    <td th:text="${useroperate.createBy}"></td>-->
-    <td th:text="${useroperate.createTime}"></td>
-    <td th:text="${useroperate.updateBy}"></td>
-<!--    <td th:text="${useroperate.updateTime}"></td>-->
-    <td th:text="${useroperate.delFlag}"></td>
+<!--    <td th:text="${user.status}"></td>-->
+    <td class="img"><img th:src="@{${user.avatar}}" /></td>
+    <td th:text="${user.userName}"></td>
+    <td th:text="${user.nickName}"></td>
+    <td th:text="${user.sex}"></td>
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.phoneNumber}"></td>
+<!--    <td th:text="${user.userType}"></td>-->
+<!--    <td th:text="${user.createBy}"></td>-->
+    <td th:text="${user.createTime}"></td>
+    <td th:text="${user.updateBy}"></td>
+<!--    <td th:text="${user.updateTime}"></td>-->
+    <td th:text="${user.delFlag}"></td>
     <td class="table-button">
-      <a th:href="@{'' + edit(id=${useroperate.id})}">修改</a>
-      <a th:href="@{'' + delete(id=${useroperate.id})}">删除</a>
+      <a th:href="@{'' + edit(id=${user.id})}">修改</a>
+      <a th:href="@{'' + delete(id=${user.id})}">删除</a>
     </td>
   </tr>
   <!-- 添加更多用户行 -->

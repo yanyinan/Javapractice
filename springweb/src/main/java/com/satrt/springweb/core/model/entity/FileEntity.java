@@ -19,7 +19,5 @@ public class FileEntity implements Serializable {
     private long size;
     private Date createTime;
     private String createBy;
-    private Date updateTime;
-    private String updateBy;
     private String downloadLink;
 }

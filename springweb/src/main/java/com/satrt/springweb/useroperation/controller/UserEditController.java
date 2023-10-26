@@ -31,9 +31,9 @@ public class UserEditController {
     @RequestMapping(value = "/userdirectory", method = RequestMethod.GET)
     public String list(Model model) throws SqlServiceException {
         // 查询用户列表
-        List<UserEntity> list = userService.userDirectory();
+        List<UserEntity> userlist = userService.userDirectory();
         // 存到域中
-        model.addAttribute("list", list);
+        model.addAttribute("userlist", userlist);
         return "backgrounder/useroperate/userdirectory";
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
 public class FileDao {
 
     public List<FileEntity> selectAll() throws SqlServiceException {
-        String sql = "select id,name,filetype,size,createtime,createby,updatetime,updateby,downloadlinik ";
+        String sql = "SELECT id, name, fileType, size, createTime, downloadLink from sys_file";
         return DbUtilsHelper.queryList(sql,FileEntity.class);
     }
 }

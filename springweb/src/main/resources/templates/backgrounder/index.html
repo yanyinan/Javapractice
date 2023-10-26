@@ -111,6 +111,7 @@
     </div>
     <h2 th:text="${session.login_user.nickName}"></h2>
     <ul class="menu">
+        <li> <a th:href="@{/fileoperate/filedirectory}" target="main">文件列表</a></li>
         <li> <a th:href="@{/useroperate/userdirectory}" target="main">用户列表</a></li>
         <li><a th:href="@{/logout}">退出登录</a></li>
     </ul>

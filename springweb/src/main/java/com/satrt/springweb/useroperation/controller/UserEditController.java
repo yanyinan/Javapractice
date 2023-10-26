@@ -25,7 +25,6 @@ public class UserEditController {
 
     @RequestMapping(value = "/userdirectory", method = RequestMethod.GET)
     public String list(Model model) {
-        // templates/user/list.html
         // 查询用户列表
         List<UserEntity> list = userService.userDirectory();
         // 存到域中
@@ -50,7 +49,7 @@ public class UserEditController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
-        // 删除 id 为 1的用户，/user/delete/1
+        System.out.println("删除");
         // 删除用户信息
         if (userService.delete(id)<0){
             //抛出错误信息

@@ -53,9 +53,6 @@ public class UserEntity implements Serializable {
      */
     private String avatar;
 
-    public String getAvatar() {
-        return Constant.UPLOAD_PATH  + userName+  avatar;
-    }
 
     /**
      * 用户类型（0管理员，1普通用户）

@@ -122,7 +122,7 @@ public class UserService {
         }
         if (user.getPhoneNumber() != null){
             sqlParams.append("phonenumber = ?, ");
-            params.add(user.getPassword());
+            params.add(user.getPhoneNumber());
         }
         if (user.getSex() != null){
             sqlParams.append("sex = ?, ");
@@ -134,7 +134,7 @@ public class UserService {
         }
         // 最后会多一个 , 需要去掉
         assert sqlParams != null;
-        sqlParams.deleteCharAt(sqlParams.length() - 1);
+        sqlParams.deleteCharAt(sqlParams.length() - 2);
         sqlParams.append(" where id = ?");
         params.add(user.getId());
         userDao.update(sqlParams,params);

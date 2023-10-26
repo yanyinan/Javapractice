@@ -65,6 +65,7 @@ public class UserDao {
     public void update(StringBuilder sqlParams, List params) throws SqlServiceException {
         StringBuilder sql = new StringBuilder("update sys_user set ");
         sql.append(sqlParams);
+        System.out.println(sql);
         DbUtilsHelper.update(String.valueOf(sql),params.toArray());
     }
 

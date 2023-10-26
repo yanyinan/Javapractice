@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * user 数据交互
  * @author: Nanzhou
  * @version: v0.0.1
  * @date: 2023 2023/10/25 17:49
@@ -51,7 +52,7 @@ public class UserDao {
      * @return 返回用户信息集合
      */
     public List<UserEntity> selectAllUser() throws SqlServiceException {
-        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName,status as status, email as email,phonenumber as phoneNumber,sex as sex,user_type as userType,create_by as createBY,create_time as createTime,update_by as updateBy,update_time as updateTime,del_flag as delFlag FROM sys_user\n";
+        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName,status as status, email as email,phonenumber as phoneNumber,sex as sex,user_type as userType,create_by as createBY,create_time as createTime,update_by as updateBy,update_time as updateTime,del_flag as delFlag FROM sys_user";
         return DbUtilsHelper.queryList(sql,UserEntity.class);
     }
 
@@ -70,16 +71,21 @@ public class UserDao {
 
     /**
      * 删除用户信息
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 返回更改行数
      */
     public int delete(Integer id) throws SqlServiceException {
         String sql = "delete  from sys_user where id = ?";
         return DbUtilsHelper.update(sql,id);
     }
 
+    /**
+     * 根据用户 id 查找用户信息
+     * @param id 用户id
+     * @return 返回用户实体
+     */
     public UserEntity selectById(Integer id) throws SqlServiceException {
-        String sql = "select * from sys_user where id = ?";
+        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName,status as status, email as email,phonenumber as phoneNumber,sex as sex,user_type as userType,create_by as createBY,create_time as createTime,update_by as updateBy,update_time as updateTime,del_flag as delFlag from sys_user where id = ?";
         return DbUtilsHelper.queryOne(sql,UserEntity.class,id);
     }
 }

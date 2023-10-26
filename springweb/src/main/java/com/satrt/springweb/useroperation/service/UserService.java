@@ -47,12 +47,9 @@ public class UserService {
 
     /**
      * 用户注册
-     *
-     * @param userEntity
-     * @param password
-     * @param rePassword
-     * @return
-     * @throws RegisterException
+     * @param userEntity 用户实体
+     * @param password 密码
+     * @param rePassword 确认密码
      */
     public void register(UserEntity userEntity, String password, String rePassword) throws RegisterException, SqlServiceException {
         //参数校验
@@ -136,6 +133,7 @@ public class UserService {
             params.add(user.getUserType());
         }
         // 最后会多一个 , 需要去掉
+        assert sqlParams != null;
         sqlParams.deleteCharAt(sqlParams.length() - 1);
 
         userDao.update(sqlParams,user.getId());

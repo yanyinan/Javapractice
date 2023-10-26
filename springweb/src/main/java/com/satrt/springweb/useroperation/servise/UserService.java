@@ -51,11 +51,11 @@ public class UserService {
      */
     public void register(UserEntity userEntity, String password, String rePassword) throws RegisterException {
         //参数校验
-        if (!StringUtils.isEmpty(userEntity)
-                || !StringUtils.hasText(password)
-                || !StringUtils.hasText(rePassword)) {
-            throw new RegisterException("参数校验失败", 0);
-        }
+//        if (!StringUtils.isEmpty(userEntity)
+//                || !StringUtils.hasText(password)
+//                || !StringUtils.hasText(rePassword)) {
+//            throw new RegisterException("参数校验失败", 0);
+//        }
         //密码校验
         if (!password.equals(rePassword)) {
             throw new RegisterException("密码重复", 0);

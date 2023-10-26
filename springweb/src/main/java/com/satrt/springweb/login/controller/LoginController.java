@@ -6,6 +6,7 @@ import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.useroperation.servise.UserService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.POST)
-    public String login(@RequestParam("name") String username, @RequestParam("password") String password, String captcha, HttpServletRequest request) throws LoginException {
+    public String login(@RequestParam("name") String username, @RequestParam("password") String password, String captcha, HttpServletRequest request, Model model) throws LoginException {
 
 //         校验验证码
         if (!CaptchaUtil.ver(captcha, request)) {

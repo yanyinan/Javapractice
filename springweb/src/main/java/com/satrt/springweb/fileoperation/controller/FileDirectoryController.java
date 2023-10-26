@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -37,15 +38,24 @@ public class FileDirectoryController {
         model.addAttribute("filelist", filelist);
         return "backgrounder/fileoperate/filedirectory";
     }
+    @RequestMapping(value = "/useradd", method = RequestMethod.GET)
+    public String addUser(Model model, Integer id) throws SqlServiceException {
+        // 查询文件信息
+        FileEntity byId = fileService.getById(id);
+        // 存到域中
+        model.addAttribute("file", byId);
+        return "backgrounder/fileoperate/fileadd";
+    }
     @RequestMapping(value = "/fileadd", method = RequestMethod.POST)
     public ModelAndView upload(@RequestParam("img") MultipartFile file, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) {
         ModelAndView mv = new ModelAndView("redirect:/file/list");
         if (!file.isEmpty()){
             try {
                 fileService.save(file, user.getId());
-            } catch (ServiceException e) {
-                e.printStackTrace();
-                mv.setViewName("file/add");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (SqlServiceException e) {
+                throw new RuntimeException(e);
             }
         }
         return mv;

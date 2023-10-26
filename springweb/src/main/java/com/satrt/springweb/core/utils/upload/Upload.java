@@ -14,7 +14,7 @@ import java.util.UUID;
  * @date: 2023 2023/10/26 21:10
  */
 public class Upload {
-    public static String saveFile(MultipartFile multipartFile, String submittedFileName,String Filetype) throws IOException {
+    public static String saveFile(MultipartFile multipartFile, String submittedFileName) throws IOException {
         // 按照日期存储. 获取日期的字符串 替换 - // 20231017
         String date = LocalDate.now().toString().replace("-", "");
 

@@ -3,7 +3,6 @@ package com.satrt.springweb.fileoperation.controller;
 import com.satrt.springweb.core.constant.Constant;
 import com.satrt.springweb.core.model.entity.FileEntity;
 import com.satrt.springweb.core.model.entity.UserEntity;
-import com.satrt.springweb.exception.service.ServiceException;
 import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.fileoperation.service.FileService;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
@@ -47,18 +45,15 @@ public class FileDirectoryController {
         return "backgrounder/fileOperation/fileAdd";
     }
     @RequestMapping(value = "/fileAdd", method = RequestMethod.POST)
-    public ModelAndView upload(@RequestParam("img") MultipartFile file, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) {
-        ModelAndView mv = new ModelAndView("redirect:/backgrounder/fileOperation/fileDirectory");
+    public String upload(@RequestParam("img") MultipartFile file, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) {
         if (!file.isEmpty()){
             try {
-                fileService.save(file, user.getNickName());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (SqlServiceException e) {
+                fileService.save(file, user.getUserName());
+            } catch (IOException | SqlServiceException e) {
                 throw new RuntimeException(e);
             }
         }
-        return mv;
+        return "redirect:/fileOperate/fileDirectory";
     }
 
 }

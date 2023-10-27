@@ -7,7 +7,7 @@
 <body>
 <div class="login-container">
     <h2>修改<span th:text="${user.userName}"></span>用户信息</h2>
-    <form th:action="@{/useroperate/edit}" method="post">
+    <form th:action="@{/userOperate/edit}" method="post">
         <input type="hidden" name="id" th:value="${user.id}" readonly/>
         <div class="form-group">
             <label for="username">用户名:</label>

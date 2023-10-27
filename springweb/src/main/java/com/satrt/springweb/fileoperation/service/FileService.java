@@ -39,8 +39,8 @@ public class FileService {
      * @param id 用户id
      * @return 返回 0 添加失败
      */
-    public int save(MultipartFile file, String nickname) throws IOException, SqlServiceException {
-        String path = saveFile(file, file.getOriginalFilename(),nickname);
+    public int save(MultipartFile file, String username) throws IOException, SqlServiceException {
+        String path = saveFile(file, file.getOriginalFilename(),username);
         FileEntity fileEntity = new FileEntity();
         fileEntity.setFileName(file.getOriginalFilename());
         fileEntity.setFileType(file.getContentType());

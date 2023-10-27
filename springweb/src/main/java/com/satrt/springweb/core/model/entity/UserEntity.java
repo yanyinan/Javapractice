@@ -52,8 +52,6 @@ public class UserEntity implements Serializable {
      * 头像
      */
     private String avatar;
-
-
     /**
      * 用户类型（0管理员，1普通用户）
      */

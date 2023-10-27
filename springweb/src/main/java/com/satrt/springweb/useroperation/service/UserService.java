@@ -5,7 +5,9 @@ import com.satrt.springweb.exception.login.RegisterException;
 import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.core.utils.db.MD5Util;
+import com.satrt.springweb.fileoperation.service.FileService;
 import com.satrt.springweb.useroperation.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -26,6 +28,8 @@ public class UserService {
     UserService(UserDao userDao){
         this.userDao = userDao;
     }
+    @Autowired
+    private FileService fileService;
     /**
      * 用户登录
      *

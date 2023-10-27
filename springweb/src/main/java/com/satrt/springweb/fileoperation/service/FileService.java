@@ -25,14 +25,24 @@ public class FileService {
         this.fileDao = fileDao;
     }
 
+    /**
+     * 文件列表
+     * @return 返回文件列表
+     */
     public  List<FileEntity> fileDirectory() throws SqlServiceException {
         return fileDao.selectAll();
     }
 
+    /**
+     * 添加文件
+     * @param file 文件
+     * @param id 用户id
+     * @return 返回 0 添加失败
+     */
     public int save(MultipartFile file, int id) throws IOException, SqlServiceException {
         String path = saveFile(file, file.getOriginalFilename());
         FileEntity fileEntity = new FileEntity();
-        fileEntity.setName(file.getOriginalFilename());
+        fileEntity.setFileName(file.getOriginalFilename());
         fileEntity.setFileType(file.getContentType());
         fileEntity.setSize(file.getSize());
         //设置地址
@@ -40,6 +50,11 @@ public class FileService {
         return fileDao.fileAdd(fileEntity);
     }
 
+    /**
+     * 根据文件 id 查找文件
+     * @param id 文件id
+     * @return 返回文件
+     */
     public FileEntity getById(Integer id) throws SqlServiceException {
         return fileDao.selectById(id);
     }

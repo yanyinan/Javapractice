@@ -34,7 +34,7 @@ public class UserEditController {
         List<UserEntity> userlist = userService.userDirectory();
         // 存到域中
         model.addAttribute("userlist", userlist);
-        return "backgrounder/useroperate/userdirectory";
+        return "backgrounder/useroperation/userdirectory";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -43,7 +43,7 @@ public class UserEditController {
         UserEntity byId = userService.getById(id);
         // 存到域中
         model.addAttribute("user", byId);
-        return "backgrounder/useroperate/useredit";
+        return "backgrounder/useroperation/useredit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -51,7 +51,7 @@ public class UserEditController {
         // 修改用户信息
         user.setPhoneNumber(phoneNumber);
         userService.update(user);
-        return "redirect:/useroperate/userdirectory";
+        return "redirect:/useroperation/userdirectory";
     }
     @RequestMapping(value = "/useradd", method = RequestMethod.GET)
     public String addUser(Model model, Integer id) throws SqlServiceException {
@@ -59,7 +59,7 @@ public class UserEditController {
         UserEntity byId = userService.getById(id);
         // 存到域中
         model.addAttribute("user", byId);
-        return "backgrounder/useroperate/useradd";
+        return "backgrounder/useroperation/useradd";
     }
     @RequestMapping(value = "/useradd", method = RequestMethod.POST)
     public String addUser(UserEntity userEntity, String Registration_password, String re_Registration_password) throws RegisterException, SqlServiceException {

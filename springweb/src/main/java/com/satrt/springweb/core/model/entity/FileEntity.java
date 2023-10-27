@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 public class FileEntity implements Serializable {
     private int id;
-    private String name;
+    private String fileName;
     private String fileType;
     private long size;
     private Date createTime;

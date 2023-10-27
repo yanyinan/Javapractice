@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>用户列表</title>
+  <title>文件列表</title>
   <style>
     /* 添加一些基本的样式 */
     body {
@@ -53,7 +53,7 @@
 </head>
 <body>
 <h1>文件列表</h1>
-<a th:href="@{/file/add}">上传文件</a>
+<a th:href="@{/fileOperate/fileAdd}">上传文件</a>
 <span class="error" th:text="${message}"></span>
 <table>
   <thead>
@@ -67,17 +67,17 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="filedirectory, stat : ${list}">
+  <tr th:each="file, stat : ${fileList}">
     <td th:text="${stat.count}"></td>
-    <td class="img"><img th:src="@{${file.path}}" /></td>
-    <td th:text="${file.name}"></td>
+    <td class="img"><img th:src="@{${file.downloadLink}}" /></td>
+    <td th:text="${file.fileName}"></td>
+    <td th:text="${file.fileType}"></td>
     <td th:text="${file.size}"></td>
     <td th:text="${file.createTime}"></td>
     <td class="table-button">
-      <a th:href="@{'' + ${file.path}}" target="_blank">查看</a>
+      <a th:href="@{'' + ${file.downloadLink}}" target="_blank">查看</a>
     </td>
   </tr>
-  <!-- 添加更多用户行 -->
   </tbody>
 </table>
 </body>

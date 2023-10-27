@@ -24,31 +24,31 @@ import java.util.List;
  * @date: 2023 2023/10/26 20:56
  */
 @Controller
-@RequestMapping("/fileoperate")
+@RequestMapping("/fileOperate")
 public class FileDirectoryController {
     private FileService fileService;
     FileDirectoryController(FileService fileService){
         this.fileService = fileService;
     }
-    @RequestMapping(value = "/filedirectory", method = RequestMethod.GET)
-    public String list(Model model) throws SqlServiceException {
+    @RequestMapping(value = "/fileDirectory", method = RequestMethod.GET)
+    public String fileList(Model model) throws SqlServiceException {
         // 查询用户列表
         List<FileEntity> filelist = fileService.fileDirectory();
         // 存到域中
-        model.addAttribute("filelist", filelist);
-        return "backgrounder/fileoperate/filedirectory";
+        model.addAttribute("fileList", filelist);
+        return "backgrounder/fileOperation/fileDirectory";
     }
-    @RequestMapping(value = "/useradd", method = RequestMethod.GET)
-    public String addUser(Model model, Integer id) throws SqlServiceException {
+    @RequestMapping(value = "/fileAdd", method = RequestMethod.GET)
+    public String fileAdd(Model model, Integer id) throws SqlServiceException {
         // 查询文件信息
         FileEntity byId = fileService.getById(id);
         // 存到域中
         model.addAttribute("file", byId);
-        return "backgrounder/fileoperate/fileadd";
+        return "backgrounder/fileOperation/fileAdd";
     }
-    @RequestMapping(value = "/fileadd", method = RequestMethod.POST)
+    @RequestMapping(value = "/fileAdd", method = RequestMethod.POST)
     public ModelAndView upload(@RequestParam("img") MultipartFile file, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) {
-        ModelAndView mv = new ModelAndView("redirect:/file/list");
+        ModelAndView mv = new ModelAndView("redirect:/backgrounder/fileOperation/fileDirectory");
         if (!file.isEmpty()){
             try {
                 fileService.save(file, user.getId());

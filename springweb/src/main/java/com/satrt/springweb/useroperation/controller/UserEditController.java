@@ -4,14 +4,12 @@ import com.satrt.springweb.core.constant.Constant;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.exception.login.RegisterException;
 import com.satrt.springweb.exception.sql.SqlServiceException;
-import com.satrt.springweb.fileoperation.service.FileService;
 import com.satrt.springweb.useroperation.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class UserEditController {
         List<UserEntity> userList = userService.userDirectory();
         // 存到域中
         model.addAttribute("userList", userList);
-        return "backgrounder/userOperation/userDirectory";
+        return "backgrounder/userOperation/leader/userDirectory";
     }
 
     @GetMapping ("/edit")
@@ -46,7 +44,7 @@ public class UserEditController {
         UserEntity byId = userService.getById(id);
         // 存到域中
         model.addAttribute("user", byId);
-        return "backgrounder/userOperation/userEdit";
+        return "backgrounder/userOperation/leader/userEdit";
     }
 
     @PostMapping("/edit")
@@ -62,7 +60,7 @@ public class UserEditController {
         UserEntity byId = userService.getById(id);
         // 存到域中
         model.addAttribute("user", byId);
-        return "backgrounder/userOperation/userAdd";
+        return "backgrounder/userOperation/leader/userAdd";
     }
     @PostMapping("/userAdd")
     public String addUser(UserEntity userEntity, String Registration_password, String re_Registration_password) throws RegisterException, SqlServiceException {
@@ -82,7 +80,7 @@ public class UserEditController {
     }
     @GetMapping("/avatarEdit")
     public String avatarEdit(){
-        return "backgrounder/userOperation/avatarEdit";
+        return "backgrounder/userOperation/leader/avatarEdit";
     }
     @PostMapping("/avatarEdit")
     public String avatarEdit(@RequestParam("avatar") MultipartFile avatar, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) throws SqlServiceException, IOException {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+<!--    <link rel="icon" href="favicon.ico" type="image/x-icon">-->
     <title>后台管理</title>
     <style>
         body {
@@ -109,8 +109,9 @@
     <div class="avatar-container">
         <img th:src="@{${session.login_user.avatar}}" />
     </div>
-    <h2 th:text="${session.login_user.nickName}"></h2>
+    <h2 class="user-info" th:text="${session.login_user.nickName}"></h2>
     <ul class="menu">
+        <li> <a th:href="@{/LoginUserMsg}" target="main">个人信息</a></li>
         <li> <a th:href="@{/fileOperate/fileDirectory}" target="main">文件列表</a></li>
         <li> <a th:href="@{/userOperate/userDirectory}" target="main">用户列表</a></li>
         <li> <a th:href="@{/userOperate/avatarEdit}" target="main">修改头像</a></li>
@@ -118,14 +119,7 @@
     </ul>
 </div>
 <div class="content">
-    <iframe src="/backgrouder/welcome.html" id="main" name="main" frameborder="0" width="100%" height="100%"></iframe>
+    <iframe src="" id="main" name="main" frameborder="0" width="100%" height="100%"></iframe>
 </div>
-<script>
-    var iframe = document.getElementById("usernameFrame");
-    iframe.onload = function () {
-        var username = iframe.contentWindow.document.body.textContent;
-        document.getElementById("username").textContent = "用户名：" + username;
-    };
-</script>
 </body>
 </html>

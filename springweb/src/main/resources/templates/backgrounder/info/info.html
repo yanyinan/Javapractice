@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords"
+          content="New Website Widget Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements"/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Index-Page-CSS -->
+    <link rel="stylesheet" href="/backgrouder/info/infro.css" type="text/css" media="all">
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        h2 {
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body style="background: url(/backgrouder/images/1.jpg) no-repeat center;">
+
+<div class="w3ls-main">
+    <!--/tabs-->
+    <div class="responsive_tabs w3ls_tab">
+        <h1 class="title-agile text-center">Our new website is on its way.</h1>
+        <div class="container">
+            <div class="avatar-container">
+                <img th:src="${session.login_user.avatarUrl}" />
+            </div>
+            <h2 class="user-info" th:text="${session.login_user.nickName}"></h2>
+            <p th:text="${session.login_user.userName}"></p>
+            <p th:text="${session.login_user.phoneNumber}"></p>
+            <p th:text="${session.login_user.email}"></p>
+            <p th:text="${session.login_user.sex}"></p>
+        </div>
+    </div>
+</div>
+
+</body>
+<!-- //Body -->
+
+</html>

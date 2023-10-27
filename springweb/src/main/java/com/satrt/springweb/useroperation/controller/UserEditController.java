@@ -1,5 +1,6 @@
 package com.satrt.springweb.useroperation.controller;
 
+import com.satrt.springweb.core.constant.Constant;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.exception.login.RegisterException;
 import com.satrt.springweb.exception.sql.SqlServiceException;
@@ -7,10 +8,11 @@ import com.satrt.springweb.fileoperation.service.FileService;
 import com.satrt.springweb.useroperation.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -29,7 +31,7 @@ public class UserEditController {
     }
 
 
-    @RequestMapping(value = "/userDirectory", method = RequestMethod.GET)
+    @GetMapping("/userDirectory")
     public String list(Model model) throws SqlServiceException {
         // 查询用户列表
         List<UserEntity> userList = userService.userDirectory();
@@ -38,7 +40,7 @@ public class UserEditController {
         return "backgrounder/userOperation/userDirectory";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @GetMapping ("/edit")
     public String edit(Model model, Integer id) throws SqlServiceException {
         // 查询用户信息
         UserEntity byId = userService.getById(id);
@@ -47,14 +49,14 @@ public class UserEditController {
         return "backgrounder/userOperation/userEdit";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @PostMapping("/edit")
     public String edit(UserEntity user, @RequestParam("phonenumber") String phoneNumber ) throws SqlServiceException {
         // 修改用户信息
         user.setPhoneNumber(phoneNumber);
         userService.update(user);
         return "redirect:/userOperation/userDirectory";
     }
-    @RequestMapping(value = "/userAdd", method = RequestMethod.GET)
+    @GetMapping ("/userAdd")
     public String addUser(Model model, Integer id) throws SqlServiceException {
         // 查询用户信息
         UserEntity byId = userService.getById(id);
@@ -62,7 +64,7 @@ public class UserEditController {
         model.addAttribute("user", byId);
         return "backgrounder/userOperation/userAdd";
     }
-    @RequestMapping(value = "/userAdd", method = RequestMethod.POST)
+    @PostMapping("/userAdd")
     public String addUser(UserEntity userEntity, String Registration_password, String re_Registration_password) throws RegisterException, SqlServiceException {
         //获取注册密码与确认密码
         String password = Registration_password;
@@ -71,11 +73,20 @@ public class UserEditController {
         userService.register(userEntity, password,rePassword);
         return "redirect:/userOperate/userDirectory";
     }
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @GetMapping ( "/delete")
     public String delete(Integer id) throws SqlServiceException {
         System.out.println("删除");
         // 删除用户信息
         userService.delete(id);
         return "redirect:/userOperate/userDirectory";
+    }
+    @GetMapping("/avatarEdit")
+    public String avatarEdit(){
+        return "backgrounder/userOperation/avatarEdit";
+    }
+    @PostMapping("/avatarEdit")
+    public String avatarEdit(@RequestParam("avatar") MultipartFile avatar, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) throws SqlServiceException, IOException {
+        userService.updateAvatar(avatar,user);
+        return "backgrounder/index";
     }
 }

@@ -1,8 +1,6 @@
 package com.satrt.springweb.fileoperation.service;
 
 import com.satrt.springweb.core.model.entity.FileEntity;
-import com.satrt.springweb.core.model.entity.UserEntity;
-import com.satrt.springweb.core.utils.upload.Upload;
 import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.fileoperation.dao.FileDao;
 import org.springframework.stereotype.Service;

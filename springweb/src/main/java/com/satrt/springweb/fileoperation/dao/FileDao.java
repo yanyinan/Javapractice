@@ -44,4 +44,9 @@ public class FileDao {
         String sql = "SELECT id as id, file_name as fileName, file_type as fileType, size, createTime, createBy ,downloadLink from sys_file where id = ?";
         return DbUtilsHelper.queryOne(sql, FileEntity.class, id);
     }
+
+    public void fileUpdate(FileEntity fileEntity) throws SqlServiceException {
+        String sql = "update sys_file set file_name = ? ,file_type =?,size=?,downloadLink=? set where id = ?";
+        DbUtilsHelper.update(sql,fileEntity.getFileName(),fileEntity.getFileType(),fileEntity.getSize(),fileEntity.getDownloadLink(),fileEntity.getId());
+    }
 }

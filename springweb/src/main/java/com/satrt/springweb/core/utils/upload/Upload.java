@@ -14,14 +14,41 @@ import java.util.UUID;
  * @date: 2023 2023/10/26 21:10
  */
 public class Upload {
-    public static String saveFile(MultipartFile multipartFile, String submittedFileName,String username) throws IOException {
+    public static String saveUserFile(MultipartFile multipartFile, String submittedFileName,String username,String uploadType) throws IOException {
         // 按照日期存储. 获取日期的字符串 替换 - // 20231017
         String date = LocalDate.now().toString().replace("-", "");
 
         // 保存文件的路径
         // 根据类型改变文件路径 todo
         File file = new File(Constant.UPLOAD_PATH+"/"+username, date);
+        // 判断文件夹是否存在
+        if (!file.exists()){
+            // 不存在创建
+            file.mkdirs();
+        }
+        //todo 文件冲突
+            /*
+             重命名文件，防止文件冲突
+                时间戳
+                UUID
+             */
+        // .jpg
+        String substring = submittedFileName.substring(submittedFileName.lastIndexOf("."));
 
+
+        String fileName = UUID.randomUUID().toString().replace("-", "");
+
+        //存储
+        // 存文件  d:/temp/upload/20231017/fileName + substring
+        multipartFile.transferTo(new File(file.getAbsolutePath(),fileName + substring));
+
+        return username+ "/" +date + "/" + fileName + substring;
+    }
+    public static String saveAvatarFile(MultipartFile multipartFile, String submittedFileName,String username,String avatar) throws IOException {
+
+        // 保存文件的路径
+        // 根据类型改变文件路径 todo
+        File file = new File(Constant.UPLOAD_PATH+"/"+username,avatar);
         // 判断文件夹是否存在
         if (!file.exists()){
             // 不存在创建
@@ -44,6 +71,6 @@ public class Upload {
         // 存文件  d:/temp/upload/20231017/fileName + substring
         multipartFile.transferTo(new File(file.getAbsolutePath(),fileName + substring));
 
-        return username+ "/" +date + "/" + fileName + substring;
+        return username+ "/avatar/" + fileName + substring;
     }
 }

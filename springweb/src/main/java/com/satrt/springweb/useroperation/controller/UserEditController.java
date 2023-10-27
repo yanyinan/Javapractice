@@ -86,7 +86,9 @@ public class UserEditController {
     }
     @PostMapping("/avatarEdit")
     public String avatarEdit(@RequestParam("avatar") MultipartFile avatar, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) throws SqlServiceException, IOException {
-        userService.updateAvatar(avatar,user);
+        if (!avatar.isEmpty()){
+            userService.updateAvatar(avatar,user);
+        }
         return "backgrounder/index";
     }
 }

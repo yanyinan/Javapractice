@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-import static com.satrt.springweb.core.utils.upload.Upload.saveFile;
+import static com.satrt.springweb.core.utils.upload.Upload.saveUserFile;
 
 /**
  * @author: Nanzhou
@@ -38,7 +38,7 @@ public class FileService {
      * @return 返回 0 添加失败
      */
     public int save(MultipartFile file, String username) throws IOException, SqlServiceException {
-        String path = saveFile(file, file.getOriginalFilename(),username);
+        String path = saveUserFile(file, file.getOriginalFilename(),username);
         FileEntity fileEntity = new FileEntity();
         fileEntity.setFileName(file.getOriginalFilename());
         fileEntity.setFileType(file.getContentType());

@@ -8,13 +8,12 @@ import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.core.utils.db.MD5Util;
 import com.satrt.springweb.fileoperation.dao.FileDao;
-import com.satrt.springweb.fileoperation.service.FileService;
+
 import com.satrt.springweb.useroperation.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import static com.satrt.springweb.core.utils.upload.Upload.saveFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -169,7 +168,7 @@ public class UserService {
     }
 
     public void updateAvatar(MultipartFile avatar, UserEntity user) throws IOException, SqlServiceException {
-        String path = Upload.saveFile(avatar,avatar.getOriginalFilename(),user.getUserName()+"/avatar");
+        String path = Upload.saveUserFile(avatar,avatar.getOriginalFilename(),user.getUserName());
         FileEntity fileEntity = new FileEntity();
         fileEntity.setFileName(avatar.getOriginalFilename());
         fileEntity.setFileType(avatar.getContentType());

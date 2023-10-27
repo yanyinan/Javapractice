@@ -46,7 +46,7 @@ public class FileDao {
     }
 
     public void fileUpdate(FileEntity fileEntity) throws SqlServiceException {
-        String sql = "update sys_file set file_name = ? ,file_type =?,size=?,downloadLink=? set where id = ?";
+        String sql = "update sys_file set file_name = ? ,file_type =?,size=?,downloadLink=?  where id = ?";
         DbUtilsHelper.update(sql,fileEntity.getFileName(),fileEntity.getFileType(),fileEntity.getSize(),fileEntity.getDownloadLink(),fileEntity.getId());
     }
 }

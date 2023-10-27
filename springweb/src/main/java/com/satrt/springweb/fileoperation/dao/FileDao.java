@@ -31,8 +31,8 @@ public class FileDao {
      * @return 返回 0 ，添加失败
      */
     public int fileAdd(FileEntity fileEntity) throws SqlServiceException {
-        String sql = "insert into sys_file( file_name,file_type,size,downloadLink) values(?,?,?,?) ";
-        return DbUtilsHelper.update(sql,fileEntity.getFileName(),fileEntity.getFileType(),fileEntity.getSize(),fileEntity.getDownloadLink());
+        String sql = "insert into sys_file( file_name,file_type,size,downloadLink,createBy) values(?,?,?,?,?) ";
+        return DbUtilsHelper.update(sql,fileEntity.getFileName(),fileEntity.getFileType(),fileEntity.getSize(),fileEntity.getDownloadLink(),fileEntity.getCreateBy());
     }
 
     /**
@@ -45,8 +45,9 @@ public class FileDao {
         return DbUtilsHelper.queryOne(sql, FileEntity.class, id);
     }
 
-    public void fileUpdate(FileEntity fileEntity) throws SqlServiceException {
-        String sql = "update sys_file set file_name = ? ,file_type =?,size=?,downloadLink=?  where id = ?";
-        DbUtilsHelper.update(sql,fileEntity.getFileName(),fileEntity.getFileType(),fileEntity.getSize(),fileEntity.getDownloadLink(),fileEntity.getId());
+
+    public void updateAvatar(String avatarPath, int id) throws SqlServiceException {
+        String sql = "update sys_user set avatar = ?   where id = ?";
+        DbUtilsHelper.update(sql,avatarPath,id);
     }
 }

@@ -1,5 +1,6 @@
 package com.satrt.springweb.fileoperation.service;
 
+import com.satrt.springweb.core.constant.FileServiceConstant;
 import com.satrt.springweb.core.model.entity.FileEntity;
 import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.fileoperation.dao.FileDao;
@@ -9,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-import static com.satrt.springweb.core.utils.upload.Upload.saveUserFile;
+import static com.satrt.springweb.core.utils.upload.Upload.uploadFile;
 
 /**
  * @author: Nanzhou
@@ -38,11 +39,12 @@ public class FileService {
      * @return 返回 0 添加失败
      */
     public int save(MultipartFile file, String username) throws IOException, SqlServiceException {
-        String path = saveUserFile(file, file.getOriginalFilename(),username);
+        String path = uploadFile(file, file.getOriginalFilename(),username, FileServiceConstant.UPLOAD_FILE_FLAG);
         FileEntity fileEntity = new FileEntity();
         fileEntity.setFileName(file.getOriginalFilename());
         fileEntity.setFileType(file.getContentType());
         fileEntity.setSize(file.getSize());
+        fileEntity.setCreateBy(username);
         //设置地址
         fileEntity.setDownloadLink("/web/" + path);
         return fileDao.fileAdd(fileEntity);

@@ -1,5 +1,6 @@
 package com.satrt.springweb.useroperation.service;
 
+import com.satrt.springweb.core.constant.FileServiceConstant;
 import com.satrt.springweb.core.model.entity.FileEntity;
 import com.satrt.springweb.core.utils.upload.Upload;
 import com.satrt.springweb.exception.login.LoginException;
@@ -168,12 +169,7 @@ public class UserService {
     }
 
     public void updateAvatar(MultipartFile avatar, UserEntity user) throws IOException, SqlServiceException {
-        String path = Upload.saveUserFile(avatar,avatar.getOriginalFilename(),user.getUserName());
-        FileEntity fileEntity = new FileEntity();
-        fileEntity.setFileName(avatar.getOriginalFilename());
-        fileEntity.setFileType(avatar.getContentType());
-        fileEntity.setSize(avatar.getSize());
-        fileEntity.setDownloadLink("/web/" + path);
-        fileDao.fileUpdate(fileEntity);
+        String path = Upload.uploadFile(avatar,avatar.getOriginalFilename(),user.getUserName(), FileServiceConstant.AVATAR_FILE_FLAG);
+        fileDao.updateAvatar("/web/" + path,user.getId());
     }
 }

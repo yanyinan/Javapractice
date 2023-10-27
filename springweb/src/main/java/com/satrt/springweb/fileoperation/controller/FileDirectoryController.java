@@ -51,7 +51,7 @@ public class FileDirectoryController {
         ModelAndView mv = new ModelAndView("redirect:/backgrounder/fileOperation/fileDirectory");
         if (!file.isEmpty()){
             try {
-                fileService.save(file, user.getId());
+                fileService.save(file, user.getNickName());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (SqlServiceException e) {

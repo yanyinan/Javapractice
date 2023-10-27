@@ -14,13 +14,13 @@ import java.util.UUID;
  * @date: 2023 2023/10/26 21:10
  */
 public class Upload {
-    public static String saveFile(MultipartFile multipartFile, String submittedFileName) throws IOException {
+    public static String saveFile(MultipartFile multipartFile, String submittedFileName,String nickname) throws IOException {
         // 按照日期存储. 获取日期的字符串 替换 - // 20231017
         String date = LocalDate.now().toString().replace("-", "");
 
         // 保存文件的路径
         // 根据类型改变文件路径 todo
-        File file = new File(Constant.UPLOAD_PATH, date);
+        File file = new File(Constant.UPLOAD_PATH+"/"+nickname, date);
 
         // 判断文件夹是否存在
         if (!file.exists()){

@@ -19,6 +19,43 @@
     <!-- Index-Page-CSS -->
     <link rel="stylesheet" href="/backgrouder/info/infro.css" type="text/css" media="all">
     <style>
+        .container_center {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+        }
+
+        .nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* 优化字体和颜色 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+
         .container {
             width: 80%;
             margin: 0 auto;
@@ -28,11 +65,6 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .avatar-container {
-            display: flex;
-            align-items: center;
-        }
-
         .avatar-container img {
             width: 50px;
             height: 50px;
@@ -40,13 +72,28 @@
             margin-right: 10px;
         }
 
-        h2 {
+        .user-info, .userName, .phoneNumber, .email, .gender {
             margin-bottom: 5px;
         }
-
-        p {
-            margin-bottom: 10px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+    </style>
     </style>
 </head>
 
@@ -56,16 +103,41 @@
     <!--/tabs-->
     <div class="responsive_tabs w3ls_tab">
         <h1 class="title-agile text-center">个人信息</h1>
-        <div class="container">
-            <div class="avatar-container">
-                <img th:src="${session.login_user.avatar}" />
+        <div class="container_center">
+            <div class="container">
+                <div class="avatar-container">
+                    <img th:src="${session.login_user.avatar}"/>
+                </div>
+                <table>
+                    <tr>
+                        <th>昵称</th>
+                        <td><p class="user-info" th:text="${session.login_user.nickName}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>用户名</th>
+                        <td><p class="userName" th:text="${session.login_user.userName}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>电话号码</th>
+                        <td><p class="phoneNumber" th:text="${session.login_user.phoneNumber}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>邮箱</th>
+                        <td><p class="email" th:text="${session.login_user.email}"></p></td>
+                    </tr>
+                    <tr>
+                        <th>性别</th>
+                        <td><p class="gender" th:text="${session.login_user.sex}"></p></td>
+                    </tr>
+                </table>
+
             </div>
-            昵称：<h2 class="user-info" th:text="${session.login_user.nickName}"></h2>
-            用户名：<p th:text="${session.login_user.userName}"></p>
-            电话号码：<p th:text="${session.login_user.phoneNumber}"></p>
-            邮箱：<p th:text="${session.login_user.email}"></p>
-            性别；<p th:text="${session.login_user.sex}"></p>
+            <div class="nav">
+                <a th:href="@{/userOperate/avatarEdit}" >修改头像</a>
+                <a th:href="@{/userOperate/edit(id=${session.login_user.id})}">修改个人信息</a>
+            </div>
         </div>
+
     </div>
 </div>
 

@@ -10,7 +10,7 @@ import java.io.IOException;
  * @author 26481
  */
 @WebFilter("/*")
-public class IPFilter implements Filter {
+public class IpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req  = (HttpServletRequest) request;

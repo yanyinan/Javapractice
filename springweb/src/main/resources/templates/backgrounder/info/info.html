@@ -55,16 +55,16 @@
 <div class="w3ls-main">
     <!--/tabs-->
     <div class="responsive_tabs w3ls_tab">
-        <h1 class="title-agile text-center">Our new website is on its way.</h1>
+        <h1 class="title-agile text-center">个人信息</h1>
         <div class="container">
             <div class="avatar-container">
-                <img th:src="${session.login_user.avatarUrl}" />
+                <img th:src="${session.login_user.avatar}" />
             </div>
-            <h2 class="user-info" th:text="${session.login_user.nickName}"></h2>
-<!--            <p th:text="${session.login_user.userName}"></p>-->
-<!--            <p th:text="${session.login_user.phoneNumber}"></p>-->
-<!--            <p th:text="${session.login_user.email}"></p>-->
-<!--            <p th:text="${session.login_user.sex}"></p>-->
+            昵称：<h2 class="user-info" th:text="${session.login_user.nickName}"></h2>
+            用户名：<p th:text="${session.login_user.userName}"></p>
+            电话号码：<p th:text="${session.login_user.phoneNumber}"></p>
+            邮箱：<p th:text="${session.login_user.email}"></p>
+            性别；<p th:text="${session.login_user.sex}"></p>
         </div>
     </div>
 </div>

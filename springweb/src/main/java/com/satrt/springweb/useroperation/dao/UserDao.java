@@ -23,7 +23,7 @@ public class UserDao {
      * @return 查询到的用户. 如果没有查询到, 返回 null
      */
     public UserEntity selectByUsernameAndPassword(String username, String password) throws SqlServiceException {
-        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName FROM sys_user WHERE user_name = ? AND password = ?";
+        String sql = "SELECT id AS id, user_name AS userName,avatar as avatar,nick_name AS nickName,status,email,sex,user_type as userType,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime FROM sys_user WHERE user_name = ? AND password = ?";
         return DbUtilsHelper.queryOne(sql,UserEntity.class,username,password);
     }
 

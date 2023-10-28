@@ -73,7 +73,6 @@ public class UserEditController {
     }
     @GetMapping ( "/delete")
     public String delete(Integer id) throws SqlServiceException {
-        System.out.println("删除");
         // 删除用户信息
         userService.delete(id);
         return "redirect:/userOperate/userDirectory";

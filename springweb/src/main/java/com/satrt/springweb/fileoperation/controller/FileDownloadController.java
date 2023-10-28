@@ -3,6 +3,9 @@ package com.satrt.springweb.fileoperation.controller;
 import com.satrt.springweb.core.model.entity.FileEntity;
 import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.fileoperation.service.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 
 /**
  * @author: Nanzhou
@@ -25,6 +29,8 @@ public class FileDownloadController {
     FileDownloadController(FileService fileService) {
         this.fileService = fileService;
     }
+    @Autowired
+    private  ResourceLoader resourceLoader;
 
     @GetMapping("/download")
     public void downloadFile(Integer fileId, HttpServletResponse response) throws IOException, SqlServiceException {
@@ -37,9 +43,10 @@ public class FileDownloadController {
 
 
         String path = fileEntity.getDownloadLink();
-
+        Resource resource = resourceLoader.getResource(path);
+        URI uri = resource.getURI();
         // 获取文件输入流 todo
-        File file = new File(path);
+        File file = new File(uri);
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(file);

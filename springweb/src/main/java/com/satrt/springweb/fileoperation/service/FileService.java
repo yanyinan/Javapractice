@@ -58,4 +58,9 @@ public class FileService {
     public FileEntity getById(Integer id) throws SqlServiceException {
         return fileDao.selectById(id);
     }
+
+
+    public FileEntity getByDownId(Integer fileId) throws SqlServiceException {
+        return fileDao.selectDownById(fileId);
+    }
 }

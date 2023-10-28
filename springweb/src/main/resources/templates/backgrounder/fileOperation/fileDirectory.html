@@ -85,6 +85,7 @@
         <td th:text="${file.createTime}"></td>
         <td class="table-button">
             <a th:href="@{'' + ${file.downloadLink}}" target="_blank">查看</a>
+            <a th:href="@{/download(fileId=${file.id})}">下载</a>
         </td>
     </tr>
     </tbody>

@@ -1,6 +1,7 @@
 package com.satrt.springweb.core.config;
 
 import com.satrt.springweb.core.constant.Constant;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,6 +18,7 @@ public class FilePathConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/web/**")
                 .addResourceLocations("file:" + Constant.UPLOAD_PATH);
+
     }
 
 

@@ -50,4 +50,9 @@ public class FileDao {
         String sql = "update sys_user set avatar = ?   where id = ?";
         DbUtilsHelper.update(sql,avatarPath,id);
     }
+
+    public FileEntity selectDownById(Integer fileId) throws SqlServiceException {
+        String sql ="select file_name as fileName,downloadLink from sys_file where id = ?";
+        return DbUtilsHelper.queryOne(sql,FileEntity.class,fileId);
+    }
 }

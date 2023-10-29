@@ -120,5 +120,16 @@
 <div class="content">
     <iframe src="" id="main" name="main" frameborder="0" width="100%" height="100%"></iframe>
 </div>
+<script type="text/javascript" th:inline="javascript">
+    // thymeleaf 获取当前项目路径
+    /*<![CDATA[*/
+    const ctx = /*[[@{/}]]*/;
+    /*]]>*/
+    // 当前窗口 不是最外层窗口
+    if (window != window.top) {
+        // 父窗口 window.parent，最外层窗口 window.top
+        window.top.location.href = ctx;
+    }
+</script>
 </body>
 </html>

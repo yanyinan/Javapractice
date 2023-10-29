@@ -8,7 +8,6 @@ import com.satrt.springweb.useroperation.dao.UserDao;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -24,11 +23,10 @@ public class SessionRe implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
         // 获取session域中指定元素数据，例如key为"username"的元素
         UserEntity userEntity = (UserEntity) session.getAttribute(Constant.LOGIN_USER);
-        if (userEntity !=null){
+        if (userEntity != null){
             try {
                 UserEntity user = dao.selectById(userEntity.getId());
                 session.setAttribute(Constant.LOGIN_USER, user);

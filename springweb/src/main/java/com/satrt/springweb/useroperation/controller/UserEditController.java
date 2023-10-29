@@ -52,7 +52,7 @@ public class UserEditController {
         // 修改用户信息
         user.setPhoneNumber(phoneNumber);
         userService.update(user);
-        return "redirect:/userOperation/userDirectory";
+        return "backgrounder/userOperation/leader/userDirectory";
     }
     @GetMapping ("/userAdd")
     public String addUser(Model model, Integer id) throws SqlServiceException {
@@ -86,6 +86,6 @@ public class UserEditController {
         if (!avatar.isEmpty()){
             userService.updateAvatar(avatar,user);
         }
-        return "backgrounder/index";
+        return "backgrounder/info/info";
     }
 }

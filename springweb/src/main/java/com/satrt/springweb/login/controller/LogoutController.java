@@ -3,6 +3,9 @@ package com.satrt.springweb.login.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
+
 /**
  * 退出业务
  * @author: Nanzhou
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LogoutController {
     @RequestMapping("/logout")
-    public String logout(){
+    public String logout(HttpSession session){
+        //清楚session
+        session.invalidate();
         return "login/login";
     }
 }

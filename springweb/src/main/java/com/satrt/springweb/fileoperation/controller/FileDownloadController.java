@@ -1,5 +1,6 @@
 package com.satrt.springweb.fileoperation.controller;
 
+import com.satrt.springweb.core.constant.Constant;
 import com.satrt.springweb.core.model.entity.FileEntity;
 import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.fileoperation.service.FileService;
@@ -9,13 +10,10 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URI;
+import java.net.URL;
 
 /**
  * @author: Nanzhou
@@ -31,36 +29,32 @@ public class FileDownloadController {
     }
     @Autowired
     private  ResourceLoader resourceLoader;
-
+    private static final long serialVersionUID = 1L;
     @GetMapping("/download")
     public void downloadFile(Integer fileId, HttpServletResponse response) throws IOException, SqlServiceException {
-        System.out.println(fileId);
         //查询文件
         FileEntity fileEntity = fileService.getByDownId(fileId);
         // 设置响应头
-        response.setContentType("application/octet-stream");
+        response.setContentType(fileEntity.getFileType());
         response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileEntity.getFileName().getBytes("gb2312"), "ISO8859-1"));
 
-
-        String path = fileEntity.getDownloadLink();
-        Resource resource = resourceLoader.getResource(path);
-        URI uri = resource.getURI();
+        String path = "http://localhost:8080/"+fileEntity.getDownloadLink();
+        // 替换为实际的图片URL
+        String imageUrl = "http://localhost:8080/web/kaifamiao/upload/20231027/38259824be8645089f951a6694057496.png";
         // 获取文件输入流 todo
-        File file = new File(uri);
-        FileInputStream fis = null;
+        InputStream inputStream = null;
         try {
-            fis = new FileInputStream(file);
+            URL url = new URL(path);
+            inputStream = url.openStream();
             // 获取输出流并写入文件内容
-            OutputStream os = response.getOutputStream();
             byte[] buffer = new byte[1024];
             int bytesRead;
-            while ((bytesRead = fis.read(buffer)) != -1) {
-                os.write(buffer, 0, bytesRead);
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
             }
         } finally {
-            // 关闭输入流和输出流
-            if (fis != null) {
-                fis.close();
+            if (inputStream != null) {
+                inputStream.close();
             }
         }
     }

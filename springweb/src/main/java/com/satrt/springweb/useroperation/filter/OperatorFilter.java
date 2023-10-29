@@ -33,21 +33,14 @@ public class OperatorFilter implements Filter {
         String path = requestURI.substring(contextPath.length());
 
         // 是否是排除的路径
-        if (!operation.contains(path)){
+        if (operation.contains(path)){
             // 是排除的路径，放行
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
-        // 判断用户是否登录
-        Object loginUser = req.getSession().getAttribute(Constant.LOGIN_USER);
-        boolean password = true;
-        //todo 校验密码
-        if (password){
-            // 没有登录，重定向到登录页面
-            resp.sendRedirect(contextPath + "/login");
-            return;
-        }
+        // 校验
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

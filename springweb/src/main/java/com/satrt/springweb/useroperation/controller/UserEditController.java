@@ -28,7 +28,6 @@ public class UserEditController {
         this.userService = userService;
     }
 
-
     @GetMapping("/userDirectory")
     public String list(Model model) throws SqlServiceException {
         // 查询用户列表

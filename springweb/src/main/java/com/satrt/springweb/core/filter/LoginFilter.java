@@ -16,7 +16,7 @@ import java.util.List;
 public class LoginFilter implements Filter {
 
     private List<String> excludePaths = List.of("/", "/login", "/register", "/captcha");
-    private String[] resourcePaths = {"/css/", "/js/", "/fonts/", "/images/","/assists/","/backgrouder/","/login/"};
+    private String[] resourcePaths = {"/css/", "/js/", "/fonts/", "/images/","/assists/","/backgrouder/","/login/","/web/"};
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

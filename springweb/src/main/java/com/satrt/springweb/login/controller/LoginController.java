@@ -60,6 +60,7 @@ public class LoginController {
         }
         // 登录成功
         // 将用户信息保存到 session 中
+
         request.getSession().setAttribute(Constant.LOGIN_USER, user);
         // 重定向到首页
         return "redirect:/index";

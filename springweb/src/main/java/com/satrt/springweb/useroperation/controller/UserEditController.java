@@ -4,6 +4,7 @@ import com.satrt.springweb.core.constant.Constant;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.exception.login.RegisterException;
 import com.satrt.springweb.exception.sql.SqlServiceException;
+import com.satrt.springweb.useroperation.constant.UserConstant;
 import com.satrt.springweb.useroperation.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,11 @@ public class UserEditController {
     }
 
     @GetMapping("/userDirectory")
-    public String list(Model model) throws SqlServiceException {
+    public String list(Model model, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) throws SqlServiceException {
+        String userFlag = "普通用户";
+        if (!userFlag.equals(user.getUserType())){
+            return "backgrounder/info/info";
+        }
         // 查询用户列表
         List<UserEntity> userList = userService.userDirectory();
         // 存到域中

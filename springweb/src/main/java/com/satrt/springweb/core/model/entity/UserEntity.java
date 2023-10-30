@@ -1,11 +1,11 @@
 package com.satrt.springweb.core.model.entity;
 
-import com.satrt.springweb.core.constant.Constant;
 import lombok.Data;
 
-import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import static com.satrt.springweb.useroperation.constant.UserConstant.*;
 
 /**
  * 用户实体类
@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
  */
 @Data
 public class UserEntity implements Serializable {
+
     /**
      * 用户id
      */
@@ -36,6 +37,13 @@ public class UserEntity implements Serializable {
      * 账号状态（0正常 1停用）
      */
     private String status;
+    public void setStatus(String status) {
+        if (STATUS_FLAG.equals(status)) {
+            this.status = "停用";
+        }else {
+            this.status = "正常";
+        }
+    }
     /**
      * 邮箱
      */
@@ -48,6 +56,13 @@ public class UserEntity implements Serializable {
      * 用户性别（0男，1女，2未知）
      */
     private String sex;
+    public void setSex(String sex) {
+        if (SEX_FLAG.equals(sex)) {
+            this.sex = "女";
+        }else {
+            this.sex = "男";
+        }
+    }
     /**
      * 头像
      */
@@ -56,6 +71,15 @@ public class UserEntity implements Serializable {
      * 用户类型（0管理员，1普通用户）
      */
     private String userType;
+
+    public void setUserType(String userType) {
+        if (USER_FLAG.equals(userType)) {
+            this.userType = "普通用户";
+        }else {
+            this.userType = "管理员";
+        }
+    }
+
     /**
      * 创建人的用户id
      */

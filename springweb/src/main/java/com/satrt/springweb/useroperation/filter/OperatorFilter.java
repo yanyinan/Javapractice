@@ -13,10 +13,10 @@ import java.util.List;
  * @version: v0.0.1
  * @date: 2023 2023/10/28 15:16
  */
-//@WebFilter("/userOperate")
+@WebFilter("/userOperate/*")
 public class OperatorFilter implements Filter {
     //todo 拦截不到
-    private final List<String> operation = List.of("/edit", "/userAdd", "/delete", "/avatarEdit");
+    private final List<String> operation = List.of("/userOperate/edit", "/userOperate/userAdd", "/userOperate/delete", "/userOperate/avatarEdit");
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -40,10 +40,10 @@ public class OperatorFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
             }else {
-                resp.sendRedirect(contextPath + "backgrounder/userOperation/passwordVerification");
+                resp.sendRedirect( "/Password/Verification");
             }
         }
         // 是排除的路径，放行
-        filterChain.doFilter(servletRequest, servletResponse);
+//        filterChain.doFilter(servletRequest, servletResponse);
     }
 }

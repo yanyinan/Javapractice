@@ -57,6 +57,5 @@ public class LoginFilter implements Filter {
         if (!paths.contains(path)){
             chain.doFilter(request, response);
         }
-//        chain.doFilter(request, response);
     }
 }

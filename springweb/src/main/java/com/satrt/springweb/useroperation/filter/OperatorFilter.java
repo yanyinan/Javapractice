@@ -15,7 +15,7 @@ import java.util.List;
  */
 @WebFilter("/userOperate/*")
 public class OperatorFilter implements Filter {
-    //todo 拦截不到
+
     private final List<String> operation = List.of("/userOperate/edit", "/userOperate/userAdd", "/userOperate/delete", "/userOperate/avatarEdit");
 
     @Override

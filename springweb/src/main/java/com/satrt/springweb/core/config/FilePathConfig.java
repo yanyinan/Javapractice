@@ -17,8 +17,5 @@ public class FilePathConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/web/**")
                 .addResourceLocations("file:" + Constant.UPLOAD_PATH);
-
     }
-
-
 }

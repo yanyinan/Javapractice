@@ -46,7 +46,7 @@ public class LoginFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
-
+        path.equals("/web/");
         // 判断用户是否登录
         Object loginUser = req.getSession().getAttribute(Constant.LOGIN_USER);
         if (loginUser == null){

@@ -1,7 +1,5 @@
 package com.satrt.springweb.useroperation.filter;
 
-import com.satrt.springweb.core.constant.Constant;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +13,9 @@ import java.util.List;
  * @version: v0.0.1
  * @date: 2023 2023/10/28 15:16
  */
-//@WebFilter("/userOperate")
+@WebFilter("/userOperate")
 public class OperatorFilter implements Filter {
+    //todo 拦截不到
     private final List<String> operation = List.of("/edit", "/userAdd", "/delete", "/avatarEdit");
 
     @Override
@@ -34,13 +33,17 @@ public class OperatorFilter implements Filter {
 
         // 是否是排除的路径
         if (operation.contains(path)){
-            // 是排除的路径，放行
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
+            // 校验
+            String password = (String) req.getSession().getAttribute("verification");;
+            if (password != null ){
+                // 校验成功
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            }else {
+                resp.sendRedirect(contextPath + "backgrounder/userOperation/passwordVerification");
+            }
         }
-
-        // 校验
-
+        // 是排除的路径，放行
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

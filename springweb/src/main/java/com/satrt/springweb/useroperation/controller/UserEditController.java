@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -47,10 +48,11 @@ public class UserEditController {
     }
 
     @PostMapping("/edit")
-    public String edit(UserEntity user, @RequestParam("phonenumber") String phoneNumber ) throws SqlServiceException {
+    public String edit(UserEntity user, HttpServletRequest request, @RequestParam("phonenumber") String phoneNumber ) throws SqlServiceException {
         // 修改用户信息
         user.setPhoneNumber(phoneNumber);
         userService.update(user);
+        request.getSession().setAttribute("verification", null);
         return "backgrounder/userOperation/leader/userDirectory";
     }
     @GetMapping ("/userAdd")
@@ -62,12 +64,13 @@ public class UserEditController {
         return "backgrounder/userOperation/leader/userAdd";
     }
     @PostMapping("/userAdd")
-    public String addUser(UserEntity userEntity, String Registration_password, String re_Registration_password) throws RegisterException, SqlServiceException {
+    public String addUser(UserEntity userEntity,  HttpServletRequest request,String Registration_password, String re_Registration_password) throws RegisterException, SqlServiceException {
         //获取注册密码与确认密码
         String password = Registration_password;
         String rePassword = re_Registration_password;
         // 注册
         userService.register(userEntity, password,rePassword);
+        request.getSession().setAttribute("verification", null);
         return "redirect:/userOperate/userDirectory";
     }
     @GetMapping ( "/delete")
@@ -81,10 +84,11 @@ public class UserEditController {
         return "backgrounder/userOperation/leader/avatarEdit";
     }
     @PostMapping("/avatarEdit")
-    public String avatarEdit(@RequestParam("avatar") MultipartFile avatar, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) throws SqlServiceException, IOException {
+    public String avatarEdit(@RequestParam("avatar") MultipartFile avatar, HttpServletRequest request, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) throws SqlServiceException, IOException {
         if (!avatar.isEmpty()){
             userService.updateAvatar(avatar,user);
         }
+        request.getSession().setAttribute("verification", null);
         return "backgrounder/info/info";
     }
 }

@@ -31,11 +31,10 @@ public class PasswordVerificationController {
         String userName = user.getUserName();
         UserEntity userEntity = userService.login(userName,password);
         if (userEntity != null){
-            request.getSession().setAttribute("verification", true);
+            request.getSession().setAttribute("verification", "ok");
         }else {
             return "redirect:/logout";
         }
-        //拼接返回地址 todo
-        return "backgrounder/userOperation/passwordVerification";
+        return "backgrounder/index";
     }
 }

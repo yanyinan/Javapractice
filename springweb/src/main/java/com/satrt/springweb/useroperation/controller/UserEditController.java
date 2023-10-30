@@ -53,7 +53,7 @@ public class UserEditController {
         user.setPhoneNumber(phoneNumber);
         userService.update(user);
         request.getSession().setAttribute("verification", null);
-        return "backgrounder/userOperation/leader/userDirectory";
+        return "redirect:/userOperate/userDirectory";
     }
     @GetMapping ("/userAdd")
     public String addUser(Model model, Integer id) throws SqlServiceException {
@@ -89,6 +89,6 @@ public class UserEditController {
             userService.updateAvatar(avatar,user);
         }
         request.getSession().setAttribute("verification", null);
-        return "backgrounder/info/info";
+        return "redirect:/LoginUserMsg";
     }
 }

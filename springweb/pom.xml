@@ -22,7 +22,6 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-
         <!-- springboot web模块 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -2,9 +2,11 @@ package com.satrt.springweb.fileoperation.service;
 
 import com.satrt.springweb.core.constant.FileServiceConstant;
 import com.satrt.springweb.core.model.entity.FileEntity;
+import com.satrt.springweb.exception.service.ServiceException;
 import com.satrt.springweb.exception.sql.SqlServiceException;
 import com.satrt.springweb.fileoperation.dao.FileDao;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -28,8 +30,8 @@ public class FileService {
      * 文件列表
      * @return 返回文件列表
      */
-    public  List<FileEntity> fileDirectory(String username) throws SqlServiceException {
-        return fileDao.selectAll(username);
+    public  List<FileEntity> fileDirectory(FileEntity fileEntity,String username, int pageNum, int pageSize) throws SqlServiceException {
+        return fileDao.selectLoginUserfile(fileEntity,username,pageNum,pageSize);
     }
 
     /**
@@ -59,8 +61,25 @@ public class FileService {
         return fileDao.selectById(id);
     }
 
-
+    /**
+     * 根据文件 id 查找指定文件
+     * @param fileId 文件id
+     * @return 文件实体
+     */
     public FileEntity getByDownId(Integer fileId) throws SqlServiceException {
         return fileDao.selectDownById(fileId);
+    }
+
+    /**
+     * 获取登录用户文件个数
+     * @param fileEntity 文件实体
+     * @param userName 用户名
+     * @return 返回个数
+     */
+    public int getTotal(FileEntity fileEntity, String userName) {
+        if (ObjectUtils.isEmpty(fileEntity)){
+            System.out.println("参数不能为空");
+        }
+        return fileDao.fileTotal(fileEntity,userName);
     }
 }

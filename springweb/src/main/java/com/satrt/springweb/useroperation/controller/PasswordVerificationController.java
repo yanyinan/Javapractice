@@ -35,6 +35,6 @@ public class PasswordVerificationController {
         }else {
             return "redirect:/logout";
         }
-        return "backgrounder/index";
+        return "/backgrounder/info/info";
     }
 }

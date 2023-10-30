@@ -42,8 +42,8 @@ public class OperatorFilter implements Filter {
             }else {
                 resp.sendRedirect( "/Password/Verification");
             }
+        }else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
-        // 是排除的路径，放行
-//        filterChain.doFilter(servletRequest, servletResponse);
     }
 }

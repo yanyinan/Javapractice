@@ -4,7 +4,6 @@ import com.satrt.springweb.core.constant.Constant;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.exception.login.RegisterException;
 import com.satrt.springweb.exception.sql.SqlServiceException;
-import com.satrt.springweb.useroperation.constant.UserConstant;
 import com.satrt.springweb.useroperation.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +38,7 @@ public class UserEditController {
         List<UserEntity> userList = userService.userDirectory();
         // 存到域中
         model.addAttribute("userList", userList);
-        return "backgrounder/userOperation/leader/userDirectory";
+        return "/backgrounder/userOperation/userDirectory";
     }
 
     @GetMapping ("/edit")

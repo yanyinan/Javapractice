@@ -13,7 +13,7 @@ import java.util.List;
  * @version: v0.0.1
  * @date: 2023 2023/10/28 15:16
  */
-@WebFilter("/userOperate")
+//@WebFilter("/userOperate")
 public class OperatorFilter implements Filter {
     //todo 拦截不到
     private final List<String> operation = List.of("/edit", "/userAdd", "/delete", "/avatarEdit");

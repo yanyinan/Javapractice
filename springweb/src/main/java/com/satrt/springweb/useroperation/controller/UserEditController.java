@@ -52,7 +52,7 @@ public class UserEditController {
         // 修改用户信息
         user.setPhoneNumber(phoneNumber);
         userService.update(user);
-        request.getSession().setAttribute("verification", null);
+//        request.getSession().setAttribute("verification", null);
         return "redirect:/userOperate/userDirectory";
     }
     @GetMapping ("/userAdd")
@@ -70,7 +70,7 @@ public class UserEditController {
         String rePassword = re_Registration_password;
         // 注册
         userService.register(userEntity, password,rePassword);
-        request.getSession().setAttribute("verification", null);
+//        request.getSession().setAttribute("verification", null);
         return "redirect:/userOperate/userDirectory";
     }
     @GetMapping ( "/delete")
@@ -88,7 +88,7 @@ public class UserEditController {
         if (!avatar.isEmpty()){
             userService.updateAvatar(avatar,user);
         }
-        request.getSession().setAttribute("verification", null);
+//        request.getSession().setAttribute("verification", null);
         return "redirect:/LoginUserMsg";
     }
 }

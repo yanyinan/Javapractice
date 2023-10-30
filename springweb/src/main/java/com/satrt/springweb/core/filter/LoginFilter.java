@@ -16,7 +16,8 @@ import java.util.List;
 public class LoginFilter implements Filter {
 
     private List<String> excludePaths = List.of("/", "/login", "/register", "/captcha");
-    private String[] resourcePaths = {"/css/", "/js/", "/fonts/", "/images/","/assists/","/backgrouder/","/login/","/web/"};
+    private String[] resourcePaths = {"/css/", "/js/", "/fonts/", "/images/","/assists/","/backgrouder/","/login/"};
+    private List<String> paths = List.of("/web/");
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -53,6 +54,9 @@ public class LoginFilter implements Filter {
             resp.sendRedirect(contextPath + "/login");
             return;
         }
-        chain.doFilter(request, response);
+        if (!paths.contains(path)){
+            chain.doFilter(request, response);
+        }
+//        chain.doFilter(request, response);
     }
 }

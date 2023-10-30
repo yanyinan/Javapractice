@@ -30,16 +30,10 @@ public class Upload {
             // 不存在创建
             file.mkdirs();
         }
-        //
-            /*
-             重命名文件，防止文件冲突
-                时间戳
-                UUID
-             */
-        // .jpg
+
         //获取文件后缀
         String substring = submittedFileName.substring(submittedFileName.lastIndexOf("."));
-
+        //重命名文件，防止文件冲突 时间戳
         String fileName = UUID.randomUUID().toString().replace("-", "") +substring;
         //存储
         // 存文件  d:/temp/upload/20231017/fileName + substring

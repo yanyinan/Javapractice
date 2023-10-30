@@ -17,6 +17,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * 文件下载
@@ -40,7 +41,7 @@ public class FileDownloadController {
         FileEntity fileEntity = fileService.getByDownId(fileId);
         // 设置响应头
         response.setContentType(fileEntity.getFileType());
-        response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileEntity.getFileName()));
+        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileEntity.getFileName(),"UTF-8"));
         // 替换为文件URL
         URI uri = new URI(Constant.ACCESS_PATH);
         URI uriFlier =new URI(fileEntity.getDownloadLink());

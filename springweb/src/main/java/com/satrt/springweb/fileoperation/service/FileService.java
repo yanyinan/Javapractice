@@ -28,8 +28,8 @@ public class FileService {
      * 文件列表
      * @return 返回文件列表
      */
-    public  List<FileEntity> fileDirectory() throws SqlServiceException {
-        return fileDao.selectAll();
+    public  List<FileEntity> fileDirectory(String username) throws SqlServiceException {
+        return fileDao.selectAll(username);
     }
 
     /**

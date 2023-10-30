@@ -29,9 +29,9 @@ public class FileDirectoryController {
         this.fileService = fileService;
     }
     @RequestMapping(value = "/fileDirectory", method = RequestMethod.GET)
-    public String fileList(Model model) throws SqlServiceException {
+    public String fileList(Model model, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) throws SqlServiceException {
         // 查询用户列表
-        List<FileEntity> filelist = fileService.fileDirectory();
+        List<FileEntity> filelist = fileService.fileDirectory(user.getUserName());
         // 存到域中
         model.addAttribute("fileList", filelist);
         return "backgrounder/fileOperation/fileDirectory";

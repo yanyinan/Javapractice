@@ -17,7 +17,7 @@ import java.io.IOException;
  * @version: v0.0.1
  * @date: 2023 2023/10/28 13:40
  */
-//@WebFilter("/*")
+@WebFilter("/*")
 public class SessionRe implements Filter {
     private UserDao dao = new UserDao();
     @Override

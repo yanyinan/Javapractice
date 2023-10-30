@@ -20,9 +20,9 @@ public class FileDao {
      * 查询所有文件
      * @return 返回文件列表
      */
-    public List<FileEntity> selectAll() throws SqlServiceException {
-        String sql = "SELECT id as id, file_name as fileName, file_type as fileType, size, createTime, createBy ,downloadLink from sys_file";
-        return DbUtilsHelper.queryList(sql, FileEntity.class);
+    public List<FileEntity> selectAll(String username) throws SqlServiceException {
+        String sql = "SELECT id as id, file_name as fileName, file_type as fileType, size, createTime, createBy ,downloadLink from sys_file where createBy = ?";
+        return DbUtilsHelper.queryList(sql, FileEntity.class,username);
     }
 
     /**

@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 /**
  * @author 26481
  */
-@SpringBootApplication
+@SpringBootApplication 
 /**
  * 扫描 Servlet 组件
 */

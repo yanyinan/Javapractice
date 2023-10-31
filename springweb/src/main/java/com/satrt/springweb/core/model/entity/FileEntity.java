@@ -18,6 +18,6 @@ public class FileEntity implements Serializable {
     private String fileType;
     private long size;
     private Date createTime;
-    private String createBy;
+    private int createBy;
     private String downloadLink;
 }

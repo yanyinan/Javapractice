@@ -37,10 +37,10 @@ public class FileDirectoryController {
                            FileEntity fileEntity) throws SqlServiceException {
 
         // 查询文件列表
-        List<FileEntity> filelist = fileService.fileDirectory(fileEntity,user.getUserName(),pageNum,pageSize);
+        List<FileEntity> filelist = fileService.fileDirectory(fileEntity,user.getId(),pageNum,pageSize);
 
         // 存到域中
-        int total = fileService.getTotal(fileEntity,user.getUserName());
+        int total = fileService.getTotal(fileEntity,user.getId());
 
         // 构建一个分页对象
         PageEntity page = new PageEntity(pageNum, pageSize, total, filelist);
@@ -64,7 +64,7 @@ public class FileDirectoryController {
     public String upload(@RequestParam("img") MultipartFile file, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) {
         if (!file.isEmpty()){
             try {
-                fileService.save(file, user.getUserName());
+                fileService.save(file, user.getId());
             } catch (IOException | SqlServiceException e) {
                 throw new RuntimeException(e);
             }

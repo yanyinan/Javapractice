@@ -24,14 +24,14 @@ public class FileDao {
      *
      * @return 返回文件列表
      */
-    public List<FileEntity> selectLoginUserfile(FileEntity fileEntity, String username, int pageNum, int pageSize) throws SqlServiceException {
+    public List<FileEntity> selectLoginUserfile(FileEntity fileEntity, int id, int pageNum, int pageSize) throws SqlServiceException {
         StringBuilder sql = new StringBuilder("SELECT id as id, file_name as fileName, file_type as fileType, size, createTime, createBy ,downloadLink from sys_file");
         StringBuilder where = new StringBuilder();
         List param = new ArrayList();
         //传入文件名
         if (StringUtils.hasText(fileEntity.getFileName())) {
-            where.append(" where file_name = ?");
-            param.add(fileEntity.getFileName());
+            where.append(" where file_name like ?");
+            param.add(new StringBuilder("%" + fileEntity.getFileName() + "%").toString());
         }
 
         // 传入用户
@@ -40,7 +40,7 @@ public class FileDao {
         } else {
             where.append(" and createBy = ?");
         }
-        param.add(username);
+        param.add(id);
 
         if (where.length() > 0) {
             sql.append(where);
@@ -86,14 +86,14 @@ public class FileDao {
         return DbUtilsHelper.queryOne(sql, FileEntity.class, fileId);
     }
 
-    public int fileTotal(FileEntity fileEntity, String userName) throws SqlServiceException {
+    public int fileTotal(FileEntity fileEntity, int id) throws SqlServiceException {
         StringBuilder sql = new StringBuilder("select * from sys_file");
         StringBuilder where = new StringBuilder();
         List param = new ArrayList();
         //传入文件名
         if (StringUtils.hasText(fileEntity.getFileName())) {
-            where.append(" where file_name = ?");
-            param.add(fileEntity.getFileName());
+            where.append(" where file_name like ?");
+            param.add(new StringBuilder("%" + fileEntity.getFileName() + "%").toString());
         }
 
         // 传入用户
@@ -102,12 +102,17 @@ public class FileDao {
         } else {
             where.append(" and createBy = ?");
         }
-        param.add(userName);
+        param.add(id);
 
         if (where.length() > 0) {
             sql.append(where);
         }
         List<FileEntity> list = DbUtilsHelper.queryList(sql.toString(), FileEntity.class, param.toArray());
         return list.size();
+    }
+
+    public void deleteByUser(Integer id) throws SqlServiceException {
+        String sql = "delete  from sys_file where createBy = ?";
+        DbUtilsHelper.update(sql,id);
     }
 }

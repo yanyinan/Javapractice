@@ -30,8 +30,8 @@ public class FileService {
      * 文件列表
      * @return 返回文件列表
      */
-    public  List<FileEntity> fileDirectory(FileEntity fileEntity,String username, int pageNum, int pageSize) throws SqlServiceException {
-        return fileDao.selectLoginUserfile(fileEntity,username,pageNum,pageSize);
+    public  List<FileEntity> fileDirectory(FileEntity fileEntity,int id, int pageNum, int pageSize) throws SqlServiceException {
+        return fileDao.selectLoginUserfile(fileEntity,id,pageNum,pageSize);
     }
 
     /**
@@ -40,13 +40,13 @@ public class FileService {
      * @param id 用户id
      * @return 返回 0 添加失败
      */
-    public int save(MultipartFile file, String username) throws IOException, SqlServiceException {
-        String path = uploadFile(file, file.getOriginalFilename(),username, FileServiceConstant.UPLOAD_FILE_FLAG);
+    public int save(MultipartFile file, int id) throws IOException, SqlServiceException {
+        String path = uploadFile(file, file.getOriginalFilename(), String.valueOf(id), FileServiceConstant.UPLOAD_FILE_FLAG);
         FileEntity fileEntity = new FileEntity();
         fileEntity.setFileName(file.getOriginalFilename());
         fileEntity.setFileType(file.getContentType());
         fileEntity.setSize(file.getSize());
-        fileEntity.setCreateBy(username);
+        fileEntity.setCreateBy(id);
         //设置地址
         fileEntity.setDownloadLink("/web/" + path);
         return fileDao.fileAdd(fileEntity);
@@ -76,10 +76,14 @@ public class FileService {
      * @param userName 用户名
      * @return 返回个数
      */
-    public int getTotal(FileEntity fileEntity, String userName) throws SqlServiceException {
+    public int getTotal(FileEntity fileEntity, int id) throws SqlServiceException {
         if (ObjectUtils.isEmpty(fileEntity)){
             System.out.println("参数不能为空");
         }
-        return fileDao.fileTotal(fileEntity,userName);
+        return fileDao.fileTotal(fileEntity,id);
+    }
+
+    public void deleteByUser(Integer id) throws SqlServiceException {
+        fileDao.deleteByUser(id);
     }
 }

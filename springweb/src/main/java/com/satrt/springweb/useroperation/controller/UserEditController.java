@@ -1,10 +1,13 @@
 package com.satrt.springweb.useroperation.controller;
 
 import com.satrt.springweb.core.constant.Constant;
+import com.satrt.springweb.core.model.entity.FileEntity;
 import com.satrt.springweb.core.model.entity.UserEntity;
 import com.satrt.springweb.exception.login.RegisterException;
 import com.satrt.springweb.exception.sql.SqlServiceException;
+import com.satrt.springweb.fileoperation.service.FileService;
 import com.satrt.springweb.useroperation.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,8 @@ public class UserEditController {
     UserEditController(UserService userService) {
         this.userService = userService;
     }
+    @Autowired
+    private FileService fileService;
 
     @GetMapping("/userDirectory")
     public String list(Model model, @SessionAttribute(Constant.LOGIN_USER) UserEntity user) throws SqlServiceException {
@@ -82,6 +87,7 @@ public class UserEditController {
     public String delete(Integer id,HttpServletRequest request) throws SqlServiceException {
         // 删除用户信息
         userService.delete(id);
+        fileService.deleteByUser(id);
         request.getSession().setAttribute("verification", null);
         return "redirect:/userOperate/userDirectory";
     }

@@ -43,7 +43,7 @@ public class UserDao {
      * @return 返回修改行数
      */
     public int insert(UserEntity userEntity) throws SqlServiceException {
-        String sql = "insert into sys_user(user_name, nick_name, password) values(?, ?, ?)";
+        String sql = "insert into sys_user(user_name, nick_name, password,user_type) values(?, ?, ?,2)";
         return DbUtilsHelper.update(sql,userEntity.getUserName(),userEntity.getNickName(),userEntity.getPassword());
     }
 

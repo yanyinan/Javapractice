@@ -29,7 +29,7 @@ public class FileDirectoryController {
     FileDirectoryController(FileService fileService){
         this.fileService = fileService;
     }
-    @RequestMapping(value = "/fileDirectory", method = RequestMethod.GET)
+    @RequestMapping(value = "/fileDirectory")
     public String fileList(Model model,
                            @RequestParam(value = "p", defaultValue = "1") int pageNum,
                            @RequestParam(value = "s", defaultValue = "5") int pageSize,

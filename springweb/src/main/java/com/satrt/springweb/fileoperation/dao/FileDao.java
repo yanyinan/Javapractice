@@ -86,8 +86,8 @@ public class FileDao {
         return DbUtilsHelper.queryOne(sql, FileEntity.class, fileId);
     }
 
-    public int fileTotal(FileEntity fileEntity, String userName) {
-        StringBuilder sql = new StringBuilder("select count(*) from file");
+    public int fileTotal(FileEntity fileEntity, String userName) throws SqlServiceException {
+        StringBuilder sql = new StringBuilder("select * from sys_file");
         StringBuilder where = new StringBuilder();
         List param = new ArrayList();
         //传入文件名
@@ -107,6 +107,7 @@ public class FileDao {
         if (where.length() > 0) {
             sql.append(where);
         }
-        return DbUtilsHelper.selectCount(sql.toString(), param.toArray());
+        List<FileEntity> list = DbUtilsHelper.queryList(sql.toString(), FileEntity.class, param.toArray());
+        return list.size();
     }
 }

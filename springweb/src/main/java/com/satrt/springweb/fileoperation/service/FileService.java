@@ -76,7 +76,7 @@ public class FileService {
      * @param userName 用户名
      * @return 返回个数
      */
-    public int getTotal(FileEntity fileEntity, String userName) {
+    public int getTotal(FileEntity fileEntity, String userName) throws SqlServiceException {
         if (ObjectUtils.isEmpty(fileEntity)){
             System.out.println("参数不能为空");
         }

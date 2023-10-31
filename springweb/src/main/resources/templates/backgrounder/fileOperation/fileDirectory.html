@@ -62,9 +62,10 @@
 <body>
 <h1>文件列表</h1>
 <a th:href="@{/fileOperate/fileAdd}">上传文件</a>
-<span class="error" th:text="${message}"></span>
-<form th:each="/fileOperate/fileDirectory" method="post">
-    <input type="text" name="name" placeholder="请输入文件名" th:value="${search.name}"/>
+
+<form th:action="@{/fileOperate/fileDirectory}" method="post">
+    <input type="text" name="fileName" placeholder="请输入文件名" th:value="${search.fileName}"/>
+    <input type="submit" value="搜索">
 </form>
 <table>
     <thead>
@@ -79,7 +80,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="file, stat : ${fileList}">
+    <tr th:if="${page.data.size() == 0}">
+        <td colspan="7">暂无数据</td>
+    </tr>
+    <tr th:if="${page.data.size() > 0}" th:each="file, stat : ${page.data}">
         <td th:text="${stat.count}"></td>
         <td class="img"><img th:src="@{${file.downloadLink}}"/></td>
         <td th:text="${file.fileName}"></td>
@@ -92,6 +96,33 @@
         </td>
     </tr>
     </tbody>
+    <tfoot th:if="${page.data.size() > 0 and page.totalPage > 1}">
+    <tr>
+        <th colspan="7">
+        <span th:if="${page.hasPrePage}">
+            <a th:href="@{/fileOperate/fileDirectory(p=${page.prePage},s=${page.pageSize},name=${search.fileName})}">上一页</a>
+        </span>
+            <span th:if="!${page.hasPrePage}">
+            上一页
+        </span>
+            <!--     循环页码   -->
+            <span th:each="num : ${page.pageNumbers}">
+           <a th:if="${num == page.pageNum}" th:text="${num}" class="current_page"></a>
+           <a th:if="${num != page.pageNum}"
+              th:href="@{/fileOperate/fileDirectory(p=${num},s=${page.pageSize},name=${search.fileName})}"
+              th:text="${num}"></a>
+        </span>
+
+            <span th:if="${page.hasNextPage}">
+            <a th:href="@{/fileOperate/fileDirectory(p=${page.nextPage},s=${page.pageSize},name=${search.fileName})}">下一页</a>
+        </span>
+
+            <span th:if="!${page.hasNextPage}">
+            下一页
+        </span>
+        </th>
+    </tr>
+    </tfoot>
 </table>
 </body>
 </html>

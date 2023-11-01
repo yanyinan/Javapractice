@@ -17,5 +17,6 @@ public interface IUserInfoDao {
      *查询所有的 User 信息 ，并封装到 UserInfoModel
      * @return 返回用户信息集合
      */
+
     List<UserInfoModel> selectAll();
 }

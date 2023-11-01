@@ -4,7 +4,8 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 表示 要映射的 dao 接口 -->
 <mapper namespace="nanzhou.mybatis.demo.dao.IUserInfoDao">
+    <!--select 标签表示查询语句， id 属性和接口中的方法保持一致-->
     <select id="selectAll" resultType="nanzhou.mybatis.demo.model.UserInfoModel">
-
+        select * from userinfo
     </select>
 </mapper>

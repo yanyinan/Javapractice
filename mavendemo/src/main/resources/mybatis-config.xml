@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <properties resource=""></properties>
+    <properties resource="db.properties"></properties>
 
     <settings>
         <!-- 开启驼峰命名转换 -->
@@ -36,8 +36,8 @@
 
     <mappers>
         <!-- 配置映射文件路径 -->
-        <!--        <mapper class="" />-->
-        <!--        <mapper resource=""/>-->
-        <package name=""/>
+        <!--        <mapper class="nanzhou.mybatis.demo.dao.IUserInfoDao" />-->
+        <!--        <mapper resource="nanzhou/mybatis/demo/dao/IUserInfoDao.xml"/>-->
+        <package name="nanzhou.mybatis.demo.dao"/>
     </mappers>
 </configuration>

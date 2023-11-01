@@ -3,6 +3,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+###忽略项目内的.idea .out
+
+*/.idea
+*/out
 ### IntelliJ IDEA ###
 .idea
 *.iws

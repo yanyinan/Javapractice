@@ -4,9 +4,64 @@
     <meta charset="UTF-8">
     <title>修改</title> <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
+    header {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    main {
+        padding: 2rem;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+
+    input[type="password"] {
+        margin-bottom: 1rem;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
 <body>
+<header>
+    <h1>修改<span th:text="${user.userName}"></span>用户信息</h1>
+</header>
 <div class="login-container">
-    <h2>修改<span th:text="${user.userName}"></span>用户信息</h2>
     <form th:action="@{/userOperate/edit}" method="post">
         <input type="hidden" name="id" th:value="${user.id}" readonly/>
         <div class="form-group">

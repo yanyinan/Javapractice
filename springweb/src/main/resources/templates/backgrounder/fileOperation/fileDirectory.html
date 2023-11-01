@@ -5,8 +5,33 @@
     <title>文件列表</title>
     <style>
         /* 添加一些基本的样式 */
+        <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
         }
 
         table {
@@ -45,13 +70,6 @@
             background-color: #f44336;
             color: #fff;
         }
-
-        .error {
-            color: red;
-            font-weight: bold;
-            font-size: 20px;
-        }
-
         .img img {
             width: 100px;
             height: 100px;
@@ -60,13 +78,16 @@
     </style>
 </head>
 <body>
-<h1>文件列表</h1>
+<header>
+    <h1>上传文件</h1>
+</header>
 <a th:href="@{/fileOperate/fileAdd}">上传文件</a>
 
 <form th:action="@{/fileOperate/fileDirectory}" method="post">
     <input type="text" name="fileName" placeholder="请输入文件名" th:value="${search.fileName}"/>
     <input type="submit" value="搜索">
 </form>
+
 <table>
     <thead>
     <tr>
@@ -100,7 +121,7 @@
     <tr>
         <th colspan="7">
         <span th:if="${page.hasPrePage}">
-            <a th:href="@{/fileOperate/fileDirectory(p=${page.prePage},s=${page.pageSize},name=${search.fileName})}">上一页</a>
+            <a th:href="@{/fileOperate/fileDirectory(p=${page.prePage},s=${page.pageSize},fileName=${search.fileName})}">上一页</a>
         </span>
             <span th:if="!${page.hasPrePage}">
             上一页
@@ -109,14 +130,13 @@
             <span th:each="num : ${page.pageNumbers}">
            <a th:if="${num == page.pageNum}" th:text="${num}" class="current_page"></a>
            <a th:if="${num != page.pageNum}"
-              th:href="@{/fileOperate/fileDirectory(p=${num},s=${page.pageSize},name=${search.fileName})}"
+              th:href="@{/fileOperate/fileDirectory(p=${num},s=${page.pageSize},fileName=${search.fileName})}"
               th:text="${num}"></a>
         </span>
 
             <span th:if="${page.hasNextPage}">
-            <a th:href="@{/fileOperate/fileDirectory(p=${page.nextPage},s=${page.pageSize},name=${search.fileName})}">下一页</a>
+            <a th:href="@{/fileOperate/fileDirectory(p=${page.nextPage},s=${page.pageSize},fileName=${search.fileName})}">下一页</a>
         </span>
-
             <span th:if="!${page.hasNextPage}">
             下一页
         </span>

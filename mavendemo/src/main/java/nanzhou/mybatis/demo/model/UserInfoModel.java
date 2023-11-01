@@ -1,4 +1,4 @@
-package org.example.model;
+package nanzhou.mybatis.demo.model;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @program: mavendemo
+ * @program: maven demo
  * @ClassName UserInfoModel
  * @description:
  * @author: nanzhou

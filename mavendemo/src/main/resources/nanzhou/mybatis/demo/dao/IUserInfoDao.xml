@@ -4,6 +4,14 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 表示 要映射的 dao 接口 -->
 <mapper namespace="nanzhou.mybatis.demo.dao.IUserInfoDao">
+
+    <insert id="insert" parameterType="nanzhou.mybatis.demo.dao.IUserInfoDao">
+        insert into userinfo(id, username, password, name, gender, birthday, phone, email, create_date, is_del)
+        values(#{id}, #{username}, #{password}, #{name}, #{gender}, #{birthday}, #{phone}, #{email}, #{createDate}, #{del})
+    </insert>
+    <delete id="delete" parameterType="nanzhou.mybatis.demo.dao.IUserInfoDao">
+        delete from userinfo where id =#{id}
+    </delete>
     <!--select 标签表示查询语句， id 属性和接口中的方法保持一致-->
     <select id="selectAll" resultType="nanzhou.mybatis.demo.model.UserInfoModel">
         select * from userinfo

@@ -19,4 +19,7 @@ public interface IUserInfoDao {
      */
 
     List<UserInfoModel> selectAll();
+    int insert(UserInfoModel UserInfoModel);
+
+    int delete(String id);
 }

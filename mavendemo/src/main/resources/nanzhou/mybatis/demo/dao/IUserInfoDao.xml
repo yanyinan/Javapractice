@@ -1,19 +1,67 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- namespace 表示 要映射的 dao 接口 -->
-<mapper namespace="nanzhou.mybatis.demo.dao.IUserInfoDao">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nanzhou.mybatis.demo.dao.IUserinfoDao">
 
-    <insert id="insert" parameterType="nanzhou.mybatis.demo.dao.IUserInfoDao">
-        insert into userinfo(id, username, password, name, gender, birthday, phone, email, create_date, is_del)
-        values(#{id}, #{username}, #{password}, #{name}, #{gender}, #{birthday}, #{phone}, #{email}, #{createDate}, #{del})
-    </insert>
-    <delete id="delete" parameterType="nanzhou.mybatis.demo.dao.IUserInfoDao">
-        delete from userinfo where id =#{id}
-    </delete>
-    <!--select 标签表示查询语句， id 属性和接口中的方法保持一致-->
-    <select id="selectAll" resultType="nanzhou.mybatis.demo.model.UserInfoModel">
-        select * from userinfo
+    <resultMap id="result" type="userinfoModel">
+        <result column="is_del" property="del" />
+    </resultMap>
+
+    <sql id="columns">
+        id, username, password, name, gender, phone, birthday, email, qq, img, is_del, create_date, update_date
+    </sql>
+
+    <select id="selectAll" resultMap="result" parameterType="userinfoModel">
+        select
+        <include refid="columns"></include>
+        from userinfo
+        <where>
+            <if test="username != null">
+                and username = #{username}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+        </where>
+        <choose>
+            <when test="name != null">
+                order by name
+            </when>
+            <when test="username != null">
+                order by username
+            </when>
+            <otherwise>
+                order by id
+            </otherwise>
+        </choose>
     </select>
+
+    <delete id="deleteById" parameterType="list">
+        delete from userinfo
+        <where>
+            <foreach collection="array" item="id" open="id in (" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+
+    <update id="update" parameterType="userinfoModel">
+        update userinfo
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+        </set>
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+        </where>
+    </update>
 </mapper>

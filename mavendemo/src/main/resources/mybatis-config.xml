@@ -14,7 +14,9 @@
     <typeAliases>
         <!--        <typeAlias type="" alias=""/>-->
         <!-- 扫描包下的所有类，别名为类名, 首字母可以小写 -->
-        <package name=""/>
+        <package name="nanzhou.mybatis.demo.model"/>
+        <package name="nanzhou.mybatis.demo.dao"/>
+
     </typeAliases>
 
     <!--  环境配置 ， default 默认使用的环境  -->
@@ -38,6 +40,7 @@
         <!-- 配置映射文件路径 -->
         <!--        <mapper class="nanzhou.mybatis.demo.dao.IUserInfoDao" />-->
         <!--        <mapper resource="nanzhou/mybatis/demo/dao/IUserInfoDao.xml"/>-->
+        <package name="nanzhou.mybatis.demo.model"/>
         <package name="nanzhou.mybatis.demo.dao"/>
     </mappers>
 </configuration>

@@ -60,19 +60,20 @@
                     </div>
 					<!--密码-->
                     <div class="form-group">
-                        <input type="password" class="form-control" id="InputPassword" placeholder="请输入密码"  required="required">
+                        <input type="password" class="form-control" id="password" placeholder="请输入密码"  required="required">
                     </div>
 					<!--验证码-->
 					<div class="form-group">
 						<!--将验证码输入框的src属性的值替换为验证码图片的地址-->
                         <div class="fxt-form-row">
                             <div class="figure">
-                                <input type="text"  maxlength="1" required="required">
-                                <input type="text"  maxlength="1" required="required">
-                                <input type="text"  maxlength="1" required="required">
-                                <input type="text"  maxlength="1" required="required">
+                                <input type="text"  class="input-box" maxlength="1" required="required">
+                                <input type="text"  class="input-box" maxlength="1" required="required">
+                                <input type="text"  class="input-box" maxlength="1" required="required">
+                                <input type="text"  class="input-box" maxlength="1" required="required">
                             </div>
-                            <img src="" alt="验证码" class="code">
+                            <img th:src="@{/captcha}" alt="验证码" class="code">
+                            <p style="display: none" id="captcha"></p>
                         </div>
                     </div>
 					<!--记住密码-->
@@ -92,20 +93,4 @@
     </div>
 </div>
 </body>
-<script>
-    document.getElementById("username").addEventListener("change", function() {
-        var username = this.value;
-        if (username.length < 5 || username.length > 20) {
-            alert("用户名长度必须在5到20个字符之间");
-            this.focus();
-        }
-    });
-    document.getElementById("InputPassword").addEventListener("change", function() {
-        var username = this.value;
-        if (username.length < 5 || username.length > 20) {
-            alert("密码长度必须在5到20个字符之间");
-            this.focus();
-        }
-    });
-</script>
 </html>

@@ -40,6 +40,7 @@ public class OperatorFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
             }else {
+                System.out.println("跳转到验证页");
                 resp.sendRedirect( "/Password/Verification");
             }
         }else {

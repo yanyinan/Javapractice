@@ -24,7 +24,7 @@ public class PasswordVerificationController {
     }
     @GetMapping("/Verification")
     public String Verification(){
-        return "/backgrounder/userOperation/passwordVerification";
+        return "backgrounder/userOperation/passwordVerification";
     }
     @PostMapping("/Verification")
     public String Verification(String password, @SessionAttribute(Constant.LOGIN_USER) UserEntity user, HttpServletRequest request) throws SqlServiceException, LoginException {
@@ -35,6 +35,6 @@ public class PasswordVerificationController {
         }else {
             return "redirect:/logout";
         }
-        return "/backgrounder/info/info";
+        return "backgrounder/info/info";
     }
 }

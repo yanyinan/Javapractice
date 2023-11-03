@@ -22,7 +22,6 @@ public class ConfigReader {
     /**
      * 服务器配置
      */
-
     static {
         try {// 通过 ClassLoader 获取资源文件的输入流
             ClassLoader classLoader = ConfigReader.class.getClassLoader();

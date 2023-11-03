@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/login/css/bootstrap.min.css">
+
+    <!-- Loding font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" type="text/css" href="../../static/login/css/styles.css">
+
+    <style>
+        .fxt-form-row{
+            display: flex;
+            flex-flow: row;
+
+        }
+        .fxt-form-row .figure{
+            width: 75%;
+            display: flex;
+            flex-flow: row;
+            justify-content: space-between;
+        }
+        .fxt-form-row .figure input{
+            width: 25%;
+            padding: 3px;
+            text-align: center;
+        }
+        .fxt-form-row .figure img{
+            width: 25%;
+        }
+    </style>
+    <title>Home</title>
+</head>
+<body>
+
+<!-- Backgrounds -->
+<div id="login-bg" class="container-fluid">
+    <div class="bg-img"></div>
+    <div class="bg-color"></div>
+</div>
+<!-- End Backgrounds -->
+
+<div class="container" id="login">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="login">
+                <h1>Login</h1>
+                <!-- Loging form -->
+                <form th:action="/login" th:method="post">
+					<!--账号或用户名-->
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="username"
+                               placeholder="请输入账号或用户名"  required="required">
+                    </div>
+					<!--密码-->
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="InputPassword" placeholder="请输入密码"  required="required">
+                    </div>
+					<!--验证码-->
+					<div class="form-group">
+						<!--将验证码输入框的src属性的值替换为验证码图片的地址-->
+                        <div class="fxt-form-row">
+                            <div class="figure">
+                                <input type="text"  maxlength="1" required="required">
+                                <input type="text"  maxlength="1" required="required">
+                                <input type="text"  maxlength="1" required="required">
+                                <input type="text"  maxlength="1" required="required">
+                            </div>
+                            <img src="" alt="验证码" class="code">
+                        </div>
+                    </div>
+					<!--记住密码-->
+                    <div class="form-check">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <label class="form-check-label" >记住密码</label>
+<!--                        <label class="forgot-password"><a href="#">忘记密码</a></label>-->
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-lg btn-block btn-success">登录</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    document.getElementById("username").addEventListener("change", function() {
+        var username = this.value;
+        if (username.length < 5 || username.length > 20) {
+            alert("用户名长度必须在5到20个字符之间");
+            this.focus();
+        }
+    });
+    document.getElementById("InputPassword").addEventListener("change", function() {
+        var username = this.value;
+        if (username.length < 5 || username.length > 20) {
+            alert("密码长度必须在5到20个字符之间");
+            this.focus();
+        }
+    });
+</script>
+</html>

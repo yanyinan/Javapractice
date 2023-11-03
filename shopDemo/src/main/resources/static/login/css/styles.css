@@ -29,7 +29,7 @@ body {
 }
 
 .bg-img {
-	background-image: url(./bg-image.jpeg);
+	background-image: url(../bg-image.jpeg);
 	background-size: cover;
 }
 
@@ -160,7 +160,7 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px ##00B72E;
+  box-shadow: 0 0 1px #00B72E;
 }
 
 input:checked + .slider:before {

@@ -49,15 +49,15 @@ public class LoginController {
     @PostMapping(value = {"/", "/login"})
     public ModelAndView login(Model model, UserEntity userEntity, String captcha, HttpServletRequest request) {
         // 校验验证码
-        if (captcha == null || !CaptchaUtil.ver(captcha, request)) {
-            // 验证码错误
-            // 清除验证码
-            CaptchaUtil.clear(request);
-            // 重定向到登录页面
-            return new ModelAndView("redirect:login");
-        }
-        // 清除验证码
-        CaptchaUtil.clear(request);
+//        if (captcha == null || !CaptchaUtil.ver(captcha, request)) {
+//            // 验证码错误
+//            // 清除验证码
+//            CaptchaUtil.clear(request);
+//            // 重定向到登录页面
+//            return new ModelAndView("redirect:login");
+//        }
+//        // 清除验证码
+//        CaptchaUtil.clear(request);
         // 校验用户名密码
         UserEntity user = userService.login(userEntity);
         // 如果用户为空，则登录失败
@@ -76,7 +76,7 @@ public class LoginController {
     }
     @RequestMapping("/index")
     public String index() {
-        return "backgrounder/index";
+        return "menu/index";
     }
     @RequestMapping("/logout")
     public String logout(HttpSession session){

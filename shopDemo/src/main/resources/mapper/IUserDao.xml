@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.demo.shopdemo.login.dao.IUserDao">
+<mapper namespace="com.demo.shopdemo.useroperation.dao.IUserDao">
 
     <select id="selectByUsernameAndPassword" resultType="com.demo.shopdemo.core.model.UserEntity">
         select * from user where username = #{username} and password = #{password}

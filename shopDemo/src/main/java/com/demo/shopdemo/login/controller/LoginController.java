@@ -1,17 +1,19 @@
 package com.demo.shopdemo.login.controller;
 
 import com.demo.shopdemo.core.model.UserEntity;
-import com.demo.shopdemo.login.service.IUserService;
+import com.demo.shopdemo.useroperation.service.IUserService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 用户登录
@@ -72,5 +74,14 @@ public class LoginController {
         // 生成验证码
         CaptchaUtil.out(request, response);
     }
-
+    @RequestMapping("/index")
+    public String index() {
+        return "backgrounder/index";
+    }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        //清楚session
+        session.invalidate();
+        return "login/login";
+    }
 }

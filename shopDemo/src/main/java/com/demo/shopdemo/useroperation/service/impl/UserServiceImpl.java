@@ -1,9 +1,9 @@
-package com.demo.shopdemo.login.service.impl;
+package com.demo.shopdemo.useroperation.service.impl;
 
 import com.demo.shopdemo.core.model.UserEntity;
-import com.demo.shopdemo.login.dao.IUserDao;
-import com.demo.shopdemo.login.service.IUserService;
-import com.demo.shopdemo.login.utils.MD5Util;
+import com.demo.shopdemo.useroperation.dao.IUserDao;
+import com.demo.shopdemo.useroperation.service.IUserService;
+import com.demo.shopdemo.core.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.demo.shopdemo.login.dao;
+package com.demo.shopdemo.useroperation.dao;
 
 import com.demo.shopdemo.core.model.UserEntity;
 public interface IUserDao {

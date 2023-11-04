@@ -1,4 +1,4 @@
-package com.demo.shopdemo.login.service;
+package com.demo.shopdemo.useroperation.service;
 
 import com.demo.shopdemo.core.model.UserEntity;
 

@@ -1,5 +1,7 @@
 package com.demo.shopdemo.core.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ import java.util.Date;
  * @version: v0.0.1
  * @Date: 2023/11/4
  */
+@Data
 public class UserEntity implements Serializable {
     /**
      * 用户编号，自定义

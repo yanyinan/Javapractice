@@ -2,17 +2,14 @@ package com.demo.shopdemo.login.controller;
 
 
 import com.demo.shopdemo.core.model.UserEntity;
-
 import com.demo.shopdemo.login.service.IUserService;
-import com.demo.shopdemo.login.service.impl.UserServiceImpl;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-
 
 /**
  * 用户登录

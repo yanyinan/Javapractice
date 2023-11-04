@@ -1,22 +1,20 @@
-# ???spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/web?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password:
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      initial-size: 5
-      min-idle: 5
-      max-active: 20
-      max-wait: 60000
+datasource:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/shop_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+  username: root
+  password:
+  type: com.alibaba.druid.pool.DruidDataSource
+  druid:
+    initial-size: 5
+    min-idle: 5
+    max-active: 20
+    max-wait: 60000
 
 
 mybatis:
 
   mapperLocations: classpath:mapper/*.xml
-
-  type-aliases-package: com.demo.shopdemo.model
+  type-aliases-package: com.demo.shopdemo.core.models
   configuration:
 
     map-underscore-to-camel-case: true

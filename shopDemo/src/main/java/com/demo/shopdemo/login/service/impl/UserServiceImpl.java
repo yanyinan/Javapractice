@@ -6,9 +6,6 @@ import com.demo.shopdemo.login.service.IUserService;
 import com.demo.shopdemo.login.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-
-import javax.security.auth.login.LoginException;
 
 /**
  * 用户登录
@@ -19,6 +16,7 @@ import javax.security.auth.login.LoginException;
  */
 @Service
 public class UserServiceImpl implements IUserService {
+
     @Autowired
     private IUserDao userDao;
     @Override

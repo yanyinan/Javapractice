@@ -1,20 +1,35 @@
-datasource:
-  driver-class-name: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/shop_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-  username: root
-  password:
-  type: com.alibaba.druid.pool.DruidDataSource
-  druid:
-    initial-size: 5
-    min-idle: 5
-    max-active: 20
-    max-wait: 60000
+server:
+  port: 80
 
 
+# 数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+
+# MyBatis 配置
 mybatis:
-
+  # mapper 映射文件的路径
   mapperLocations: classpath:mapper/*.xml
-  type-aliases-package: com.demo.shopdemo.core.models
+  # 实体类所在的包，类型别名
+  type-aliases-package: com.demo.shopdemo.core.model
   configuration:
-
+    # 开启驼峰命名
     map-underscore-to-camel-case: true
+
+
+
+logging:
+  level:
+    com.kfm.bootmybatis.dao: debug
+
+

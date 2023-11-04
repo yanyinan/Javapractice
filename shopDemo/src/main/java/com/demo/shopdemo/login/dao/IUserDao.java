@@ -1,12 +1,6 @@
 package com.demo.shopdemo.login.dao;
 
 import com.demo.shopdemo.core.model.UserEntity;
-import org.springframework.stereotype.Repository;
-
-/**
- * @author 26481
- */
-
 public interface IUserDao {
     /**
      * 根据用户名和密码查询用户

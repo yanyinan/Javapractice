@@ -6,4 +6,5 @@
     <select id="selectByUsernameAndPassword" resultType="com.demo.shopdemo.core.model.UserEntity">
         select * from user where username = #{username} and password = #{password}
     </select>
+
 </mapper>

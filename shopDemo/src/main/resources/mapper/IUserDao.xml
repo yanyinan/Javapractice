@@ -24,5 +24,6 @@
     <select id="getById" resultType="com.demo.shopdemo.core.model.UserEntity">
         select * from user where id = #{id}
     </select>
+    <select id="selectAll" resultType="com.demo.shopdemo.core.model.UserEntity"></select>
 
 </mapper>

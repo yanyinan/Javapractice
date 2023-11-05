@@ -1,6 +1,9 @@
 package com.demo.shopdemo.useroperation.dao;
 
 import com.demo.shopdemo.core.model.UserEntity;
+
+import java.util.List;
+
 public interface IUserDao {
     /**
      * 根据用户名和密码查询用户
@@ -20,4 +23,6 @@ public interface IUserDao {
     int update(UserEntity userEntity);
 
     void banned(Integer id);
+
+    List<UserEntity> selectAll();
 }

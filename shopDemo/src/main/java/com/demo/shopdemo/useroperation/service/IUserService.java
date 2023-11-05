@@ -2,6 +2,8 @@ package com.demo.shopdemo.useroperation.service;
 
 import com.demo.shopdemo.core.model.UserEntity;
 
+import java.util.List;
+
 public interface IUserService {
     /**
      * 用户登录
@@ -21,4 +23,6 @@ public interface IUserService {
     void banned(Integer id);
 
     void modify(UserEntity userEntity);
+
+    List<UserEntity> selectAll();
 }

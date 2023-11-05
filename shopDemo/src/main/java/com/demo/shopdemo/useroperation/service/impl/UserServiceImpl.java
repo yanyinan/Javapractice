@@ -7,6 +7,8 @@ import com.demo.shopdemo.core.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 用户登录
  *
@@ -58,5 +60,10 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void modify(UserEntity userEntity) {
         userDao.update(userEntity);
+    }
+
+    @Override
+    public List<UserEntity> selectAll() {
+        return userDao.selectAll();
     }
 }

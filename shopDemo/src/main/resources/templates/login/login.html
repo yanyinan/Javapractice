@@ -55,25 +55,35 @@
                 <form th:action="@{/login}" th:method="post">
 					<!--账号或用户名-->
                     <div class="form-group">
-                        <input type="text" class="form-control" id="username"
+                        <input type="text" class="form-control" id="username" name="username"
                                placeholder="请输入账号或用户名"  required="required">
                     </div>
 					<!--密码-->
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" placeholder="请输入密码"  required="required">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"  required="required">
                     </div>
 					<!--验证码-->
 					<div class="form-group">
 						<!--将验证码输入框的src属性的值替换为验证码图片的地址-->
                         <div class="fxt-form-row">
                             <div class="figure">
-                                <input type="text"  class="input-box" maxlength="1" required="required">
-                                <input type="text"  class="input-box" maxlength="1" required="required">
-                                <input type="text"  class="input-box" maxlength="1" required="required">
-                                <input type="text"  class="input-box" maxlength="1" required="required">
+                                <input type="text" class="input-box" maxlength="1" required="required" oninput="updateCaptcha(this)">
+                                <input type="text" class="input-box" maxlength="1" required="required" oninput="updateCaptcha(this)">
+                                <input type="text" class="input-box" maxlength="1" required="required" oninput="updateCaptcha(this)">
+                                <input type="text" class="input-box" maxlength="1" required="required" oninput="updateCaptcha(this)">
                             </div>
                             <img th:src="@{/captcha}" alt="验证码" class="code">
-                            <p style="display: none" id="captcha"></p>
+                            <p id="captcha" name="captcha"></p>
+                            <script>
+                                function updateCaptcha(input) {
+                                    const captcha = document.querySelectorAll('.input-box');
+                                    let newCaptcha = '';
+                                    for (let i = 0; i < captcha.length; i++) {
+                                        newCaptcha += captcha[i].value;
+                                    }
+                                    document.getElementById("captcha").innerText = newCaptcha;
+                                }
+                            </script>
                         </div>
                     </div>
 					<!--记住密码-->
@@ -86,7 +96,7 @@
 <!--&lt;!&ndash;                        <label class="forgot-password"><a href="#">忘记密码</a></label>&ndash;&gt;-->
 <!--                    </div>-->
                     <br>
-                    <button type="submit" class="btn btn-lg btn-block btn-success">登录</button>
+                    <button type="submit" class="btn btn-lg btn-block btn-success" onclick="concatInputs()">登录</button>
                 </form>
             </div>
         </div>

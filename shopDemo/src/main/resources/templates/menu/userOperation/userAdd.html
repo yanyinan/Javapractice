@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+
+  header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  main {
+    padding: 2rem;
+  }
+
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  label {
+    margin-bottom: 0.5rem;
+  }
+
+  input[type="password"] {
+    margin-bottom: 1rem;
+  }
+
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
+<body>
+<header>
+  <h1>添加用户</h1>
+</header>
+<form th:action="@{/userOperate/userAdd}" method="post">
+  <div class="overbox">
+    <div class="material-button alt-2">
+      <span class="shape"></span>
+    </div>
+    <div class="title">用户添加</div>
+    <div class="input">
+      <label for="nickName">昵称</label>
+      <input type="text" name="nickName" id="nickName" required>
+      <span class="spin"></span>
+    </div>
+    <div class="input">
+      <label for="userName">用户名</label>
+      <input type="text" name="userName" id="userName" required>
+      <span class="spin"></span>
+    </div>
+    <div class="input">
+      <label for="Registration_password">密码</label>
+      <input type="password" name="Registration_password" id="Registration_password" required>
+      <span class="spin"></span>
+    </div>
+    <div class="input">
+      <label for="re_Registration_password">确认密码</label>
+      <input type="password" name="re_Registration_password" id="re_Registration_password" required>
+      <span class="spin"></span>
+    </div>
+    <div class="button">
+      <button>
+        <span>提交</span>
+      </button>
+      <br>
+    </div>
+  </div>
+</form>
+</body>
+</html>

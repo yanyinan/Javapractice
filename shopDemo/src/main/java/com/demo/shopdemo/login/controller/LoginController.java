@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,17 +48,19 @@ public class LoginController {
      * @return 登录结果
      */
     @PostMapping(value = {"/", "/login"})
-    public ModelAndView login(Model model, UserEntity userEntity, String captcha, HttpServletRequest request) {
+    public ModelAndView login(Model model, @RequestParam("name") String username, @RequestParam("password") String password, UserEntity userEntity, String captcha, HttpServletRequest request) {
+        System.out.println(captcha);
+
         // 校验验证码
-//        if (captcha == null || !CaptchaUtil.ver(captcha, request)) {
-//            // 验证码错误
-//            // 清除验证码
-//            CaptchaUtil.clear(request);
-//            // 重定向到登录页面
+        if (captcha == null || !CaptchaUtil.ver(captcha, request)) {
+            // 验证码错误
+            // 清除验证码
+            CaptchaUtil.clear(request);
+            // 重定向到登录页面
 //            return new ModelAndView("redirect:login");
-//        }
-//        // 清除验证码
-//        CaptchaUtil.clear(request);
+        }
+        // 清除验证码
+        CaptchaUtil.clear(request);
         // 校验用户名密码
         UserEntity user = userService.login(userEntity);
         // 如果用户为空，则登录失败
@@ -65,7 +68,7 @@ public class LoginController {
             // 登录成功
             // 将用户信息保存到 model 中
             model.addAttribute("user", user);
-            return new ModelAndView("index");
+            return new ModelAndView("menu/index");
         }
         return new ModelAndView("redirect:login");
     }

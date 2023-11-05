@@ -10,4 +10,14 @@ public interface IUserDao {
      * @return 用户实体
      */
     UserEntity selectByUsernameAndPassword(String username, String password);
+
+    UserEntity getById(Integer id);
+
+    int deleteById(Integer id);
+
+    void reset(UserEntity userEntity);
+
+    int update(UserEntity userEntity);
+
+    void banned(Integer id);
 }

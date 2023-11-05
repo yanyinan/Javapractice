@@ -67,13 +67,13 @@
 						<!--将验证码输入框的src属性的值替换为验证码图片的地址-->
                         <div class="fxt-form-row">
                             <div class="figure">
+                                <input id="captcha" name="captcha" STYLE="display: none">
                                 <input type="text" class="input-box" maxlength="1" required="required" oninput="updateCaptcha(this)">
                                 <input type="text" class="input-box" maxlength="1" required="required" oninput="updateCaptcha(this)">
                                 <input type="text" class="input-box" maxlength="1" required="required" oninput="updateCaptcha(this)">
                                 <input type="text" class="input-box" maxlength="1" required="required" oninput="updateCaptcha(this)">
                             </div>
                             <img th:src="@{/captcha}" alt="验证码" class="code">
-                            <p id="captcha" name="captcha"></p>
                             <script>
                                 function updateCaptcha(input) {
                                     const captcha = document.querySelectorAll('.input-box');
@@ -81,7 +81,7 @@
                                     for (let i = 0; i < captcha.length; i++) {
                                         newCaptcha += captcha[i].value;
                                     }
-                                    document.getElementById("captcha").innerText = newCaptcha;
+                                    document.getElementById("captcha").value = newCaptcha;
                                 }
                             </script>
                         </div>

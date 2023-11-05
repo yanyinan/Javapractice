@@ -29,4 +29,34 @@ public class UserServiceImpl implements IUserService {
         // 查询数据库
         return userDao.selectByUsernameAndPassword(username, password);
     }
+
+    @Override
+    public UserEntity getById(Integer id) {
+        return userDao.getById(id);
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        return userDao.deleteById(id);
+    }
+
+    @Override
+    public void reset(UserEntity userEntity) {
+        userDao.reset(userEntity);
+    }
+
+    @Override
+    public int save(UserEntity userEntity) {
+        return userDao.update(userEntity);
+    }
+
+    @Override
+    public void banned(Integer id) {
+        userDao.banned(id);
+    }
+
+    @Override
+    public void modify(UserEntity userEntity) {
+        userDao.update(userEntity);
+    }
 }

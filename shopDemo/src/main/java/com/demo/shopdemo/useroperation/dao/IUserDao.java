@@ -4,6 +4,9 @@ import com.demo.shopdemo.core.model.UserEntity;
 
 import java.util.List;
 
+/**
+ * @author 26481
+ */
 public interface IUserDao {
     /**
      * 根据用户名和密码查询用户

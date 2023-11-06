@@ -69,7 +69,7 @@ public class LoginController {
             // 将用户信息保存到 model 中
             model.addAttribute(LOGIN_USER_MESSAGE, user);
             // 保存登录状态保存到 cookie 中
-            response.addCookie(new Cookie(LOGIN_STATUS, LOGIN_SUCCESS));
+//            response.addCookie(new Cookie(LOGIN_STATUS, LOGIN_SUCCESS));
             return new ModelAndView("menu/index");
         }
         return new ModelAndView("redirect:login");

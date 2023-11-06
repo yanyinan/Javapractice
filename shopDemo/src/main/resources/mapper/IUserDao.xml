@@ -2,28 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.shopdemo.useroperation.dao.IUserDao">
-    #动态sql进行重置 todo
-    <update id="reset">
+<!--    #动态sql进行重置 todo-->
+<!--    <update id="reset">-->
 
-        update user set password = "123456" where id = #{id}
-    </update>
-    <update id="update">
-        update user set name = #{name}, username = #{username}, password = #{password}, email = #{email}, phone = #{phone}, avatar = #{avatar}, usertype = #{usertype}, state = #{state}, updateDate = #{updateDate} where id = #{id}
-    </update>
-    #动态sql进行禁用 todo
-    <update id="banned">
-        update user set state = 0 where id = #{id}
-    </update>
-    <delete id="deleteById">
-        delete from user where id = #{id}
-    </delete>
+<!--        update user set password = "123456" where id = #{id}-->
+<!--    </update>-->
+<!--    <update id="update">-->
+<!--        update user set name = #{name}, username = #{username}, password = #{password}, email = #{email}, phone = #{phone}, avatar = #{avatar}, usertype = #{usertype}, state = #{state}, updateDate = #{updateDate} where id = #{id}-->
+<!--    </update>-->
+<!--    #动态sql进行禁用 todo-->
+<!--    <update id="banned">-->
+<!--        update user set state = 0 where id = #{id}-->
+<!--    </update>-->
+<!--    <delete id="deleteById">-->
+<!--        delete from user where id = #{id}-->
+<!--    </delete>-->
     <select id="selectByUsernameAndPassword" resultType="com.demo.shopdemo.core.model.UserEntity">
         select * from user where username = #{username} and password = #{password}
     </select>
-    #动态sql进行查询 todo
-    <select id="getById" resultType="com.demo.shopdemo.core.model.UserEntity">
-        select * from user where id = #{id}
-    </select>
-    <select id="selectAll" resultType="com.demo.shopdemo.core.model.UserEntity"></select>
+<!--    #动态sql进行查询 todo-->
+<!--    <select id="getById" resultType="com.demo.shopdemo.core.model.UserEntity">-->
+<!--        select * from user where id = #{id}-->
+<!--    </select>-->
+<!--    <select id="selectAll" resultType="com.demo.shopdemo.core.model.UserEntity"></select>-->
 
 </mapper>

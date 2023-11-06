@@ -6,6 +6,8 @@ import com.demo.shopdemo.useroperation.service.IUserService;
 import com.demo.shopdemo.core.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -21,18 +23,27 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private IUserMapper userMapper;
+
     @Override
     public UserEntity login(UserEntity userEntity) {
+        //todo 完善null校验
         // 参数校验
-        String username = userEntity.getUsername();
-        String password = userEntity.getPassword();
-        if (username == null || password == null) {
+        if (ObjectUtils.isEmpty(userEntity) == false && StringUtils.isEmpty(userEntity.getUsername()) == false && StringUtils.isEmpty(userEntity.getPassword()) == false) {
             return null;
         }
         // 密码加密
-        userEntity.setPassword(MD5Util.encodePassword(password, username));
+        userEntity.setPassword(MD5Util.encodePassword(userEntity.getPassword(), userEntity.getUsername()));
+
         // 查询数据库
-        return userMapper.selectUser(userEntity);
+        UserEntity user = userMapper.selectUser(userEntity);
+        if ( user!= null) {
+            if (user.getState() == 0 || user.getLogin()) {
+                return null;
+            }
+            return user;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -43,7 +54,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public UserEntity getById(Integer id) {
-        return userMapper.getById(id);
+        return userMapper.selectUser(id);
     }
 
 

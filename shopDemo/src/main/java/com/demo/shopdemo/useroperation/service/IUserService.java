@@ -12,15 +12,15 @@ public interface IUserService {
      */
     UserEntity login(UserEntity userEntity);
 
-    UserEntity getById(Integer id);
+    UserEntity getById(UserEntity userEntity);
 
-    int deleteById(Integer id);
+    int deleteById(UserEntity userEntity);
 
     void reset(UserEntity userEntity);
 
     int save(UserEntity userEntity);
 
-    void banned(Integer id);
+    void banned(UserEntity userEntity);
 
     void modify(UserEntity userEntity);
 

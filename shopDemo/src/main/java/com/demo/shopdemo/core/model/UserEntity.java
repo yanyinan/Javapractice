@@ -70,4 +70,6 @@ public class UserEntity implements Serializable {
      */
 
     private Integer usertype;
+
+    private Boolean login;
 }

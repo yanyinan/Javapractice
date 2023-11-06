@@ -63,6 +63,7 @@ public class UserServiceImpl implements IUserService {
      *
      * @param userEntity 用户实体对象
      * @return 用户实体对象
+     * @throws UserOperationException
      */
     @Override
     public UserEntity getById(UserEntity userEntity) throws UserOperationException {
@@ -128,9 +129,9 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 重写 selectUser 方法
-     * 从数据库中选择所有用户实体并返回列表
-     * 调用userDao的 selectUser 方法获取所有用户实体
-     * 返回获取到的所有用户实体列表
+     *
+     * @return 用户实体列表
+     * @throws UserOperationException
      */
     @Override
     public List<UserEntity> selectAll() throws UserOperationException {

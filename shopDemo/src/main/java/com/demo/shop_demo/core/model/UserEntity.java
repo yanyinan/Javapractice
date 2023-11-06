@@ -77,7 +77,7 @@ public class UserEntity implements Serializable {
     /**
      * 是否登录
      */
-    private Boolean login;
+    private int login;
     public String getState() {
         if (state == 0) {
             return LOGIN_BANED;
@@ -93,7 +93,7 @@ public class UserEntity implements Serializable {
         }
     }
     public String getLogin() {
-        if (login == true) {
+        if (login == 0) {
             return LOGIN_SUCCESS;
         } else {
             return LOGIN_FAIL;

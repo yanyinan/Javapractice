@@ -100,6 +100,7 @@ public class UserOperationController{
      */
     @PostMapping("/userAdd")
     public ModelAndView save(UserEntity userEntity) {
+        System.out.println(userEntity.toString());
         userService.save(userEntity);
         ModelAndView modelAndView = new ModelAndView("redirect:/listOfUser");
         modelAndView.addObject(USER_LOGIN_MESSAGE, "添加成功");

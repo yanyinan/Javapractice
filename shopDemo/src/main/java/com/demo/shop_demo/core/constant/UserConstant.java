@@ -8,5 +8,8 @@ package com.demo.shop_demo.core.constant;
  * @Date: 2023/11/5
  */
 public class UserConstant {
-    public static final String USER_LOGIN_MESSAGE = "return_message";
+
+    public static final String USER_LOGIN_MESSAGE = "登录用户";
+    public static final String USER_TYPE_ADMIN = "管理员";
+    public static final String USER_TYPE_USER = "普通用户";
 }

@@ -13,6 +13,8 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
+import static com.demo.shop_demo.core.constant.LoginConstant.*;
+
 /**
  * @program: shop_demo
  * @description: 用户服务实现类
@@ -44,15 +46,15 @@ public class UserServiceImpl implements IUserService {
         // 查询数据库
         List<UserEntity> user = userMapper.selectUser(userEntity);
         if (user.size() == 1) {
-            if (user.get(0).getState() == 0 ) {
-                throw new LoginException("用户已经封禁");
+            if ( user.get(0).getState() == LOGIN_BANED ) {
+                throw new LoginException(LOGIN_BANED);
             }
-            if (user.get(0).getLogin()) {
-                throw new LoginException("用户已登录");
+            if (user.get(0).getLogin() == LOGIN_SUCCESS) {
+                throw new LoginException(LOGIN_SUCCESS);
             }
             return user.get(0);
         } else {
-            throw new LoginException("未查找到当前用户");
+            throw new LoginException(LOGIN_ERROR_USER_NOT_EXIST);
         }
     }
 
@@ -69,7 +71,7 @@ public class UserServiceImpl implements IUserService {
         if (user.size() == 1) {
             return user.get(0);
         } else {
-            throw new UserOperationException("未查找到当前用户");
+            throw new UserOperationException(LOGIN_ERROR_USER_NOT_EXIST);
         }
     }
 
@@ -137,7 +139,7 @@ public class UserServiceImpl implements IUserService {
         if (userEntityList.size() > 0) {
             return userEntityList;
         } else {
-            throw new UserOperationException("未查找到用户");
+            throw new UserOperationException(LOGIN_ERROR_USER_NOT_EXIST);
         }
     }
 

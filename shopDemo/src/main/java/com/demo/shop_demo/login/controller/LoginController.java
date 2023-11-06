@@ -49,13 +49,14 @@ public class LoginController {
      */
     @PostMapping( "/login")
     public ModelAndView login(UserEntity userEntity, String captcha, HttpServletRequest request, HttpServletResponse response) throws LoginException {
+        ModelAndView modelAndView = new ModelAndView("redirect:login");
         // 校验验证码
         if (captcha == null || !CaptchaUtil.ver(captcha, request)) {
             // 验证码错误
             // 清除验证码
             CaptchaUtil.clear(request);
             // 重定向到登录页面
-            return new ModelAndView("redirect:login");
+            modelAndView.addObject(LOGIN_USER_MESSAGE,LOGIN_ERROR_CAPTCHA);
         }
         // 清除验证码
         CaptchaUtil.clear(request);
@@ -65,11 +66,11 @@ public class LoginController {
         if (user != null) {
             // 登录成功
             // 保存登录状态保存到 cookie 中
-            response.addCookie(new Cookie(LOGIN_STATUS, LOGIN_SUCCESS));
+            response.addCookie(new Cookie("status", LOGIN_SUCCESS));
             // 将用户信息保存到 model 中
-            return new ModelAndView("/menu/index",LOGIN_USER_MESSAGE, user);
+            modelAndView.addObject(USER_LOGIN_MESSAGE, user);
         }
-        return new ModelAndView("redirect:/login");
+        return modelAndView;
     }
     /**
      * 生成验证码
@@ -99,9 +100,9 @@ public class LoginController {
      * @return 登出成功后跳转的页面
      */
     @RequestMapping("/logout")
-    public String logout(HttpSession session){
+    public ModelAndView logout(HttpSession session){
         //清除session
         session.invalidate();
-        return "login/login";
+        return new ModelAndView("login/login");
     }
 }

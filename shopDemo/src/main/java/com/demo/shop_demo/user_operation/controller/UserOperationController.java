@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import static com.demo.shop_demo.core.constant.UserConstant.USER_LOGIN_MESSAGE;
  * @Date: 2023/11/5
  */
 @Controller
+@RequestMapping("/userOperate")
 public class UserOperationController{
 
     @Autowired

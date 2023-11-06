@@ -1,4 +1,4 @@
-package com.demo.shopdemo.shopoperation.service;
+package com.demo.shop_demo.shopoperation.service;
 
 import org.springframework.stereotype.Service;
 

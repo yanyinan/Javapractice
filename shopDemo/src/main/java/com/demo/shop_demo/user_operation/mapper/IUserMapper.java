@@ -14,20 +14,14 @@ import java.util.List;
  */
 @Mapper
 public interface IUserMapper {
-    /**
-     * 查询所有用户
-     *
-     * @return 用户实体集合
-     */
-    List<UserEntity> selectAll();
 
     /**
      * 根据字段查询用户
      *
      * @param userEntity 用户实体
-     * @return 用户实体
+     * @return 用户实体集合
      */
-    UserEntity selectUser(UserEntity userEntity);
+    List<UserEntity> selectUser(UserEntity userEntity);
 
     /**
      * 根据字段删除用户
@@ -38,13 +32,6 @@ public interface IUserMapper {
     int deleteUser(UserEntity userEntity);
 
     /**
-     * 重置
-     *
-     * @param userEntity 用户实体
-     */
-    void reset(UserEntity userEntity);
-
-    /**
      * 更新用户信息
      *
      * @param userEntity 用户实体
@@ -53,11 +40,10 @@ public interface IUserMapper {
     int update(UserEntity userEntity);
 
     /**
-     * 封禁
+     * 插入用户信息
      *
-     * @param id 用户id
+     * @param userEntity 用户实体
+     * @return 受影响的行数
      */
-    void banned(UserEntity id);
-    
-
+    int insert(UserEntity userEntity);
 }

@@ -35,12 +35,12 @@ public class UserServiceImpl implements IUserService {
         userEntity.setPassword(MD5Util.encodePassword(userEntity.getPassword(), userEntity.getUsername()));
 
         // 查询数据库
-        UserEntity user = userMapper.selectUser(userEntity);
-        if ( user!= null) {
-            if (user.getState() == 0 || user.getLogin()) {
+        List<UserEntity> user = userMapper.selectUser(userEntity);
+        if (user.size() == 1) {
+            if (user.get(0).getState() == 0 || user.get(0).getLogin()) {
                 return null;
             }
-            return user;
+            return user.get(0);
         } else {
             return null;
         }
@@ -49,18 +49,26 @@ public class UserServiceImpl implements IUserService {
     /**
      * 根据用户ID获取用户实体对象
      *
-     * @param  userEntity 用户实体对象
+     * @param userEntity 用户实体对象
      * @return 用户实体对象
      */
     @Override
     public UserEntity getById(UserEntity userEntity) {
-        return userMapper.selectUser(userEntity);
+        List<UserEntity> user = userMapper.selectUser(userEntity);
+        if (user.size() == 1) {
+            if (user.get(0).getState() == 0 || user.get(0).getLogin()) {
+                return null;
+            }
+            return user.get(0);
+        } else {
+            return null;
+        }
     }
 
     /**
      * 根据用户ID删除用户实体对象
      *
-     * @param  userEntity 用户实体对象
+     * @param userEntity 用户实体对象
      * @return 用户实体对象
      */
 
@@ -69,7 +77,6 @@ public class UserServiceImpl implements IUserService {
         return userMapper.deleteUser(userEntity);
     }
 
-
     /**
      * 重置用户实体的信息
      *
@@ -77,7 +84,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public void reset(UserEntity userEntity) {
-        userMapper.reset(userEntity);
+        userMapper.update(userEntity);
     }
 
     /**
@@ -88,7 +95,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public int save(UserEntity userEntity) {
-        return userMapper.update(userEntity);
+        return userMapper.insert(userEntity);
     }
 
     /**
@@ -98,7 +105,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public void banned(UserEntity userEntity) {
-        userMapper.banned(userEntity);
+        userMapper.update(userEntity);
     }
 
     /**
@@ -112,14 +119,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 重写selectAll方法
+     * 重写 selectUser 方法
      * 从数据库中选择所有用户实体并返回列表
-     * 调用userDao的selectAll方法获取所有用户实体
+     * 调用userDao的 selectUser 方法获取所有用户实体
      * 返回获取到的所有用户实体列表
      */
     @Override
     public List<UserEntity> selectAll() {
-        return userMapper.selectAll();
+        List<UserEntity> userEntityList = userMapper.selectUser(new UserEntity());
+        if (userEntityList.size() > 0) {
+            return userEntityList;
+        } else {
+            return null;
+        }
     }
 
 }

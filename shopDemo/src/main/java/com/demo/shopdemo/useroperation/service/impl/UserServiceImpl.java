@@ -26,6 +26,9 @@ public class UserServiceImpl implements IUserService {
         // 参数校验
         String username = userEntity.getUsername();
         String password = userEntity.getPassword();
+        if (username == null || password == null) {
+            return null;
+        }
         // 密码加密
         userEntity.setPassword(MD5Util.encodePassword(password, username));
         // 查询数据库

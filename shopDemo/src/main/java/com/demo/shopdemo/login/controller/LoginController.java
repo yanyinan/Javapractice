@@ -5,7 +5,6 @@ import com.demo.shopdemo.useroperation.service.IUserService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import static com.demo.shopdemo.core.constant.LoginConstant.*;
 
 /**
- * 用户登录
+ * @Description: 登录控制器
  *
  * @author: Nanzhou
  * @version: v0.0.1
@@ -32,7 +31,6 @@ public class LoginController {
     private IUserService userService;
     /**
      * 处理GET请求，对应的URL路径为"/"或"/login"
-     *
      * 返回一个包含登录页面路径的ModelAndView对象
      */
     @GetMapping({"/", "/login"})
@@ -43,14 +41,13 @@ public class LoginController {
     /**
      * 登录方法
      *
-     * @param model       模型对象
      * @param userEntity  用户实体对象
      * @param captcha     验证码
      * @param request     请求对象
      * @return 登录结果
      */
     @PostMapping(value = {"/", "/login"})
-    public ModelAndView login(UserEntity userEntity, String captcha,Model model, HttpServletRequest request,HttpServletResponse response) {
+    public ModelAndView login(UserEntity userEntity, String captcha, HttpServletRequest request, HttpServletResponse response) {
         // 校验验证码
         if (captcha == null || !CaptchaUtil.ver(captcha, request)) {
             // 验证码错误
@@ -66,11 +63,10 @@ public class LoginController {
         // 如果用户为空，则登录失败
         if (user != null) {
             // 登录成功
-            // 将用户信息保存到 model 中
-            model.addAttribute(LOGIN_USER_MESSAGE, user);
             // 保存登录状态保存到 cookie 中
-//            response.addCookie(new Cookie(LOGIN_STATUS, LOGIN_SUCCESS));
-            return new ModelAndView("menu/index");
+            response.addCookie(new Cookie(LOGIN_STATUS, LOGIN_SUCCESS));
+            // 将用户信息保存到 model 中
+            return new ModelAndView("menu/index",LOGIN_USER_MESSAGE, user);
         }
         return new ModelAndView("redirect:login");
     }

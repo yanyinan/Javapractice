@@ -1,6 +1,8 @@
 package com.demo.shop_demo.user_operation.controller;
 
 import com.demo.shop_demo.core.model.UserEntity;
+import com.demo.shop_demo.login.exception.LoginException;
+import com.demo.shop_demo.user_operation.exception.UserOperationException;
 import com.demo.shop_demo.user_operation.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,7 @@ public class UserOperationController{
      * @return ModelAndView 对象
      */
     @GetMapping("/listOfUser")
-    public ModelAndView userList(Model model){
+    public ModelAndView userList(Model model) throws UserOperationException {
         // 查询用户列表
         List<UserEntity> userList = userService.selectAll();
         // 存到域中
@@ -42,13 +44,13 @@ public class UserOperationController{
     /**
      * 编辑用户操作菜单
      * @param model 域对象
-     * @param id 用户ID
-     * @return ModelAndView 对象，指定视图路径 "/menu/userOperation/userlist"
+     * @param userEntity 用户
+     * @return ModelAndView 对象，指定视图路径 "/menu/userOperation/listOfUser"
      */
     @GetMapping("/userModify")
-    public ModelAndView userModify(Model model, Integer id) {
+    public ModelAndView userModify(Model model, UserEntity userEntity) throws LoginException, UserOperationException {
         // 查询用户信息
-        UserEntity byId = userService.getById(id);
+        UserEntity byId = userService.getById(userEntity);
         // 存到域中
         model.addAttribute("modify", byId);
         //模型（Model）和会话（Session）都是用于存储信息的地方，但它们的生命周期和存在位置不同。在Web开发中，会话是服务器端的一种机制，用于记录特定客户端与服务器的一系列请求交互。它的生命周期一般是在用户关闭浏览器或者一定时间内没有活动访问时结束。而模型，更像是数据结构，用于在服务器端处理数据、验证数据、执行业务逻辑等。其生命周期通常受应用程序或请求的影响，当请求结束时，模型通常也会被销毁。
@@ -68,13 +70,13 @@ public class UserOperationController{
 
     /**
      * 删除用户信息
-     * @param id 用户ID
+     * @param userEntity 用户
      * @return 返回删除用户后的用户列表页面
      */
     @GetMapping("/userDelete")
-    public ModelAndView userDelete(Integer id) {
+    public ModelAndView userDelete(UserEntity userEntity) {
         // 删除用户信息
-        userService.deleteById(id);
+        userService.deleteById(userEntity);
         //重定向到用户界面
         return new ModelAndView("redirect:/listOfUser");
     }
@@ -118,12 +120,12 @@ public class UserOperationController{
 
     /**
      * 禁用用户
-     * @param id 用户ID
+     * @param userEntity 用户
      * @return 重定向到用户列表页面的Maven视图对象
      */
     @GetMapping("/banned")
-    public ModelAndView banned(Integer id) {
-        userService.banned(id);
+    public ModelAndView banned(UserEntity userEntity) {
+        userService.banned(userEntity);
         ModelAndView modelAndView = new ModelAndView("redirect:/listOfUser");
         modelAndView.addObject(USER_LOGIN_MESSAGE, "用户禁用成功");
         return modelAndView;

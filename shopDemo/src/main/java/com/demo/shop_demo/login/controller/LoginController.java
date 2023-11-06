@@ -1,6 +1,7 @@
 package com.demo.shop_demo.login.controller;
 
 import com.demo.shop_demo.core.model.UserEntity;
+import com.demo.shop_demo.login.exception.LoginException;
 import com.demo.shop_demo.user_operation.service.IUserService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class LoginController {
      * @return 登录结果
      */
     @PostMapping(value = {"/", "/login"})
-    public ModelAndView login(UserEntity userEntity, String captcha, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView login(UserEntity userEntity, String captcha, HttpServletRequest request, HttpServletResponse response) throws LoginException {
         // 校验验证码
         if (captcha == null || !CaptchaUtil.ver(captcha, request)) {
             // 验证码错误
@@ -66,9 +67,9 @@ public class LoginController {
             // 保存登录状态保存到 cookie 中
             response.addCookie(new Cookie(LOGIN_STATUS, LOGIN_SUCCESS));
             // 将用户信息保存到 model 中
-            return new ModelAndView("menu/index",LOGIN_USER_MESSAGE, user);
+            return new ModelAndView("/menu/index",LOGIN_USER_MESSAGE, user);
         }
-        return new ModelAndView("redirect:login");
+        return new ModelAndView("redirect:/login");
     }
     /**
      * 生成验证码

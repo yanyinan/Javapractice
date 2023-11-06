@@ -47,7 +47,7 @@ public class LoginController {
      * @param request     请求对象
      * @return 登录结果
      */
-    @PostMapping(value = {"/", "/login"})
+    @PostMapping( "/login")
     public ModelAndView login(UserEntity userEntity, String captcha, HttpServletRequest request, HttpServletResponse response) throws LoginException {
         // 校验验证码
         if (captcha == null || !CaptchaUtil.ver(captcha, request)) {

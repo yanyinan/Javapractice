@@ -35,9 +35,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserEntity login(UserEntity userEntity) throws LoginException {
         // 参数校验
-        if (ObjectUtils.isEmpty(userEntity) == false
-                && StringUtils.isEmpty(userEntity.getUsername()) == false
-                && StringUtils.isEmpty(userEntity.getPassword()) == false) {
+        if (userEntity.getUsername() == null || userEntity.getPassword() == null) {
             throw new LoginException("用户名或密码不能为空");
         }
         // 密码加密

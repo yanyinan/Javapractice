@@ -14,6 +14,7 @@ import java.util.Date;
  */
 @Data
 public class UserEntity implements Serializable {
+
     /**
      * 用户编号，自定义
      */

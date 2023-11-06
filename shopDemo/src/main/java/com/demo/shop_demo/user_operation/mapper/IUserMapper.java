@@ -1,6 +1,6 @@
-package com.demo.shopdemo.useroperation.mapper;
+package com.demo.shop_demo.user_operation.mapper;
 
-import com.demo.shopdemo.core.model.UserEntity;
+import com.demo.shop_demo.core.model.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,27 +15,27 @@ import java.util.List;
 @Mapper
 public interface IUserMapper {
     /**
-     * 根据用户名和密码查询用户
+     * 查询所有用户
+     *
+     * @return 用户实体集合
+     */
+    List<UserEntity> selectAll();
+
+    /**
+     * 根据字段查询用户
      *
      * @param userEntity 用户实体
      * @return 用户实体
      */
     UserEntity selectUser(UserEntity userEntity);
-    /**
-     * 根据id查询用户
-     *
-     * @param id 用户id
-     * @return 用户实体
-     */
-    UserEntity getById(Integer id);
 
     /**
-     * 根据id删除用户
+     * 根据字段删除用户
      *
-     * @param id 用户id
+     * @param userEntity 用户实体
      * @return 受影响的行数
      */
-    int deleteById(Integer id);
+    int deleteUser(UserEntity userEntity);
 
     /**
      * 重置
@@ -57,14 +57,7 @@ public interface IUserMapper {
      *
      * @param id 用户id
      */
-    void banned(Integer id);
-
-    /**
-     * 查询所有用户
-     *
-     * @return 用户实体集合
-     */
-    List<UserEntity> selectAll();
-
+    void banned(UserEntity id);
+    
 
 }

@@ -21,7 +21,7 @@ mybatis:
   # mapper 映射文件的路径
   mapperLocations: classpath:mapper/*.xml
   # 实体类所在的包，类型别名
-  type-aliases-package: com.demo.shopdemo.core.model
+  type-aliases-package: com.demo.shop_demo.core.model
   configuration:
     # 开启驼峰命名
     map-underscore-to-camel-case: true
@@ -30,6 +30,6 @@ mybatis:
 
 logging:
   level:
-    com.kfm.bootmybatis.dao: debug
+    com.demo.shop_demo.user_operation.mapper: debug
 
 

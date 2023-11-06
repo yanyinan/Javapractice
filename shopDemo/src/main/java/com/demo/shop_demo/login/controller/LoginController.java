@@ -1,7 +1,7 @@
-package com.demo.shopdemo.login.controller;
+package com.demo.shop_demo.login.controller;
 
-import com.demo.shopdemo.core.model.UserEntity;
-import com.demo.shopdemo.useroperation.service.IUserService;
+import com.demo.shop_demo.core.model.UserEntity;
+import com.demo.shop_demo.user_operation.service.IUserService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import static com.demo.shopdemo.core.constant.LoginConstant.*;
+import static com.demo.shop_demo.core.constant.LoginConstant.*;
 
 /**
  * @Description: 登录控制器

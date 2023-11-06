@@ -1,7 +1,7 @@
-package com.demo.shopdemo.useroperation.controller;
+package com.demo.shop_demo.user_operation.controller;
 
-import com.demo.shopdemo.core.model.UserEntity;
-import com.demo.shopdemo.useroperation.service.IUserService;
+import com.demo.shop_demo.core.model.UserEntity;
+import com.demo.shop_demo.user_operation.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-import static com.demo.shopdemo.core.constant.UserConstant.USER_LOGIN_MESSAGE;
+import static com.demo.shop_demo.core.constant.UserConstant.USER_LOGIN_MESSAGE;
 
 /**
  * 用户操作

@@ -1,9 +1,9 @@
-package com.demo.shopdemo.useroperation.service.impl;
+package com.demo.shop_demo.user_operation.service.impl;
 
-import com.demo.shopdemo.core.model.UserEntity;
-import com.demo.shopdemo.useroperation.mapper.IUserMapper;
-import com.demo.shopdemo.useroperation.service.IUserService;
-import com.demo.shopdemo.core.utils.MD5Util;
+import com.demo.shop_demo.core.model.UserEntity;
+import com.demo.shop_demo.user_operation.mapper.IUserMapper;
+import com.demo.shop_demo.user_operation.service.IUserService;
+import com.demo.shop_demo.core.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 /**
- * @program: shopdemo
+ * @program: shop_demo
  * @description: 用户服务实现类
  * @author: Nanzhou
  * @version: v0.0.1
@@ -49,24 +49,24 @@ public class UserServiceImpl implements IUserService {
     /**
      * 根据用户ID获取用户实体对象
      *
-     * @param id 用户ID
+     * @param  userEntity 用户实体对象
      * @return 用户实体对象
      */
     @Override
-    public UserEntity getById(Integer id) {
-        return userMapper.selectUser(id);
+    public UserEntity getById(UserEntity userEntity) {
+        return userMapper.selectUser(userEntity);
     }
 
-
     /**
-     * 根据指定的id删除数据
+     * 根据用户ID删除用户实体对象
      *
-     * @param id 要删除的数据的id
-     * @return 被删除的数据的数量
+     * @param  userEntity 用户实体对象
+     * @return 用户实体对象
      */
+
     @Override
-    public int deleteById(Integer id) {
-        return userMapper.deleteById(id);
+    public int deleteById(UserEntity userEntity) {
+        return userMapper.deleteUser(userEntity);
     }
 
 
@@ -80,21 +80,26 @@ public class UserServiceImpl implements IUserService {
         userMapper.reset(userEntity);
     }
 
+    /**
+     * 保存用户实体对象
+     *
+     * @param userEntity 需要保存的用户实体对象
+     * @return 更新的行数
+     */
     @Override
     public int save(UserEntity userEntity) {
         return userMapper.update(userEntity);
     }
 
     /**
-     * 禁止用户
+     * 禁用用户
      *
-     * @param id 用户ID
+     * @param userEntity 需要禁用的用户实体对象
      */
     @Override
-    public void banned(Integer id) {
-        userMapper.banned(id);
+    public void banned(UserEntity userEntity) {
+        userMapper.banned(userEntity);
     }
-
 
     /**
      * 修改用户实体对象
@@ -105,7 +110,6 @@ public class UserServiceImpl implements IUserService {
     public void modify(UserEntity userEntity) {
         userMapper.update(userEntity);
     }
-
 
     /**
      * 重写selectAll方法

@@ -1,44 +1,91 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.demo.shopdemo.useroperation.mapper.IUserMapper">
+<mapper namespace="com.demo.shop_demo.user_operation.mapper.IUserMapper">
+    <!--重置密码-->
+    <update id="reset">
+        update user set password = #{password} where id = #{id}
+    </update>
+    <!--修改用户信息-->
+    <update id="update">
+        update user set name = #{name}, username = #{username}, password = #{password}, email = #{email}, phone = #{phone}, avatar = #{avatar}, usertype = #{usertype}, state = #{state}, updateDate = #{updateDate} where id = #{id}
+    </update>
+    <!--封禁-->
+    <update id="banned">
+        update user set state = 0 where id = #{id}
+    </update>
+    <delete id="deleteUser">
+        delete from user
+        <where>
+            <trim prefix="where" suffixOverrides="and">
+                <if test="id!= null">
+                    id = #{id}
+                </if>
+                <if test="name!= null">
+                    and name = #{name}
+                </if>
+                <if test="username!= null">
+                    and username = #{username}
+                </if>
+                <if test="email!= null">
+                    and email = #{email}
+                </if>
+                <if test="phone!= null">
+                    and phone = #{phone}
+                </if>
+                <if test="usertype!= null">
+                    and usertype = #{usertype}
+                </if>
+                <if test="state!= null">
+                    and state = #{state}
+                </if>
+                <if test="updateDate!= null">
+                    and updateDate = #{updateDate}
+                </if>
+                <if test="createDate!= null">
+                    and createDate = #{createDate}
+                </if>
+            </trim>
+        </where>
+    </delete>
+    <!--查询所用用户-->
+    <select id="selectAll" resultType="com.demo.shop_demo.core.model.UserEntity">
+        select * from user
+    </select>
     <!--动态条件 sql 查询用户-->
-    <select id="selectUser" resultType="com.demo.shopdemo.core.model.UserEntity">
+    <select id="selectUser" resultType="com.demo.shop_demo.core.model.UserEntity">
         select * from user
         <where>
-            <if test="id!= null">
-                id = #{id}
-            </if>
-            <if test="name!= null">
-                and name = #{name}
-            </if>
-            <if test="username!= null">
-                and username = #{username}
-            </if>
-            <if test="password!= null">
-                and password = #{password}
-            </if>
-            <if test="email!= null">
-                and email = #{email}
-            </if>
-            <if test="phone!= null">
-                and phone = #{phone}
-            </if>
-            <if test="avatar!= null">
-                and avatar = #{avatar}
-            </if>
-            <if test="usertype!= null">
-                and usertype = #{usertype}
-            </if>
-            <if test="state!= null">
-                and state = #{state}
-            </if>
-            <if test="updateDate!= null">
-                and updateDate = #{updateDate}
-            </if>
-            <if test="createDate!= null">
-                and createDate = #{createDate}
-            </if>
+            <trim prefix="where" suffixOverrides="and">
+                <if test="id!= null">
+                    id = #{id}
+                </if>
+                <if test="name!= null">
+                    and name = #{name}
+                </if>
+                <if test="username!= null">
+                    and username = #{username}
+                </if>
+                <if test="email!= null">
+                    and email = #{email}
+                </if>
+                <if test="phone!= null">
+                    and phone = #{phone}
+                </if>
+                <if test="usertype!= null">
+                    and usertype = #{usertype}
+                </if>
+                <if test="state!= null">
+                    and state = #{state}
+                </if>
+                <if test="updateDate!= null">
+                    and updateDate = #{updateDate}
+                </if>
+                <if test="createDate!= null">
+                    and createDate = #{createDate}
+                </if>
+            </trim>
         </where>
     </select>
+
 </mapper>

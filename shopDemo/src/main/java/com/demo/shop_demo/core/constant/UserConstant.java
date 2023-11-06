@@ -1,4 +1,4 @@
-package com.demo.shopdemo.core.constant;
+package com.demo.shop_demo.core.constant;
 
 /**
  * 用户登录

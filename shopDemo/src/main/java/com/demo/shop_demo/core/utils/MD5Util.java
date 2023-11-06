@@ -1,4 +1,4 @@
-package com.demo.shopdemo.core.utils;
+package com.demo.shop_demo.core.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

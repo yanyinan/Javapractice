@@ -1,4 +1,4 @@
-package com.demo.shopdemo.core.model;
+package com.demo.shop_demo.core.model;
 
 import lombok.Data;
 

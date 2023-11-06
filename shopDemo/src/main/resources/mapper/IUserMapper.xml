@@ -3,48 +3,47 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.shop_demo.user_operation.mapper.IUserMapper">
     <sql id="selectNormal">
-        id
-        , name, username, email, phone, avatar, usertype, state, createDate, updateDate
+        id, name, username, email, phone, avatar, usertype, state, create_date, update_date
     </sql>
     <!--添加用户信息-->
     <insert id="insert">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id!= null">
-                id = #{id}
+                id,
             </if>
             <if test="name!= null">
-                name = #{name}
+                name,
             </if>
             <if test="username!= null">
-                username = #{username}
+                username,
             </if>
             <if test="password!= null">
-                password = #{password}
+                password,
             </if>
             <if test="email!= null">
-                email = #{email}
+                email,
             </if>
             <if test="phone!= null">
-                phone = #{phone}
+                phone,
             </if>
             <if test="avatar!= null">
-                avatar = #{avatar}
+                avatar,
             </if>
             <if test="usertype!= null">
-                usertype = #{usertype}
+                usertype,
             </if>
             <if test="state!= null">
-                state = #{state}
+                state,
             </if>
             <if test="createDate!= null">
-                createDate = #{createDate}
+                createDate,
             </if>
             <if test="updateDate!= null">
-                updateDate = #{updateDate}
+                updateDate,
             </if>
         </trim>
-        <trim prefix="values" suffix=")" suffixOverrides=",">
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
             <if test="id!= null">
                 #{id}
             </if>
@@ -187,8 +186,7 @@
     <!--动态条件 sql 查询用户-->
     <select id="selectUser" resultType="com.demo.shop_demo.core.model.UserEntity">
         select
-        <!--        <include refid="selectNormal"></include>-->
-        *
+        <include refid="selectNormal"></include>
         from user
         <trim prefix="where" prefixOverrides="and">
             <if test="id!= null">
@@ -216,7 +214,7 @@
                 and state = #{state}
             </if>
             <if test="updateDate!= null">
-                and  updateDate = #{updateDate}
+                and updateDate = #{updateDate}
             </if>
             <if test="createDate!= null">
                 and createDate = #{createDate}

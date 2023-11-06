@@ -135,7 +135,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public List<UserEntity> selectAll() throws UserOperationException {
-        List<UserEntity> userEntityList = userMapper.selectUser(new UserEntity());
+        List<UserEntity> userEntityList = userMapper.selectUser(null);
         if (userEntityList.size() > 0) {
             return userEntityList;
         } else {

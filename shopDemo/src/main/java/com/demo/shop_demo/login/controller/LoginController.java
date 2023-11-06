@@ -70,6 +70,7 @@ public class LoginController {
             // 将用户信息保存到 model 中
             modelAndView.addObject(USER_LOGIN_MESSAGE, user);
         }
+        modelAndView.addObject(LOGIN_USER_MESSAGE, LOGIN_ERROR_PASSWORD);
         return modelAndView;
     }
     /**

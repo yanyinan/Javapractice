@@ -98,7 +98,7 @@ public class UserOperationController{
      * @param userEntity 用户实体
      * @return ModelAndView 返回用户列表页面
      */
-    @PostMapping("/add")
+    @PostMapping("/userAdd")
     public ModelAndView save(UserEntity userEntity) {
         userService.save(userEntity);
         ModelAndView modelAndView = new ModelAndView("redirect:/listOfUser");

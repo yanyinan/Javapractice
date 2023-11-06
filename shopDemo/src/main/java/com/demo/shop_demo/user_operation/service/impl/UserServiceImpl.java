@@ -46,12 +46,12 @@ public class UserServiceImpl implements IUserService {
         // 查询数据库
         List<UserEntity> user = userMapper.selectUser(userEntity);
         if (user.size() == 1) {
-            if ( user.get(0).getState() == LOGIN_BANED ) {
-                throw new LoginException(LOGIN_BANED);
-            }
-            if (user.get(0).getLogin() == LOGIN_SUCCESS) {
-                throw new LoginException(LOGIN_SUCCESS);
-            }
+//            if ( user.get(0).getState() == LOGIN_BANED ) {
+//                throw new LoginException(LOGIN_BANED);
+//            }
+//            if (user.get(0).getLogin() == LOGIN_SUCCESS) {
+//                throw new LoginException(LOGIN_SUCCESS);
+//            }
             return user.get(0);
         } else {
             throw new LoginException(LOGIN_ERROR_USER_NOT_EXIST);
@@ -104,6 +104,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public int save(UserEntity userEntity) {
+        userEntity.setPassword(MD5Util.encodePassword(userEntity.getPassword(), userEntity.getUsername()));
         return userMapper.insert(userEntity);
     }
 

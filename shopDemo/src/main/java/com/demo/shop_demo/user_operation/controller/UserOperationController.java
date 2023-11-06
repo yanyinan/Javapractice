@@ -80,7 +80,7 @@ public class UserOperationController{
         // 删除用户信息
         userService.deleteById(userEntity);
         //重定向到用户界面
-        return new ModelAndView("redirect:/listOfUser");
+        return new ModelAndView("redirect:/userOperate/listOfUser");
     }
 
     /**
@@ -100,9 +100,8 @@ public class UserOperationController{
      */
     @PostMapping("/userAdd")
     public ModelAndView save(UserEntity userEntity) {
-        System.out.println(userEntity.toString());
         userService.save(userEntity);
-        ModelAndView modelAndView = new ModelAndView("redirect:/listOfUser");
+        ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/listOfUser");
         modelAndView.addObject(USER_LOGIN_MESSAGE, "添加成功");
         return modelAndView;
     }

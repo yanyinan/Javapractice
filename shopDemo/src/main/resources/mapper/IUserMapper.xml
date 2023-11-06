@@ -105,33 +105,36 @@
             </trim>
         </set>
         <where>
-            <trim prefix="where" suffixOverrides="and">
+            <trim prefixOverrides="and">
                 <if test="id!= null">
-                    id = #{id}
+                    and id = #{id}
                 </if>
                 <if test="name!= null">
-                    name = #{name}
+                    and name = #{name}
                 </if>
                 <if test="username!= null">
-                    username = #{username}
+                    and username = #{username}
+                </if>
+                <if test="password!= null">
+                    and password = #{password}
                 </if>
                 <if test="email!= null">
-                    email = #{email}
+                    and email = #{email}
                 </if>
                 <if test="phone!= null">
-                    phone = #{phone}
+                    and phone = #{phone}
                 </if>
                 <if test="usertype!= null">
-                    usertype = #{usertype}
+                    and usertype = #{usertype}
                 </if>
                 <if test="state!= null">
-                    state = #{state}
+                    and state = #{state}
                 </if>
                 <if test="updateDate!= null">
-                    updateDate = #{updateDate}
+                    and updateDate = #{updateDate}
                 </if>
                 <if test="createDate!= null">
-                    createDate = #{createDate}
+                    and createDate = #{createDate}
                 </if>
             </trim>
         </where>
@@ -176,37 +179,39 @@
         select
         <include refid="selectNormal"></include>
         from user
-        <trim prefix="where" prefixOverrides="and">
-            <if test="id!= null">
-                and id = #{id}
-            </if>
-            <if test="name!= null">
-                and name = #{name}
-            </if>
-            <if test="username!= null">
-                and username = #{username}
-            </if>
-            <if test="password!= null">
-                and password = #{password}
-            </if>
-            <if test="email!= null">
-                and email = #{email}
-            </if>
-            <if test="phone!= null">
-                and phone = #{phone}
-            </if>
-            <if test="usertype!= null">
-                and usertype = #{usertype}
-            </if>
-            <if test="state!= null">
-                and state = #{state}
-            </if>
-            <if test="updateDate!= null">
-                and updateDate = #{updateDate}
-            </if>
-            <if test="createDate!= null">
-                and createDate = #{createDate}
-            </if>
-        </trim>
+        <where>
+            <trim  prefixOverrides="and">
+                <if test="id!= null">
+                    and id = #{id}
+                </if>
+                <if test="name!= null">
+                    and name = #{name}
+                </if>
+                <if test="username!= null">
+                    and username = #{username}
+                </if>
+                <if test="password!= null">
+                    and password = #{password}
+                </if>
+                <if test="email!= null">
+                    and email = #{email}
+                </if>
+                <if test="phone!= null">
+                    and phone = #{phone}
+                </if>
+                <if test="usertype!= null">
+                    and usertype = #{usertype}
+                </if>
+                <if test="state!= null">
+                    and state = #{state}
+                </if>
+                <if test="updateDate!= null">
+                    and updateDate = #{updateDate}
+                </if>
+                <if test="createDate!= null">
+                    and createDate = #{createDate}
+                </if>
+            </trim>
+        </where>
     </select>
 </mapper>

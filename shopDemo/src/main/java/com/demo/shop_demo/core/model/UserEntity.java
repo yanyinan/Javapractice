@@ -57,7 +57,7 @@ public class UserEntity implements Serializable {
      * 状态 0表示禁用 1表示正常
      */
 
-    private int state;
+    private Integer state;
     /**
      * 创建时间
      */
@@ -72,12 +72,12 @@ public class UserEntity implements Serializable {
      * 用户类型（0，管理员；1，普通用户）
      */
 
-    private int usertype;
+    private Integer usertype;
 
     /**
      * 是否登录
      */
-    private int login;
+    private Integer login;
 //    public String getState() {
 //        if (state == 0) {
 //            return LOGIN_BANED;

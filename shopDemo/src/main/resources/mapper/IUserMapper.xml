@@ -71,36 +71,33 @@
     <update id="update">
         update user
         <set>
-            <trim prefix="set" suffixOverrides=",">
+            <trim  suffixOverrides=",">
                 <if test="id!= null">
-                    id = #{id}
+                    id = #{id},
                 </if>
                 <if test="name!= null">
-                    name = #{name}
+                    name = #{name},
                 </if>
                 <if test="username!= null">
-                    username = #{username}
+                    username = #{username},
                 </if>
                 <if test="password!= null">
-                    password = #{password}
+                    password = #{password},
                 </if>
                 <if test="email!= null">
-                    email = #{email}
+                    email = #{email},
                 </if>
                 <if test="phone!= null">
-                    phone = #{phone}
+                    phone = #{phone},
                 </if>
                 <if test="avatar!= null">
-                    avatar = #{avatar}
+                    avatar = #{avatar},
                 </if>
                 <if test="usertype!= null">
-                    usertype = #{usertype}
+                    usertype = #{usertype},
                 </if>
                 <if test="state!= null">
-                    state = #{state}
-                </if>
-                <if test="updateDate!= null">
-                    updateDate = #{updateDate}
+                    state = #{state},
                 </if>
             </trim>
         </set>
@@ -131,10 +128,10 @@
                     and state = #{state}
                 </if>
                 <if test="updateDate!= null">
-                    and updateDate = #{updateDate}
+                    and update_date = #{updateDate}
                 </if>
                 <if test="createDate!= null">
-                    and createDate = #{createDate}
+                    and create_date = #{createDate}
                 </if>
             </trim>
         </where>
@@ -143,7 +140,7 @@
     <delete id="deleteUser">
         delete from user
         <where>
-            <trim prefix="where" suffixOverrides="and">
+            <trim  suffixOverrides="and">
                 <if test="id!= null">
                     id = #{id}
                 </if>

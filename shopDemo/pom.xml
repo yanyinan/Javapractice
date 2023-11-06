@@ -76,6 +76,13 @@
             <artifactId>easy-captcha</artifactId>
             <version>1.6.2</version>
         </dependency>
+        <!-- 引入 pagehelper  -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <!-- 引入junit-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

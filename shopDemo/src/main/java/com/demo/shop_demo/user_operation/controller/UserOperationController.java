@@ -4,6 +4,8 @@ import com.demo.shop_demo.core.model.UserEntity;
 import com.demo.shop_demo.login.exception.LoginException;
 import com.demo.shop_demo.user_operation.exception.UserOperationException;
 import com.demo.shop_demo.user_operation.service.IUserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +38,12 @@ public class UserOperationController{
      */
     @GetMapping("/listOfUser")
     public ModelAndView userList(Model model) throws UserOperationException {
-        // 查询用户列表
+        // 开启分页功能
+//        PageHelper.startPage(pageNum, pageSize);
+        // 查询所有用户
         List<UserEntity> userList = userService.selectAll();
+        // 获取分页信息
+//        PageInfo<UserEntity> pageInfo = new PageInfo<>(userList);
         // 存到域中
         model.addAttribute("userList", userList);
         return new ModelAndView("/menu/userOperation/listOfUser");
@@ -65,7 +71,7 @@ public class UserOperationController{
     @PostMapping("/userModify")
     public ModelAndView userModify(UserEntity userEntity){
         userService.modify(userEntity);
-        ModelAndView modelAndView = new ModelAndView("redirect:/listOfUser");
+        ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/listOfUser");;
         modelAndView.addObject(USER_LOGIN_MESSAGE,"修改成功");
         return modelAndView;
     }

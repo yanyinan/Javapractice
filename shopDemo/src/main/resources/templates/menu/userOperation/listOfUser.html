@@ -134,7 +134,7 @@
         <td th:text="${user.updateDate}"></td>
         <td th:text="${user.usertype}"></td>
         <td class="table-button">
-            <a th:href="@{'' + edit(id=${user.id})}">修改</a>
+            <a th:href="@{'' + userModify(id=${user.id})}">修改</a>
             <a th:href="@{'' + userDelete(id=${user.id})}">删除</a>
         </td>
     </tr>

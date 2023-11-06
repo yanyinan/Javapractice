@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>修改用户信息</title>
 </head>
 <body>
-
+<h1>修改用户信息</h1>
+<form action="/userOperate/userModify" method="post">
+    <label for="id">ID:</label><br>
+    <input type="text" id="id" name="id" th:value="${modify.id}"><br>
+    <label for="username">用户名：</label><br>
+    <input type="text" id="username" name="username" th:value="${modify.username}"><br>
+    <label for="name">姓名：</label><br>
+    <input type="text" id="name" name="name" th:value="${modify.name}"><br>
+    <label for="phone">电话：</label><br>
+    <input type="text" id="phone" name="phone" th:value="${modify.phone}"><br>
+    <label for="email">邮箱：</label><br>
+    <input type="text" id="email" name="email" th:value="${modify.email}"><br>
+    <label for="state">状态：</label><br>
+    <input type="text" id="state" name="state" th:value="${modify.state}"><br>
+    <label for="createDate">创建日期：</label><br>
+    <input type="text" id="createDate" name="createDate" th:value="${modify.createDate}"><br>
+    <label for="updateDate">更新日期：</label><br>
+    <input type="text" id="updateDate" name="updateDate" th:value="${modify.updateDate}"><br>
+    <label for="usertype">用户类型：</label><br>
+    <input type="text" id="usertype" name="usertype" th:value="${modify.usertype}"><br>
+    <input type="submit" value="提交">
+</form>
 </body>
 </html>

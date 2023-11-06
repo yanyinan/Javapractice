@@ -1,6 +1,8 @@
 package com.demo.shop_demo.user_operation.service.impl;
 
 import com.demo.shop_demo.core.model.UserEntity;
+import com.demo.shop_demo.login.exception.LoginException;
+import com.demo.shop_demo.user_operation.exception.UserOperationException;
 import com.demo.shop_demo.user_operation.mapper.IUserMapper;
 import com.demo.shop_demo.user_operation.service.IUserService;
 import com.demo.shop_demo.core.utils.MD5Util;
@@ -24,12 +26,19 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserMapper userMapper;
 
+    /**
+     * 登录
+     * @param userEntity 用户实体
+     * @return 用户实体
+     * @throws LoginException
+     */
     @Override
-    public UserEntity login(UserEntity userEntity) {
-        //todo 完善null校验
+    public UserEntity login(UserEntity userEntity) throws LoginException {
         // 参数校验
-        if (ObjectUtils.isEmpty(userEntity) == false && StringUtils.isEmpty(userEntity.getUsername()) == false && StringUtils.isEmpty(userEntity.getPassword()) == false) {
-            return null;
+        if (ObjectUtils.isEmpty(userEntity) == false
+                && StringUtils.isEmpty(userEntity.getUsername()) == false
+                && StringUtils.isEmpty(userEntity.getPassword()) == false) {
+            throw new LoginException("用户名或密码不能为空");
         }
         // 密码加密
         userEntity.setPassword(MD5Util.encodePassword(userEntity.getPassword(), userEntity.getUsername()));
@@ -37,12 +46,15 @@ public class UserServiceImpl implements IUserService {
         // 查询数据库
         List<UserEntity> user = userMapper.selectUser(userEntity);
         if (user.size() == 1) {
-            if (user.get(0).getState() == 0 || user.get(0).getLogin()) {
-                return null;
+            if (user.get(0).getState() == 0 ) {
+                throw new LoginException("用户已经封禁");
+            }
+            if (user.get(0).getLogin()) {
+                throw new LoginException("用户已登录");
             }
             return user.get(0);
         } else {
-            return null;
+            throw new LoginException("未查找到当前用户");
         }
     }
 
@@ -53,15 +65,12 @@ public class UserServiceImpl implements IUserService {
      * @return 用户实体对象
      */
     @Override
-    public UserEntity getById(UserEntity userEntity) {
+    public UserEntity getById(UserEntity userEntity) throws UserOperationException {
         List<UserEntity> user = userMapper.selectUser(userEntity);
         if (user.size() == 1) {
-            if (user.get(0).getState() == 0 || user.get(0).getLogin()) {
-                return null;
-            }
             return user.get(0);
         } else {
-            return null;
+            throw new UserOperationException("未查找到当前用户");
         }
     }
 
@@ -71,7 +80,6 @@ public class UserServiceImpl implements IUserService {
      * @param userEntity 用户实体对象
      * @return 用户实体对象
      */
-
     @Override
     public int deleteById(UserEntity userEntity) {
         return userMapper.deleteUser(userEntity);
@@ -125,12 +133,12 @@ public class UserServiceImpl implements IUserService {
      * 返回获取到的所有用户实体列表
      */
     @Override
-    public List<UserEntity> selectAll() {
+    public List<UserEntity> selectAll() throws UserOperationException {
         List<UserEntity> userEntityList = userMapper.selectUser(new UserEntity());
         if (userEntityList.size() > 0) {
             return userEntityList;
         } else {
-            return null;
+            throw new UserOperationException("未查找到用户");
         }
     }
 

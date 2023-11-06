@@ -1,6 +1,8 @@
 package com.demo.shop_demo.user_operation.service;
 
 import com.demo.shop_demo.core.model.UserEntity;
+import com.demo.shop_demo.login.exception.LoginException;
+import com.demo.shop_demo.user_operation.exception.UserOperationException;
 
 import java.util.List;
 /**
@@ -17,13 +19,13 @@ public interface IUserService {
      * @param userEntity 用户实体
      * @return 用户实体
      */
-    UserEntity login(UserEntity userEntity);
+    UserEntity login(UserEntity userEntity) throws LoginException;
     /**
      * 根据id查询用户
      * @param userEntity 用户实体
      * @return 用户实体
      */
-    UserEntity getById(UserEntity userEntity);
+    UserEntity getById(UserEntity userEntity) throws LoginException, UserOperationException;
     /**
      * 根据字段删除用户
      * @param userEntity 用户实体
@@ -55,5 +57,5 @@ public interface IUserService {
      * 查询所有用户
      * @return 用户实体集合
      */
-    List<UserEntity> selectAll();
+    List<UserEntity> selectAll() throws UserOperationException;
 }

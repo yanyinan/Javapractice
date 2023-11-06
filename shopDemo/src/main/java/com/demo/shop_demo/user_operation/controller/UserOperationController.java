@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -37,15 +38,17 @@ public class UserOperationController{
      * @return ModelAndView 对象
      */
     @GetMapping("/listOfUser")
-    public ModelAndView userList(Model model) throws UserOperationException {
+    public ModelAndView userList(Model model,
+                                 @RequestParam(value = "p", defaultValue = "1") int pageNum,
+                                 @RequestParam(value = "s", defaultValue = "5") int pageSize) throws UserOperationException {
         // 开启分页功能
-//        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         // 查询所有用户
         List<UserEntity> userList = userService.selectAll();
         // 获取分页信息
-//        PageInfo<UserEntity> pageInfo = new PageInfo<>(userList);
+        PageInfo<UserEntity> pageInfo = new PageInfo<>(userList);
         // 存到域中
-        model.addAttribute("userList", userList);
+        model.addAttribute("pageInfo",pageInfo);
         return new ModelAndView("/menu/userOperation/listOfUser");
     }
 

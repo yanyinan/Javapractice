@@ -122,7 +122,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user, stat : ${userList}">
+    <tr th:each="user, stat : ${pageInfo.list}">
         <td th:text="${stat.count}"></td>
         <td class="img"><img th:src="@{${user.avatar}}"/></td>
         <td th:text="${user.username}"></td>
@@ -139,6 +139,19 @@
         </td>
     </tr>
     </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="11">
+            <div th:if="${pageInfo.hasPreviousPage}">
+                <a href="?pageNum=${pageInfo.previousPage}">上一页</a>
+            </div>
+            <div th:if="${pageInfo.hasNextPage}">
+                <a href="?pageNum=${pageInfo.nextPage}">下一页</a>
+            </div>
+            <div>共 <span th:text="${pageInfo.total}"></span> 条记录</div>
+        </td>
+    </tr>
+    </tfoot>
 </table>
 </body>
 </html>

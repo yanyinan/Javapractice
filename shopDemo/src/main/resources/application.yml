@@ -27,6 +27,13 @@ mybatis:
     map-underscore-to-camel-case: true
 
 
+# PageHelper分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
 
 logging:
   level:

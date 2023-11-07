@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 import static com.demo.shop_demo.core.constant.UserConstant.USER_LOGIN_MESSAGE;
+import static com.demo.shop_demo.core.utils.UuidUtil.getUUID32;
 
 /**
  * 用户操作
@@ -109,6 +110,9 @@ public class UserOperationController{
      */
     @PostMapping("/userAdd")
     public ModelAndView save(UserEntity userEntity) {
+        if (userEntity.getId() == null) {
+            userEntity.setId(getUUID32(userEntity.getUsername()));
+        }
         userService.save(userEntity);
         ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/listOfUser");
         modelAndView.addObject(USER_LOGIN_MESSAGE, "添加成功");

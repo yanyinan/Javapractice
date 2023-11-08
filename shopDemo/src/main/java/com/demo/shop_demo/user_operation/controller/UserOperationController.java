@@ -43,7 +43,7 @@ public class UserOperationController{
      * @return ModelAndView 对象
      */
     @GetMapping("/listOf")
-    public PageInfo<UserEntity> userList(@RequestParam(value = "page", defaultValue = "1") int pageNum,
+    public PageInfo userList(@RequestParam(value = "page", defaultValue = "1") int pageNum,
                                  @RequestParam(value = "limit", defaultValue = "2") int pageSize) throws UserOperationException {
         // 开启分页功能
         PageHelper.startPage(pageNum, pageSize);
@@ -51,10 +51,7 @@ public class UserOperationController{
         List<UserEntity> userList = userService.selectAll();
         // 获取分页信息
         PageInfo<UserEntity> pageInfo = new PageInfo<>(userList);
-        // 存到域中
-//        model.addAttribute("pageInfo",pageInfo);
         return pageInfo;
-//        return new ModelAndView("/menu/userOperation/listOfUser");
     }
 
     /**

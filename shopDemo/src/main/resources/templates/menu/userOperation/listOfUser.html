@@ -45,20 +45,23 @@ sfsfs
     /*]]>*/
 </script>
 <script th:inline="none">
-    layui.use('table',function () {
-        var table = layui.table;
+    let table;
+    layui.use('table', function () {
+        table = layui.table;
         // form = layui.form;
+
         // 渲染表格实例
         table.render({
             elem: '#User-table-list',
             id: 'User-table-list',
             toolbar: true,
-            url: '/userOperate/listOf',
-            response:{
+            url:  '/userOperate/listOf',
+            url: ctx + '/userOperate/listOf',
+            response: {
                 statusCode: 200, //成功的状态码，默认：0
             },
             // 将原始数据解析成 table 组件所规定的数据格式
-            parseData: function(res){
+            parseData: function (res) {
                 console.log(res.list);
                 return {
                     "code": 200, //解析接口状态
@@ -67,19 +70,23 @@ sfsfs
                     "data": res.list //解析数据列表
                 };
             },
-            cols: [[
-                {type: 'radio', title: '选择', width: 80, fixed: true}, // 单选框
-                {field: 'id', title: 'ID', width: 80, sort: true, fixed: true},
-                {field: 'username', title: '用户名', width: 100},
-                {field: 'name', title: '真实姓名', width: 100},
-                {field: 'phone', title: '手机号码', width: 100},
-                {field: 'email', title: '邮箱', width: 100},
-                {field: 'usertype', title: '用户类型', width: 100},
-                {field: 'state', title: '状态', width: 100},
-                {field: 'createDate', title: '创建时间', width: 150, sort: true},
-                {field: 'updateDate', title: '更新时间', width: 150, sort: true}
-            ]],
-            // page: true,
+            cols: [
+                [
+                    {type: 'radio', title: '选择', width: 80, fixed: true}, // 单选框
+                    {field: 'id', title: 'ID', width: 80, sort: true, fixed: true},
+                    {field: 'username', title: '用户名', width: 100},
+                    {field: 'name', title: '真实姓名', width: 100},
+                    {field: 'phone', title: '手机号码', width: 100},
+                    {field: 'email', title: '邮箱', width: 100},
+                    {field: 'usertype', title: '用户类型', width: 100},
+                    {field: 'state', title: '状态', width: 100},
+                    {field: 'createDate', title: '创建时间', width: 150, sort: true},
+                    {field: 'updateDate', title: '更新时间', width: 150, sort: true}
+                ]
+            ],
+            page: true,
+            limit: 2,
+            limits: [1, 2, 5, 10]
         });
     });
 </script>

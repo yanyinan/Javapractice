@@ -43,8 +43,8 @@ public class UserOperationController{
      * @return ModelAndView 对象
      */
     @GetMapping("/listOf")
-    public PageInfo<UserEntity> userList(@RequestParam(value = "p", defaultValue = "1") int pageNum,
-                                 @RequestParam(value = "s", defaultValue = "2") int pageSize) throws UserOperationException {
+    public PageInfo<UserEntity> userList(@RequestParam(value = "page", defaultValue = "1") int pageNum,
+                                 @RequestParam(value = "limit", defaultValue = "2") int pageSize) throws UserOperationException {
         // 开启分页功能
         PageHelper.startPage(pageNum, pageSize);
         // 查询所有用户
@@ -53,7 +53,6 @@ public class UserOperationController{
         PageInfo<UserEntity> pageInfo = new PageInfo<>(userList);
         // 存到域中
 //        model.addAttribute("pageInfo",pageInfo);
-        System.out.println(pageInfo);
         return pageInfo;
 //        return new ModelAndView("/menu/userOperation/listOfUser");
     }

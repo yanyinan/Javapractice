@@ -45,39 +45,40 @@
     // 创建表格实例
     table.render({
       elem: '#ID-table-demo-search',
+      //todo 接口地址
       url: '/static/json/2/table/user.json', // 此处为静态模拟数据，实际使用时需换成真实接口
       cols: [[
         {type: 'radio', title: '选择',width: 80, fixed: true}, // 单选框
         {field:'id', title: 'ID', width:80, sort: true, fixed: true},
         {field:'username', title: '用户名', width:100},
         {field:'name', title: '真实姓名', width:100},
-        {field:'phone', title: '手机号码', w},
-        {field:'email', title: '邮箱', width:80},
-        {field:'usertype', title: '用户类型', width:80},
-        {field:'state', title: '状态', width:80},
-        {field:'createDate', title: '创建时间', width:80},
-        {field:'updateDate', title: '更新时间', width:80}
+        {field:'phone', title: '手机号码', width:100},
+        {field:'email', title: '邮箱', width:100},
+        {field:'usertype', title: '用户类型', width:100},
+        {field:'state', title: '状态', width:100},
+        {field:'createDate', title: '创建时间',width:150,sort: true},
+        {field:'updateDate', title: '更新时间', width:150,sort: true}
       ]],
       page: true,
       height: 310
     });
-    // 日期
-    laydate.render({
-      elem: '.demo-table-search-date'
-    });
+    // // 日期
+    // laydate.render({
+    //   elem: '.demo-table-search-date'
+    // });
     // 搜索提交
-    form.on('submit(demo-table-search)', function(data){
-      var field = data.field; // 获得表单字段
-      // 执行搜索重载
-      table.reload('ID-table-demo-search', {
-        page: {
-          curr: 1 // 重新从第 1 页开始
-        },
-        where: field // 搜索的字段
-      });
-      layer.msg('搜索成功<br>此处为静态模拟数据，实际使用时换成真实接口即可');
-      return false; // 阻止默认 form 跳转
-    });
+    // form.on('submit(demo-table-search)', function(data){
+    //   var field = data.field; // 获得表单字段
+    //   // 执行搜索重载
+    //   table.reload('ID-table-demo-search', {
+    //     page: {
+    //       curr: 1 // 重新从第 1 页开始
+    //     },
+    //     where: field // 搜索的字段
+    //   });
+    //   layer.msg('搜索成功<br>此处为静态模拟数据，实际使用时换成真实接口即可');
+    //   return false; // 阻止默认 form 跳转
+    // });
   });
 </script>
 </body>

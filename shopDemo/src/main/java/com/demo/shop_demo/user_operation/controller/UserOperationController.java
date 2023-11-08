@@ -33,13 +33,17 @@ public class UserOperationController{
 
     @Autowired
     private IUserService userService;
+    @GetMapping("/user")
+    public ModelAndView user() {
+        return new ModelAndView("/menu/userOperation/listOfUser");
+    }
 
     /**
      * 获取用户列表
      * @return ModelAndView 对象
      */
-    @GetMapping("/listOfUser")
-    public ModelAndView userList(Model model,
+    @GetMapping("/listOf")
+    public PageInfo<UserEntity> userList(Model model,
                                  @RequestParam(value = "p", defaultValue = "1") int pageNum,
                                  @RequestParam(value = "s", defaultValue = "2") int pageSize) throws UserOperationException {
         // 开启分页功能
@@ -49,8 +53,9 @@ public class UserOperationController{
         // 获取分页信息
         PageInfo<UserEntity> pageInfo = new PageInfo<>(userList);
         // 存到域中
-        model.addAttribute("pageInfo",pageInfo);
-        return new ModelAndView("/menu/userOperation/listOfUser");
+//        model.addAttribute("pageInfo",pageInfo);
+        return pageInfo;
+//        return new ModelAndView("/menu/userOperation/listOfUser");
     }
 
     /**

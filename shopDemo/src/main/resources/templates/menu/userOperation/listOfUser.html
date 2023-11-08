@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Demo</title>
     <!-- 请勿在项目正式环境中引用该 layui.css 地址 -->
-    <link href="../../../static/base/css/layui.css" rel="stylesheet">
+    <link th:href="@{base/css/layui.css}" rel="stylesheet">
 </head>
 <body>
+sfsfs
 <!--<form class="layui-form layui-row layui-col-space16">-->
 <!--    <div class="layui-col-md4">-->
 <!--        <div class="layui-input-wrap">-->
@@ -35,51 +36,54 @@
 <!--        <button type="reset" class="layui-btn layui-btn-primary">Clear</button>-->
 <!--    </div>-->
 <!--</form>-->
-<table class="layui-hide" id="ID-table-demo-search"></table>
-<script src="../../../static/base/js/layui.js"></script>
+<table class="layui-hide" id="User-table-list" lay-filter="User-table-list"></table>
+<script th:src="@{base/js/layui.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    // thymeleaf 获取当前项目路径
+    /*<![CDATA[*/
+    const ctx = /*[[@{/}]]*/;
+    /*]]>*/
+</script>
 <script>
-  layui.use(function(){
-    var table = layui.table;
-    var form = layui.form;
-    var laydate = layui.laydate;
-    // 创建表格实例
-    table.render({
-      elem: '#ID-table-demo-search',
-      //todo 接口地址
-      url: '/static/json/2/table/user.json', // 此处为静态模拟数据，实际使用时需换成真实接口
-      cols: [[
-        {type: 'radio', title: '选择',width: 80, fixed: true}, // 单选框
-        {field:'id', title: 'ID', width:80, sort: true, fixed: true},
-        {field:'username', title: '用户名', width:100},
-        {field:'name', title: '真实姓名', width:100},
-        {field:'phone', title: '手机号码', width:100},
-        {field:'email', title: '邮箱', width:100},
-        {field:'usertype', title: '用户类型', width:100},
-        {field:'state', title: '状态', width:100},
-        {field:'createDate', title: '创建时间',width:150,sort: true},
-        {field:'updateDate', title: '更新时间', width:150,sort: true}
-      ]],
-      page: true,
-      height: 310
+    layui.use(function () {
+        var table = layui.table;
+        form = layui.form;
+        // 渲染表格实例
+        table.render({
+            elem: '#User-table-list',
+            id: 'User-table-list',
+            toolbar: true,
+            url: ctx + '/userOperate/listOf',
+            response:{
+                statusCode: 200, //成功的状态码，默认：0
+            },
+            // 将原始数据解析成 table 组件所规定的数据格式
+            parseData: function(res){
+                console.log(res.list);
+                return {
+                    "code": 200, //解析接口状态
+                    "msg": '', //解析提示文本
+                    "count": res.total, //解析数据长度
+                    "data": res.list //解析数据列表
+                };
+            },
+            cols: [[
+                {type: 'radio', title: '选择', width: 80, fixed: true}, // 单选框
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: true},
+                {field: 'username', title: '用户名', width: 100},
+                {field: 'name', title: '真实姓名', width: 100},
+                {field: 'phone', title: '手机号码', width: 100},
+                {field: 'email', title: '邮箱', width: 100},
+                {field: 'usertype', title: '用户类型', width: 100},
+                {field: 'state', title: '状态', width: 100},
+                {field: 'createDate', title: '创建时间', width: 150, sort: true},
+                {field: 'updateDate', title: '更新时间', width: 150, sort: true}
+            ]],
+            page: true,
+            limit: 2,
+            limits: [1, 2, 5, 10]
+        });
     });
-    // // 日期
-    // laydate.render({
-    //   elem: '.demo-table-search-date'
-    // });
-    // 搜索提交
-    // form.on('submit(demo-table-search)', function(data){
-    //   var field = data.field; // 获得表单字段
-    //   // 执行搜索重载
-    //   table.reload('ID-table-demo-search', {
-    //     page: {
-    //       curr: 1 // 重新从第 1 页开始
-    //     },
-    //     where: field // 搜索的字段
-    //   });
-    //   layer.msg('搜索成功<br>此处为静态模拟数据，实际使用时换成真实接口即可');
-    //   return false; // 阻止默认 form 跳转
-    // });
-  });
 </script>
 </body>
 </html>

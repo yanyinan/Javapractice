@@ -49,9 +49,11 @@ public class UserServiceImpl implements IUserService {
             if ( user.get(0).getState() == null ) {
                 throw new LoginException(LOGIN_BANED);
             }
-            if (user.get(0).getLogin() == null) {
-                throw new LoginException(LOGIN_SUCCESS);
-            }
+            //todo 是否登录验证
+//            System.out.println(user.get(0).getLogin());
+//            if (user.get(0).getLogin() == 0) {
+//                throw new LoginException(LOGIN_SUCCESS);
+//            }
             return user.get(0);
         } else {
             throw new LoginException(LOGIN_ERROR_USER_NOT_EXIST);

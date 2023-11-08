@@ -41,7 +41,7 @@ public class UserOperationController{
     @GetMapping("/listOfUser")
     public ModelAndView userList(Model model,
                                  @RequestParam(value = "p", defaultValue = "1") int pageNum,
-                                 @RequestParam(value = "s", defaultValue = "5") int pageSize) throws UserOperationException {
+                                 @RequestParam(value = "s", defaultValue = "2") int pageSize) throws UserOperationException {
         // 开启分页功能
         PageHelper.startPage(pageNum, pageSize);
         // 查询所有用户

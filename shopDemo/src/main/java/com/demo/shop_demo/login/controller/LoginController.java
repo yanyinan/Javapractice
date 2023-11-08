@@ -70,6 +70,7 @@ public class LoginController {
             response.addCookie(new Cookie("status", LOGIN_SUCCESS));
             // 将用户信息保存到 model 中
             modelAndView.addObject("login_user", user);
+            modelAndView.setViewName("menu/index");
         }
         modelAndView.addObject(LOGIN_USER_MESSAGE, LOGIN_ERROR_PASSWORD);
         return modelAndView;

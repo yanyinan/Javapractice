@@ -46,10 +46,10 @@ public class UserServiceImpl implements IUserService {
         // 查询数据库
         List<UserEntity> user = userMapper.selectUser(userEntity);
         if (user.size() == 1) {
-            if ( user.get(0).getState() == 0 ) {
+            if ( user.get(0).getState() == null ) {
                 throw new LoginException(LOGIN_BANED);
             }
-            if (user.get(0).getLogin() == 0) {
+            if (user.get(0).getLogin() == null) {
                 throw new LoginException(LOGIN_SUCCESS);
             }
             return user.get(0);

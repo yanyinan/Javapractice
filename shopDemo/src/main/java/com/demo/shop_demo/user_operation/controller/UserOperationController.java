@@ -35,7 +35,7 @@ public class UserOperationController{
     private IUserService userService;
     @GetMapping("/user")
     public ModelAndView user() {
-        return new ModelAndView("/menu/userOperation/listOfUser");
+        return new ModelAndView("menu/userOperation/listOfUser");
     }
 
     /**
@@ -43,8 +43,7 @@ public class UserOperationController{
      * @return ModelAndView 对象
      */
     @GetMapping("/listOf")
-    public PageInfo<UserEntity> userList(Model model,
-                                 @RequestParam(value = "p", defaultValue = "1") int pageNum,
+    public PageInfo<UserEntity> userList(@RequestParam(value = "p", defaultValue = "1") int pageNum,
                                  @RequestParam(value = "s", defaultValue = "2") int pageSize) throws UserOperationException {
         // 开启分页功能
         PageHelper.startPage(pageNum, pageSize);
@@ -54,6 +53,7 @@ public class UserOperationController{
         PageInfo<UserEntity> pageInfo = new PageInfo<>(userList);
         // 存到域中
 //        model.addAttribute("pageInfo",pageInfo);
+        System.out.println(pageInfo);
         return pageInfo;
 //        return new ModelAndView("/menu/userOperation/listOfUser");
     }
@@ -80,7 +80,7 @@ public class UserOperationController{
     @PostMapping("/userModify")
     public ModelAndView userModify(UserEntity userEntity){
         userService.modify(userEntity);
-        ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/listOfUser");;
+        ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/user");;
         modelAndView.addObject(USER_LOGIN_MESSAGE,"修改成功");
         return modelAndView;
     }

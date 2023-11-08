@@ -101,40 +101,7 @@
                 </if>
             </trim>
         </set>
-        <where>
-            <trim prefixOverrides="and">
-                <if test="id!= null">
-                    and id = #{id}
-                </if>
-                <if test="name!= null">
-                    and name = #{name}
-                </if>
-                <if test="username!= null">
-                    and username = #{username}
-                </if>
-                <if test="password!= null">
-                    and password = #{password}
-                </if>
-                <if test="email!= null">
-                    and email = #{email}
-                </if>
-                <if test="phone!= null">
-                    and phone = #{phone}
-                </if>
-                <if test="usertype!= null">
-                    and usertype = #{usertype}
-                </if>
-                <if test="state!= null">
-                    and state = #{state}
-                </if>
-                <if test="updateDate!= null">
-                    and update_date = #{updateDate}
-                </if>
-                <if test="createDate!= null">
-                    and create_date = #{createDate}
-                </if>
-            </trim>
-        </where>
+        where id = #{id}
     </update>
     <!--删除-->
     <delete id="deleteUser">

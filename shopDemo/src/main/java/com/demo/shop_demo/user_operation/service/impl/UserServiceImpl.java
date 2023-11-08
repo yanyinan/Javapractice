@@ -117,6 +117,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public void banned(UserEntity userEntity) {
+        userEntity.setState(0);
         userMapper.update(userEntity);
     }
 

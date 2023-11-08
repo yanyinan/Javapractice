@@ -9,10 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -27,7 +24,7 @@ import static com.demo.shop_demo.core.utils.UuidUtil.getUUID32;
  * @version: v0.0.1
  * @Date: 2023/11/5
  */
-@Controller
+@RestController
 @RequestMapping("/userOperate")
 public class UserOperationController{
 
@@ -91,7 +88,7 @@ public class UserOperationController{
         // 删除用户信息
         userService.deleteById(userEntity);
         //重定向到用户界面
-        return new ModelAndView("redirect:/userOperate/listOfUser");
+        return new ModelAndView("redirect:/userOperate/user");
     }
 
     /**
@@ -115,7 +112,7 @@ public class UserOperationController{
             userEntity.setId(getUUID32(userEntity.getUsername()));
         }
         userService.save(userEntity);
-        ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/listOfUser");
+        ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/user");
         modelAndView.addObject(USER_LOGIN_MESSAGE, "添加成功");
         return modelAndView;
     }
@@ -129,7 +126,7 @@ public class UserOperationController{
     @GetMapping("/reset")
     public ModelAndView reset(UserEntity userEntity) {
         userService.reset(userEntity);
-        ModelAndView modelAndView = new ModelAndView("redirect:/listOfUser");
+        ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/user");
         modelAndView.addObject(USER_LOGIN_MESSAGE, "重置成功");
         return modelAndView;
     }
@@ -142,7 +139,7 @@ public class UserOperationController{
     @GetMapping("/banned")
     public ModelAndView banned(UserEntity userEntity) {
         userService.banned(userEntity);
-        ModelAndView modelAndView = new ModelAndView("redirect:/listOfUser");
+        ModelAndView modelAndView = new ModelAndView("redirect:/userOperate/user");
         modelAndView.addObject(USER_LOGIN_MESSAGE, "用户禁用成功");
         return modelAndView;
     }

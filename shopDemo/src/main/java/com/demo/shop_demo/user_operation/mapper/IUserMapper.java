@@ -32,18 +32,18 @@ public interface IUserMapper {
     int deleteUser(UserEntity userEntity);
 
     /**
-     * 更新用户信息
-     *
-     * @param userEntity 用户实体
-     * @return 受影响的行数
-     */
-    int update(UserEntity userEntity);
-
-    /**
      * 插入用户信息
      *
      * @param userEntity 用户实体
      * @return 受影响的行数
      */
     int insert(UserEntity userEntity);
+
+    /**
+     * 根据主键更新用户信息
+     *
+     * @param userEntity 用户实体
+     * @return 受影响的行数
+     */
+    int updateByPrimaryKey(UserEntity userEntity);
 }

@@ -78,32 +78,5 @@ public class UserEntity implements Serializable {
      * 是否登录
      */
     private Integer login;
-//    public String getState() {
-//        if (state == 0) {
-//            return LOGIN_BANED;
-//        } else {
-//            return LOGIN_NORMAL;
-//        }
-//    }
-//    public String getUsertype() {
-//        if (usertype ==0) {
-//            return USER_TYPE_ADMIN;
-//        } else {
-//            return USER_TYPE_USER;
-//        }
-//    }
-//    public String getLogin() {
-//        if (login == 0) {
-//            return LOGIN_SUCCESS;
-//        } else {
-//            return LOGIN_FAIL;
-//        }
-//    }
-
-    /**
-     * 格式化日期并输出 todo
-     * 格式化日期为 yyyy年MM月dd日 HH时mm分ss秒
-     * @return
-     */
 
 }

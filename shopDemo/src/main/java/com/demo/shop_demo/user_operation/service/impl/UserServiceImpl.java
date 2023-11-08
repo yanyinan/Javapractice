@@ -1,6 +1,7 @@
 package com.demo.shop_demo.user_operation.service.impl;
 
 import com.demo.shop_demo.core.model.UserEntity;
+import com.demo.shop_demo.core.utils.UuidUtil;
 import com.demo.shop_demo.login.exception.LoginException;
 import com.demo.shop_demo.user_operation.exception.UserOperationException;
 import com.demo.shop_demo.user_operation.mapper.IUserMapper;
@@ -95,7 +96,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public void reset(UserEntity userEntity) {
-        userMapper.update(userEntity);
+        userMapper.updateByPrimaryKey(userEntity);
     }
 
     /**
@@ -118,7 +119,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void banned(UserEntity userEntity) {
         userEntity.setState(0);
-        userMapper.update(userEntity);
+        userMapper.updateByPrimaryKey(userEntity);
     }
 
     /**
@@ -128,7 +129,25 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public void modify(UserEntity userEntity) {
-        userMapper.update(userEntity);
+
+//        if (ObjectUtils.isEmpty(userEntity)){
+//            throw new ServiceException("用户不能为空");
+//        }
+        int row = 0;
+        if (!StringUtils.hasText(userEntity.getId())){
+            // 新增
+            userEntity.setId(UuidUtil.getUUID32());
+            // 密码加密
+            String password = MD5Util.encodePassword(userEntity.getPassword(), userEntity.getUsername());
+            userEntity.setPassword(password);
+            // 数据库用户名做了唯一约束，所以此处省略验证用户名是否存在
+            row = userMapper.insert(userEntity);
+        }else {
+            row = userMapper.updateByPrimaryKey(userEntity);
+        }
+//        if (row != 1){
+////            throw new ServiceException("更新失败");
+//        }
     }
 
     /**
@@ -146,6 +165,11 @@ public class UserServiceImpl implements IUserService {
         } else {
             throw new UserOperationException(LOGIN_ERROR_USER_NOT_EXIST);
         }
+    }
+
+    @Override
+    public Object findById(String id) {
+        return null;
     }
 
 }

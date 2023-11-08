@@ -68,7 +68,7 @@
         </trim>
     </insert>
     <!--修改用户信息-->
-    <update id="update">
+    <update id="updateByPrimaryKey">
         update user
         <set>
             <trim  suffixOverrides=",">

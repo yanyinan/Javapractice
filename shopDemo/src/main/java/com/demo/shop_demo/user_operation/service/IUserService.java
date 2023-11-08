@@ -58,4 +58,6 @@ public interface IUserService {
      * @return 用户实体集合
      */
     List<UserEntity> selectAll() throws UserOperationException;
+
+    Object findById(String id);
 }

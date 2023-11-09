@@ -13,7 +13,6 @@
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
         <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
-        <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
     </div>
 </script>
 <script th:src="@{/base/js/layui.js}"></script>
@@ -47,8 +46,8 @@
                     {field: 'updateDate', title: '更新时间', sort: true}
                 ]
             ],
-            limit: 2,
-            limits: [1, 2, 5, 10],
+            limit: 20,
+            // limits: [5, 10, 15, 20],
             // 将原始数据解析成 table 组件所规定的数据格式
             parseData: function (res) {
                 console.log(res.list);
@@ -68,7 +67,6 @@
             // 根据不同的事件名进行相应的操作
             switch(obj.event){ // 对应模板元素中的 lay-event 属性值
                 case 'add':
-                    layer.msg('添加');
                     layer.open({
                         type: 2,
                         title: '添加用户',
@@ -81,12 +79,11 @@
                 case 'delete':
                     layer.msg('删除');
                     break;
-                case 'update':
-                    layer.msg('编辑');
-                    break;
             };
         });
     });
+
+    }
 </script>
 </body>
 </html>

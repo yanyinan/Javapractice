@@ -82,6 +82,20 @@
             };
         });
     });
+    function reloadTable() {
+        table.reload('User-table-list', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+           , where: {
+                username: $('#username').val(),
+                name: $('#name').val(),
+                phone: $('#phone').val(),
+                email: $('#email').val(),
+                usertype: $('#usertype').val(),
+                state: $('#state').val(),
+            }
+        });
 
     }
 </script>

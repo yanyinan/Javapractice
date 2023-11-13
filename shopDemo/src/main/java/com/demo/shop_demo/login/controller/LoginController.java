@@ -52,7 +52,7 @@ public class LoginController {
     public ModelAndView login(Model model,UserEntity userEntity, String captcha, HttpServletRequest request, HttpServletResponse response) throws LoginException {
         ModelAndView modelAndView = new ModelAndView("redirect:login");
         // 校验验证码
-        if (captcha == null || !CaptchaUtil.ver(captcha, request)) {
+        if (!CaptchaUtil.ver(captcha, request)) {
             // 验证码错误
             // 清除验证码
             CaptchaUtil.clear(request);

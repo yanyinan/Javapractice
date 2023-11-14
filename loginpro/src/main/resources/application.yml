@@ -18,7 +18,7 @@ spring:
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml
-  type-aliases-package: com.demo.shop_demo.core.model
+  type-aliases-package: com.login.loginpro.core.model
   configuration:
     map-underscore-to-camel-case: true
 

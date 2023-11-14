@@ -1,4 +1,4 @@
-package core.model;
+package com.login.loginpro.core.model;
 
 import java.io.Serializable;
 import java.util.Date;

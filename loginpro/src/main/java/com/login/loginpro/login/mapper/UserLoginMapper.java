@@ -1,6 +1,6 @@
-package core.mapper;
+package com.login.loginpro.login.mapper;
 
-import core.model.UserLogin;
+import com.login.loginpro.core.model.UserLogin;
 
 /**
 * @author 26481
@@ -11,8 +11,6 @@ import core.model.UserLogin;
 public interface UserLoginMapper {
 
     int deleteByPrimaryKey(Long id);
-
-    int insert(UserLogin record);
 
     int insertSelective(UserLogin record);
 

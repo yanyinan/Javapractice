@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="core.mapper.UserLoginMapper">
+<mapper namespace="com.login.loginpro.login.mapper.UserLoginMapper">
 
-    <resultMap id="BaseResultMap" type="core.model.UserLogin">
+    <resultMap id="BaseResultMap" type="com.login.loginpro.core.model.UserLogin">
             <id property="lid" column="lid" jdbcType="INTEGER"/>
             <result property="password" column="password" jdbcType="VARCHAR"/>
             <result property="email" column="email" jdbcType="VARCHAR"/>
@@ -29,16 +28,7 @@
         delete from user_login
         where  lid = #{lid,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="lid" keyProperty="lid" parameterType="core.model.UserLogin" useGeneratedKeys="true">
-        insert into user_login
-        ( lid,password,email
-        ,phone,create_time,update_time
-        )
-        values (#{lid,jdbcType=INTEGER},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR}
-        ,#{phone,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
-        )
-    </insert>
-    <insert id="insertSelective" keyColumn="lid" keyProperty="lid" parameterType="core.model.UserLogin" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="lid" keyProperty="lid" parameterType="com.login.loginpro.core.model.UserLogin" useGeneratedKeys="true">
         insert into user_login
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="lid != null">lid,</if>
@@ -57,7 +47,7 @@
                 <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="core.model.UserLogin">
+    <update id="updateByPrimaryKeySelective" parameterType="com.login.loginpro.core.model.UserLogin">
         update user_login
         <set>
                 <if test="password != null">
@@ -78,7 +68,7 @@
         </set>
         where   lid = #{lid,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="core.model.UserLogin">
+    <update id="updateByPrimaryKey" parameterType="com.login.loginpro.core.model.UserLogin">
         update user_login
         set 
             password =  #{password,jdbcType=VARCHAR},

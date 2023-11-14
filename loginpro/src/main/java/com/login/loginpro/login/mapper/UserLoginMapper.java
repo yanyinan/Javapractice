@@ -1,6 +1,7 @@
 package com.login.loginpro.login.mapper;
 
 import com.login.loginpro.core.model.UserLogin;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author 26481
@@ -8,6 +9,7 @@ import com.login.loginpro.core.model.UserLogin;
 * @createDate 2023-11-14 19:51:53
 * @Entity core.model.UserLogin
 */
+@Mapper
 public interface UserLoginMapper {
 
     int deleteByPrimaryKey(Long id);

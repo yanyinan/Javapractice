@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="core.mapper.UserLoginMapper">
+
+    <resultMap id="BaseResultMap" type="core.model.UserLogin">
+            <id property="lid" column="lid" jdbcType="INTEGER"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        lid,password,email,
+        phone,create_time,update_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user_login
+        where  lid = #{lid,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from user_login
+        where  lid = #{lid,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="lid" keyProperty="lid" parameterType="core.model.UserLogin" useGeneratedKeys="true">
+        insert into user_login
+        ( lid,password,email
+        ,phone,create_time,update_time
+        )
+        values (#{lid,jdbcType=INTEGER},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR}
+        ,#{phone,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="lid" keyProperty="lid" parameterType="core.model.UserLogin" useGeneratedKeys="true">
+        insert into user_login
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="lid != null">lid,</if>
+                <if test="password != null">password,</if>
+                <if test="email != null">email,</if>
+                <if test="phone != null">phone,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="lid != null">#{lid,jdbcType=INTEGER},</if>
+                <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+                <if test="email != null">#{email,jdbcType=VARCHAR},</if>
+                <if test="phone != null">#{phone,jdbcType=INTEGER},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="core.model.UserLogin">
+        update user_login
+        <set>
+                <if test="password != null">
+                    password = #{password,jdbcType=VARCHAR},
+                </if>
+                <if test="email != null">
+                    email = #{email,jdbcType=VARCHAR},
+                </if>
+                <if test="phone != null">
+                    phone = #{phone,jdbcType=INTEGER},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+        </set>
+        where   lid = #{lid,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="core.model.UserLogin">
+        update user_login
+        set 
+            password =  #{password,jdbcType=VARCHAR},
+            email =  #{email,jdbcType=VARCHAR},
+            phone =  #{phone,jdbcType=INTEGER},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP}
+        where   lid = #{lid,jdbcType=INTEGER} 
+    </update>
+</mapper>

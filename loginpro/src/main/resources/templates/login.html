@@ -59,7 +59,8 @@
                                                        lay-reqtext="请填写账号"
                                                        autocomplete="off"
                                                        class="layui-input"
-                                                       lay-affix="clear">
+                                                       lay-affix="clear"
+                                                       autofocus>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
@@ -126,10 +127,17 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-email"></i>
                                                 </div>
-                                                <input type="email" name="email" value="" lay-verify="required|email"
+                                                <input type="email"
+                                                       name="email"
+                                                       value=""
+                                                       lay-verify="required|email"
                                                        placeholder="邮箱"
-                                                       lay-reqtext="请填写邮箱" autocomplete="off" class="layui-input"
-                                                       lay-affix="clear">
+                                                       lay-reqtext="请填写邮箱"
+                                                       autocomplete="off"
+                                                       class="layui-input"
+                                                       lay-affix="clear"
+                                                       autofocus
+                                                >
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
@@ -186,11 +194,16 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-cellphone"></i>
                                                 </div>
-                                                <input type="text" name="phone" value="" lay-verify="required|phone"
+                                                <input type="text"
+                                                       name="phone"
+                                                       value=""
+                                                       lay-verify="required|phone"
                                                        placeholder="手机号码"
-                                                       lay-reqtext="请填写手机号码" autocomplete="off"
+                                                       lay-reqtext="请填写手机号码"
+                                                       autocomplete="off"
                                                        class="layui-input"
-                                                       lay-affix="clear">
+                                                       lay-affix="clear"
+                                                >
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
@@ -373,7 +386,7 @@
 </div>
 <script src="js/layui.js"></script>
 <script>
-    document.getElementById("login-lid").focus();
+
     layui.use(function () {
         var form = layui.form;
         // 自定义验证规则

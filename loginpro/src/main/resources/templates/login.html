@@ -45,7 +45,7 @@
                         <div class="layui-tab-content">
                             <div class="layui-tab-item layui-show">
                                 <!--用户名登录-->
-                                <form class="layui-form" action="#" method="post">
+                                <form class="layui-form" th:action="@{/login}" th:method="post">
                                     <div class="login-main">
                                         <div class="layui-form-item">
                                             <div class="layui-input-wrap">
@@ -60,7 +60,8 @@
                                                        autocomplete="off"
                                                        class="layui-input"
                                                        lay-affix="clear"
-                                                       autofocus>
+                                                       id="login-lid"
+                                                       >
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
@@ -386,7 +387,9 @@
 </div>
 <script src="js/layui.js"></script>
 <script>
-
+    // 让表单元素自动获取焦点
+    document.getElementById("login-lid").focus();
+    
     layui.use(function () {
         var form = layui.form;
         // 自定义验证规则

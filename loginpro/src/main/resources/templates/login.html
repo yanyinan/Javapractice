@@ -107,8 +107,8 @@
                                                 </div>
                                                 <div class="layui-col-xs5">
                                                     <div style="margin-left: 10px;">
-                                                        <img src="https://www.oschina.net/action/user/captcha"
-                                                             onclick="this.src='https://www.oschina.net/action/user/captcha?t='+ new Date().getTime();">
+                                                        <img th:src="@{/captcha}"
+                                                             onclick="this.src = this.src  +'?'+ Math.random();">
                                                     </div>
                                                 </div>
                                             </div>

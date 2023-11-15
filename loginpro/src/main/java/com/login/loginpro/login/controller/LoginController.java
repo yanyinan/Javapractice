@@ -33,8 +33,12 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(UserLogin userLogin) {
+    public ModelAndView login(UserLogin userLogin, String verCode, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("login");
+        if (!CaptchaUtil.ver(verCode, request)) {
+            // 清除session中的验证码
+            CaptchaUtil.clear(request);
+        }
         if(userLogin.getLid() != null){
             if (userLogin.getPassword() != null){
 

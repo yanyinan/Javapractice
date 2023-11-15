@@ -11,7 +11,7 @@
     <!--google fonts-->
     <link href='http://fonts.useso.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
     <!-- layui css 导入-->
-    <link href="static/css/layui.css" rel="stylesheet">
+    <link href="css/layui.css" rel="stylesheet">
     <style>
         .login-main {
             width: 70%;
@@ -26,16 +26,16 @@
             font-size: 26px;
         }
     </style>
-    <link href="static/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
 <div class="newsletter">
     <div class="newsletter-main">
         <div class="stamp">
-            <img src="static/images/stamp.png" alt="">
+            <img src="images/stamp.png" alt="">
         </div>
         <div class="design">
-            <img src="static/images/design.png">
+            <img src="images/design.png">
         </div>
         <div class="layui-tab layui-tab-brief">
             <div class="layui-tab-content">
@@ -52,9 +52,10 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-username"></i>
                                                 </div>
-                                                <input type="text" name="username" value="" lay-verify="required"
-                                                       placeholder="用户名"
-                                                       lay-reqtext="请填写用户名" autocomplete="off" class="layui-input"
+                                                <input type="text" name="username" value="" lay-verify="required|lid"
+                                                       placeholder="账号"
+                                                       lay-reqtext="请填写账号" autocomplete="off" class="layui-input"
+                                                       onfocus="this"
                                                        lay-affix="clear">
                                             </div>
                                         </div>
@@ -63,7 +64,7 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-password"></i>
                                                 </div>
-                                                <input type="password" name="password" value="" lay-verify="required"
+                                                <input type="password" name="password" value="" lay-verify="required|password"
                                                        placeholder="密   码"
                                                        lay-reqtext="请填写密码" autocomplete="off" class="layui-input"
                                                        lay-affix="eye">
@@ -113,7 +114,7 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-email"></i>
                                                 </div>
-                                                <input type="email" name="email" value="" lay-verify="required"
+                                                <input type="email" name="email" value="" lay-verify="required|email"
                                                        placeholder="邮箱"
                                                        lay-reqtext="请填写邮箱" autocomplete="off" class="layui-input"
                                                        lay-affix="clear">
@@ -124,7 +125,7 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-password"></i>
                                                 </div>
-                                                <input type="password" name="password" value="" lay-verify="required"
+                                                <input type="password" name="password" value="" lay-verify="required|password"
                                                        placeholder="密   码"
                                                        lay-reqtext="请填写密码" autocomplete="off" class="layui-input"
                                                        lay-affix="eye">
@@ -173,7 +174,7 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-cellphone"></i>
                                                 </div>
-                                                <input type="text" name="phone" value="" lay-verify="required"
+                                                <input type="text" name="phone" value="" lay-verify="required|phone"
                                                        placeholder="手机号码"
                                                        lay-reqtext="请填写手机号码" autocomplete="off"
                                                        class="layui-input"
@@ -185,7 +186,7 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-password"></i>
                                                 </div>
-                                                <input type="password" name="password" value="" lay-verify="required"
+                                                <input type="password" name="password" value="" lay-verify="required|password"
                                                        placeholder="密   码"
                                                        lay-reqtext="请填写密码" autocomplete="off" class="layui-input"
                                                        lay-affix="eye">
@@ -226,7 +227,7 @@
                             </div>
                         </div>
                         <div class="design">
-                            <img src="static/images/design.png">
+                            <img src="images/design.png">
                         </div>
                         <div class="layui-form-item demo-login-other">
                             <div class="login-main">
@@ -351,14 +352,14 @@
                 </ul>
                 <div class="login-main">
                     <div class="design">
-                        <img src="static/images/design.png">
+                        <img src="images/design.png">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="static/js/layui.js"></script>
+<script src="js/layui.js"></script>
 <script>
     layui.use(function () {
         var form = layui.form;

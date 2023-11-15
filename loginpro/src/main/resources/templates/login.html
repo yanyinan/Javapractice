@@ -52,10 +52,13 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-username"></i>
                                                 </div>
-                                                <input type="text" name="username" value="" lay-verify="required|lid"
+                                                <input type="text" name="lid"
+                                                       value=""
+                                                       lay-verify="required|lid"
                                                        placeholder="账号"
-                                                       lay-reqtext="请填写账号" autocomplete="off" class="layui-input"
-                                                       onfocus="this"
+                                                       lay-reqtext="请填写账号"
+                                                       autocomplete="off"
+                                                       class="layui-input"
                                                        lay-affix="clear">
                                             </div>
                                         </div>
@@ -64,9 +67,14 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-password"></i>
                                                 </div>
-                                                <input type="password" name="password" value="" lay-verify="required|password"
+                                                <input type="password"
+                                                       name="password"
+                                                       value=""
+                                                       lay-verify="required|password"
                                                        placeholder="密   码"
-                                                       lay-reqtext="请填写密码" autocomplete="off" class="layui-input"
+                                                       lay-reqtext="请填写密码"
+                                                       autocomplete="off"
+                                                       class="layui-input"
                                                        lay-affix="eye">
                                             </div>
                                         </div>
@@ -77,9 +85,13 @@
                                                         <div class="layui-input-prefix">
                                                             <i class="layui-icon layui-icon-vercode"></i>
                                                         </div>
-                                                        <input type="text" name="captcha" value="" lay-verify="required"
+                                                        <input type="text"
+                                                               name="captcha"
+                                                               value=""
+                                                               lay-verify="required"
                                                                placeholder="验证码"
-                                                               lay-reqtext="请填写验证码" autocomplete="off"
+                                                               lay-reqtext="请填写验证码"
+                                                               autocomplete="off"
                                                                class="layui-input"
                                                                lay-affix="clear">
                                                     </div>
@@ -361,6 +373,7 @@
 </div>
 <script src="js/layui.js"></script>
 <script>
+    document.getElementById("login-lid").focus();
     layui.use(function () {
         var form = layui.form;
         // 自定义验证规则
@@ -414,6 +427,7 @@
                 if (!/^[\S]{6,16}$/.test(value)) {
                     return '账号必须为 6 到 16 位的非空字符';
                 }
+                layui.form.find('input[name="lid"]').focus();
             },
             // 验证密码，且为必填项
             password: function (value, elem) {

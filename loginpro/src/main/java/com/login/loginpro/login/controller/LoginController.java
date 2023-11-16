@@ -6,6 +6,8 @@ import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,13 +35,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(UserLogin userLogin, String captcha, HttpServletRequest request) {
+    @ResponseBody
+    public ModelAndView login( UserLogin userLogin, String captcha, HttpServletRequest request) {
+
         ModelAndView modelAndView = new ModelAndView("redirect:login");
         // 校验验证码
+        System.out.println(userLogin.toString());
         if (!CaptchaUtil.ver(captcha, request)) {
             // 验证码错误
             // 清除验证码
             CaptchaUtil.clear(request);
+            return modelAndView;
         }
         // 清除验证码
         CaptchaUtil.clear(request);

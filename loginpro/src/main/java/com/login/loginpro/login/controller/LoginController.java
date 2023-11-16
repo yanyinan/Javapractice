@@ -40,17 +40,24 @@ public class LoginController {
             // 验证码错误
             // 清除验证码
             CaptchaUtil.clear(request);
-            
         }
         // 清除验证码
         CaptchaUtil.clear(request);
-        if(userLogin.getLid() != null){
-            if (userLogin.getPassword() != null){
-
+        if(userLogin != null){
+            if (userLogin.getPassword() != null) {
+                UserLogin userLogin1 = loginService.uselogin(userLogin);
+                if (userLogin1!= null) {
+                    // 登录成功
+                    request.getSession().setAttribute("userLogin", userLogin1);
+                    modelAndView.setViewName("redirect:/index");
+                } else {
+                    // 登录失败
+                    modelAndView.setViewName("redirect:/login");
+                }
             }
         }
 
-        return mv;
+        return modelAndView;
     }
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {

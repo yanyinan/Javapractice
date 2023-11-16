@@ -33,12 +33,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(UserLogin userLogin, String verCode, HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView("login");
-        if (!CaptchaUtil.ver(verCode, request)) {
-            // 清除session中的验证码
+    public ModelAndView login(UserLogin userLogin, String captcha, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("redirect:login");
+        // 校验验证码
+        if (!CaptchaUtil.ver(captcha, request)) {
+            // 验证码错误
+            // 清除验证码
             CaptchaUtil.clear(request);
+            
         }
+        // 清除验证码
+        CaptchaUtil.clear(request);
         if(userLogin.getLid() != null){
             if (userLogin.getPassword() != null){
 

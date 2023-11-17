@@ -1,6 +1,7 @@
 package com.login.loginpro.login.service.impl;
 
 import com.login.loginpro.core.model.UserLogin;
+import com.login.loginpro.core.utils.model.UserLoginTo;
 import com.login.loginpro.login.service.ILoginService;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LoginServiceImpl implements ILoginService {
+
     @Override
-    public UserLogin uselogin(UserLogin userEntity) {
+    public UserLogin uselogin(UserLoginTo userLoginTo) {
+        //邮箱验证登录
+        if (userLoginTo.getEmail() != null){
+
+        }
+        //手机验证登录
+        if (userLoginTo.getPhone()!= null){
+
+        }
+        //密码登录
+        if (userLoginTo.getLid()!= null && userLoginTo.getPassword()!= null){
+
+        }
         return null;
     }
 }

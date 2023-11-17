@@ -58,8 +58,8 @@
                                                 <input type="text" name="lid"
                                                        value=""
                                                        lay-verify="required|login_lid"
-                                                       placeholder="账号"
-                                                       lay-reqtext="请填写账号"
+                                                       placeholder="用户名或手机号或邮箱"
+                                                       lay-reqtext="请填写用户名或手机号或邮箱"
                                                        autocomplete="off"
                                                        class="layui-input"
                                                        lay-affix="clear"
@@ -127,7 +127,7 @@
                             </div>
                             <div class="layui-tab-item">
                                 <!--邮箱登录-->
-                                <form class="layui-form" th:action="@{/login}" th:method="post">
+                                <form class="layui-form">
                                     <div class="login-main">
                                         <div class="layui-form-item">
                                             <div class="layui-row">
@@ -156,7 +156,7 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-vercode"></i>
                                                 </div>
-                                                <input type="text" name="vercode" value="" lay-verify="required"
+                                                <input type="text" name="code" value="" lay-verify="required"
                                                        placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off"
                                                        class="layui-input">
                                             </div>
@@ -198,7 +198,7 @@
                             </div>
                             <div class="layui-tab-item">
                                 <!--手机号码登录-->
-                                <form class="layui-form" th:action="@{/login}" th:method="post">
+                                <form class="layui-form" >
                                     <div class="login-main">
                                         <div class="layui-form-item">
                                         <div class="layui-row">
@@ -227,7 +227,7 @@
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-vercode"></i>
                                                 </div>
-                                                <input type="text" name="vercode" value="" lay-verify="required"
+                                                <input type="text" name="code" value="" lay-verify="required"
                                                        placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off"
                                                        class="layui-input">
                                             </div>
@@ -416,17 +416,17 @@
         form.verify({
             // 验证用户名，且为必填项
             login_lid: function (value, elem) {
-                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
-                    return '账号不能有特殊字符';
-                }
-                if (/(^_)|(__)|(_+$)/.test(value)) {
-                    return '账号首尾不能出现下划线';
-                }
-                if (/^\d+$/.test(value)) {
-                    return '账号不能全为数字';
-                }
+                // if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                //     return '账号不能有特殊字符';
+                // }
+                // if (/(^_)|(__)|(_+$)/.test(value)) {
+                //     return '账号首尾不能出现下划线';
+                // }
+                // if (/^\d+$/.test(value)) {
+                //     return '不能全为数字';
+                // }
                 if (!/^[\S]{6,16}$/.test(value)) {
-                    return '账号必须为 6 到 16 位的非空字符';
+                    return '必须为 6 到 16 位的非空字符';
                 }
 
             },
@@ -459,32 +459,32 @@
 
         // 提交事件
         form.on('submit(demo-login)', function (data) {
-            // var field = data.field; // 获取表单字段值
+            var resp = data.field; // 获取表单字段值
             // 创建一个新的XMLHttpRequest对象
             var xhr = new XMLHttpRequest();
             // 设置请求方法和URL
             xhr.open("POST", "/login",true);
-            xhr.send();
-            xhr.onreadystatechange=function () {
-                if (xhr.readyState == 4 && xhr.status == 200){
-                    let resp = JSON.parse(xhr.responseText);
-                    console.log(resp);
-                }
-            }
-            // 设置请求头，以便服务器知道如何解析数据
-            // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            // 当请求完成时执行的函数
-            // xhr.onload = function () {
-            //     if (xhr.status === 200) {
-            //         // 请求成功，处理响应数据
-            //         console.log(xhr.responseText);
-            //     } else {
-            //         // 请求失败，处理错误信息
-            //         console.error("请求失败，状态码：" + xhr.status);
+            // xhr.send();
+            // xhr.onreadystatechange=function () {
+            //     if (xhr.readyState == 4 && xhr.status == 200){
+            //         let resp = JSON.parse(xhr.responseText);
+            //         console.log(resp);
             //     }
-            // };
-            // 将表单数据转换为JSON字符串并发送请求
-            // xhr.send(JSON.stringify(field));
+            // }
+            // 设置请求头，以便服务器知道如何解析数据
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            //当请求完成时执行的函数
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // 请求成功，处理响应数据
+                    console.log(xhr.responseText);
+                } else {
+                    // 请求失败，处理错误信息
+                    console.error("请求失败，状态码：" + xhr.status);
+                }
+            };
+            //将表单数据转换为JSON字符串并发送请求
+            xhr.send(JSON.stringify(resp));
             return false; // 阻止默认 form 跳转
         });
 

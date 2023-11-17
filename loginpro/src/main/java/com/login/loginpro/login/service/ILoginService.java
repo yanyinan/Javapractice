@@ -1,6 +1,7 @@
 package com.login.loginpro.login.service;
 
 import com.login.loginpro.core.model.UserLogin;
+import com.login.loginpro.core.utils.model.UserLoginTo;
 
 /**
  * @project: loginpro
@@ -11,10 +12,5 @@ import com.login.loginpro.core.model.UserLogin;
  * @Date: 2023/11/14
  */
 public interface ILoginService {
-    /**
-     * 登录
-     * @param userEntity
-     * @return
-     */
-    UserLogin uselogin(UserLogin userEntity) ;
+    UserLogin uselogin(UserLoginTo userLoginTo);
 }

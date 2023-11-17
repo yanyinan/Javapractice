@@ -1,14 +1,11 @@
 package com.login.loginpro.login.controller;
 
-import com.login.loginpro.core.model.UserLogin;
+import com.login.loginpro.core.utils.model.UserLoginTo;
 import com.login.loginpro.core.utils.Resp;
 import com.login.loginpro.login.service.ILoginService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,35 +32,19 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    @ResponseBody
-    public Resp login(UserLogin userLogin, String captcha, HttpServletRequest request) {
-
-        ModelAndView modelAndView = new ModelAndView("redirect:login");
-        // 校验验证码
-        System.out.println(userLogin.toString());
+    public Resp login(@RequestBody UserLoginTo userLoginTo,) {
         if (!CaptchaUtil.ver(captcha, request)) {
             // 验证码错误
             // 清除验证码
             CaptchaUtil.clear(request);
-//            return modelAndView;
+            // 重定向到登录页面
+            return "redirect:/login";
         }
-        // 清除验证码
-        CaptchaUtil.clear(request);
-        if(userLogin != null){
-            if (userLogin.getPassword() != null) {
-                UserLogin userLogin1 = loginService.uselogin(userLogin);
-                if (userLogin1!= null) {
-                    // 登录成功
-                    request.getSession().setAttribute("userLogin", userLogin1);
-                    modelAndView.setViewName("redirect:/index");
-                } else {
-                    // 登录失败
-                    modelAndView.setViewName("redirect:/login");
-                }
-            }
+        if (loginService.uselogin(userLoginTo) == null) {
+            return Resp.fail("用户名或密码错误");
+        }else {
+            return Resp.ok("用户登录成功");
         }
-        return Resp.ok();
-//        return modelAndView;
     }
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {

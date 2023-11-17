@@ -13,7 +13,7 @@ public class UserLogin implements Serializable {
     /**
      * 用户账号
      */
-    private Integer lid;
+    private String lid;
 
     /**
      * 用户密码

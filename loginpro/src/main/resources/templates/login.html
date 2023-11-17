@@ -416,15 +416,6 @@
         form.verify({
             // 验证用户名，且为必填项
             login_lid: function (value, elem) {
-                // if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
-                //     return '账号不能有特殊字符';
-                // }
-                // if (/(^_)|(__)|(_+$)/.test(value)) {
-                //     return '账号首尾不能出现下划线';
-                // }
-                // if (/^\d+$/.test(value)) {
-                //     return '不能全为数字';
-                // }
                 if (!/^[\S]{6,16}$/.test(value)) {
                     return '必须为 6 到 16 位的非空字符';
                 }
@@ -464,13 +455,6 @@
             var xhr = new XMLHttpRequest();
             // 设置请求方法和URL
             xhr.open("POST", "/login",true);
-            // xhr.send();
-            // xhr.onreadystatechange=function () {
-            //     if (xhr.readyState == 4 && xhr.status == 200){
-            //         let resp = JSON.parse(xhr.responseText);
-            //         console.log(resp);
-            //     }
-            // }
             // 设置请求头，以便服务器知道如何解析数据
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             //当请求完成时执行的函数

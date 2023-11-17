@@ -3,6 +3,8 @@ package com.login.loginpro.login.mapper;
 import com.login.loginpro.core.model.UserLogin;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author 26481
 * @description 针对表【user_login(用户登录信息表)】的数据库操作Mapper
@@ -16,10 +18,12 @@ public interface UserLoginMapper {
 
     int insertSelective(UserLogin record);
 
-    UserLogin selectByPrimaryKey(Long id);
+    UserLogin selectByPrimaryKey(String lid);
 
     int updateByPrimaryKeySelective(UserLogin record);
 
-    int updateByPrimaryKey(UserLogin record);
+    List<UserLogin> selectAll();
+
+    List<UserLogin> selectBy(UserLogin userLogin);
 
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import static com.login.loginpro.login.constant.EmailConstant.MAIL_FROM;
+
 /**
  * @project: loginpro
  * @title: SendEmailUtil （默认）
@@ -35,5 +37,8 @@ public class SendEmailUtil {
         //发送邮件
         javaMailSender.send(mimeMessage);
         return null;
+    }
+    public static String SendMimeMail(String to,String subject,String content) throws MessagingException {
+        return SendEmailUtil.SendMimeMail(to, MAIL_FROM, subject, content);
     }
 }

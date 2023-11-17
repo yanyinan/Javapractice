@@ -13,20 +13,37 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        lid,password,email,
+        lid,email,
         phone,create_time,update_time
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from user_login
-        where  lid = #{lid,jdbcType=INTEGER} 
+        where  lid = #{lid}
+    </select>
+    <select id="selectAll" resultType="com.login.loginpro.core.model.UserLogin">
+        select
+        <include refid="Base_Column_List" />
+        from user_login
+    </select>
+    <select id="selectBy" resultType="com.login.loginpro.core.model.UserLogin">
+        select
+        <include refid="Base_Column_List" />
+        from user_login
+        <trim prefix="where" suffixOverrides="and">
+                <if test="lid!= null">lid = #{lid} and</if>
+                <if test="password!= null">password = #{password} and</if>
+                <if test="email!= null">email = #{email} and</if>
+                <if test="phone!= null">phone = #{phone} and</if>
+                <if test="createTime!= null">create_time = #{createTime} and</if>
+        </trim>
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from user_login
-        where  lid = #{lid,jdbcType=INTEGER} 
+        where  lid = #{lid}
     </delete>
     <insert id="insertSelective" keyColumn="lid" keyProperty="lid" parameterType="com.login.loginpro.core.model.UserLogin" useGeneratedKeys="true">
         insert into user_login
@@ -39,43 +56,33 @@
                 <if test="updateTime != null">update_time,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="lid != null">#{lid,jdbcType=INTEGER},</if>
-                <if test="password != null">#{password,jdbcType=VARCHAR},</if>
-                <if test="email != null">#{email,jdbcType=VARCHAR},</if>
-                <if test="phone != null">#{phone,jdbcType=INTEGER},</if>
-                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
-                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="lid != null">#{lid},</if>
+                <if test="password != null">#{password},</if>
+                <if test="email != null">#{email},</if>
+                <if test="phone != null">#{phone},</if>
+                <if test="createTime != null">#{createTime},</if>
+                <if test="updateTime != null">#{updateTime},</if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.login.loginpro.core.model.UserLogin">
         update user_login
         <set>
                 <if test="password != null">
-                    password = #{password,jdbcType=VARCHAR},
+                    password = #{passwordR},
                 </if>
                 <if test="email != null">
-                    email = #{email,jdbcType=VARCHAR},
+                    email = #{email},
                 </if>
                 <if test="phone != null">
-                    phone = #{phone,jdbcType=INTEGER},
+                    phone = #{phone},
                 </if>
                 <if test="createTime != null">
-                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                    create_time = #{createTime},
                 </if>
                 <if test="updateTime != null">
-                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                    update_time = #{updateTime},
                 </if>
         </set>
-        where   lid = #{lid,jdbcType=INTEGER} 
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.login.loginpro.core.model.UserLogin">
-        update user_login
-        set 
-            password =  #{password,jdbcType=VARCHAR},
-            email =  #{email,jdbcType=VARCHAR},
-            phone =  #{phone,jdbcType=INTEGER},
-            create_time =  #{createTime,jdbcType=TIMESTAMP},
-            update_time =  #{updateTime,jdbcType=TIMESTAMP}
-        where   lid = #{lid,jdbcType=INTEGER} 
+        where   lid = #{lid}
     </update>
 </mapper>

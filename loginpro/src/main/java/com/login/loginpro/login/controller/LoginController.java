@@ -1,5 +1,6 @@
 package com.login.loginpro.login.controller;
 
+import com.login.loginpro.core.model.UserLogin;
 import com.login.loginpro.core.utils.model.UserLoginTo;
 import com.login.loginpro.core.utils.Resp;
 import com.login.loginpro.login.service.ILoginService;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 /**
  * @project: loginpro
  * @title: LoginController （默认）
@@ -32,15 +35,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public Resp login(@RequestBody UserLoginTo userLoginTo,) {
-        if (!CaptchaUtil.ver(captcha, request)) {
+    public Resp login(@RequestBody UserLoginTo userLoginTo, HttpServletRequest request) {
+
+        if ( userLoginTo.getCaptcha()!= null && !CaptchaUtil.ver(userLoginTo.getCaptcha(), request)) {
             // 验证码错误
             // 清除验证码
             CaptchaUtil.clear(request);
             // 重定向到登录页面
-            return "redirect:/login";
+            return Resp.fail("验证码错误");
         }
-        if (loginService.uselogin(userLoginTo) == null) {
+        List<UserLogin> userLoginList = loginService.uselogin(userLoginTo);
+        if (userLoginList.size() != 1) {
             return Resp.fail("用户名或密码错误");
         }else {
             return Resp.ok("用户登录成功");

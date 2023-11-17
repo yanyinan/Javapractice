@@ -20,7 +20,7 @@ import java.util.List;
  * @version: v0.0.1
  * @Date: 19:59
  */
-@Controller
+@RestController
 public class LoginController {
     /**
      * ioc 构造器注入
@@ -37,20 +37,18 @@ public class LoginController {
     @PostMapping("/login")
     public Resp login(@RequestBody UserLoginTo userLoginTo, HttpServletRequest request) {
 
-        if ( userLoginTo.getCaptcha()!= null && !CaptchaUtil.ver(userLoginTo.getCaptcha(), request)) {
-            // 验证码错误
-            // 清除验证码
-            CaptchaUtil.clear(request);
-            // 重定向到登录页面
-            return Resp.fail("验证码错误");
-        }
+//        if ( userLoginTo.getCaptcha()!= null && !CaptchaUtil.ver(userLoginTo.getCaptcha(), request)) {
+//            // 验证码错误
+//            // 清除验证码
+//            CaptchaUtil.clear(request);
+//            // 重定向到登录页面
+//            return Resp.fail("验证码错误");
+//        }
         List<UserLogin> userLoginList = loginService.uselogin(userLoginTo);
         if (userLoginList.size() != 1) {
             return Resp.fail("用户名或密码错误");
         }else {
-            return Resp.ok(
-                    userLoginList.get(0)
-            );
+            return Resp.ok(userLoginList.get(0));
         }
     }
     @GetMapping("/captcha")

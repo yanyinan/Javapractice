@@ -48,7 +48,7 @@
                         <div class="layui-tab-content">
                             <div class="layui-tab-item layui-show">
                                 <!--用户名登录-->
-                                <form class="layui-form">
+                                <form class="layui-form" method="post">
                                     <div class="login-main">
                                         <div class="layui-form-item">
                                             <div class="layui-input-wrap">
@@ -406,6 +406,7 @@
     </div>
 </div>
 <script src="js/layui.js"></script>
+<script src="js/axios.min.js"></script>
 <script>
     // 让表单元素自动获取焦点
     document.getElementById("login-lid").focus();
@@ -452,48 +453,49 @@
         form.on('submit(demo-login)', function (data) {
             var resp = data.field; // 获取表单字段值
 
-            // $.ajax({
-            //     url: "/login",
-            //     type: "POST",
-            //     data: JSON.stringify(resp),
-            //     contentType: "application/json; charset=utf-8",
-            //     dataType: "json",
-            //     success: function (data) {
-            //         console.log(data);
-            //         if (data.code === 200) {
-            //             window.location.href = "/index";
-            //         } else {
-            //             alert("登录失败");
-            //         }
-            //     },
-            //     error: function (data) {
+            axios.post('login',resp)
+                .then(function (response) {
+                    if (response.data.code === 200) {
+                        layui.msg("登录成功");
+                        // 登录成功，跳转到首页
+                        location.href = "index" ;
+                    } else {
+                        // 登录失败，弹出提示
+                        alert("登录失败");
+                    }
+                    console.log(response);
+                    // response.data.code === 200? console.log("登录成功") : alert("登录失败");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+
+
+           // 创建一个新的XMLHttpRequest对象
+            // var xhr = new XMLHttpRequest();
+            // // 设置请求方法和URL
+            //
+            // xhr.onload = () => {
+            //     if (xhr.status === 200) {
+            //         // 请求成功，处理响应数据
+            //         //操作
+            //         responsecontent = xhr.response;
+            //         console.log(responsecontent);
+            //         // response.data.code === 200? console.log("登录成功") : alert("登录失败");
+            //     } else {
+            //         // 请求失败，处理错误信息
+            //         console.error("请求失败，状态码：" + xhr.status);
             //     }
             // };
-            // 创建一个新的XMLHttpRequest对象
-            var xhr = new XMLHttpRequest();
-            // 设置请求方法和URL
-
-            xhr.onreadystatechange = () => {
-                console.log(xhr)
-                if (xhr.status === 0) {
-                    // 请求成功，处理响应数据
-                    //操作
-                    responsecontent = xhr.responseText;
-                    console.log(responsecontent);
-                    // response.data.code === 200? console.log("登录成功") : alert("登录失败");
-                } else {
-                    // 请求失败，处理错误信息
-                    console.error("请求失败，状态码：" + xhr.status);
-                }
-            };
-            xhr.open("POST", "/login", true);
-            // 设置请求头，以便服务器知道如何解析数据
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            //当请求完成时执行的函数
-            xhr.send(JSON.stringify(resp));
-            //将表单数据转换为JSON字符串并发送请求
-
-            return false; // 阻止默认 form 跳转
+            // xhr.open("POST", "/login", true);
+            // // 设置请求头，以便服务器知道如何解析数据
+            // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            // //当请求完成时执行的函数
+            // xhr.send(JSON.stringify(resp));
+            // //将表单数据转换为JSON字符串并发送请求
+            //
+            // return false; // 阻止默认 form 跳转
         });
 
     })

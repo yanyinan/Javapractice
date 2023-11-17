@@ -48,7 +48,7 @@ public class LoginController {
         if (userLoginList.size() != 1) {
             return Resp.fail("用户名或密码错误");
         }else {
-            return Resp.ok("用户登录成功");
+            return Resp.ok("登录成功");
         }
     }
     @GetMapping("/captcha")

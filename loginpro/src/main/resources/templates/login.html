@@ -451,32 +451,48 @@
         // 提交事件
         form.on('submit(demo-login)', function (data) {
             var resp = data.field; // 获取表单字段值
+
+            // $.ajax({
+            //     url: "/login",
+            //     type: "POST",
+            //     data: JSON.stringify(resp),
+            //     contentType: "application/json; charset=utf-8",
+            //     dataType: "json",
+            //     success: function (data) {
+            //         console.log(data);
+            //         if (data.code === 200) {
+            //             window.location.href = "/index";
+            //         } else {
+            //             alert("登录失败");
+            //         }
+            //     },
+            //     error: function (data) {
+            //     }
+            // };
             // 创建一个新的XMLHttpRequest对象
             var xhr = new XMLHttpRequest();
             // 设置请求方法和URL
-            xhr.open("POST", "/login",true);
-            // 设置请求头，以便服务器知道如何解析数据
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            //当请求完成时执行的函数
-            xhr.onload = function (response) {
-                if (xhr.status === 200) {
+
+            xhr.onreadystatechange = () => {
+                console.log(xhr)
+                if (xhr.status === 0) {
                     // 请求成功，处理响应数据
                     //操作
-                    if (response.data.code === 200) {
-                        // 登录成功
-                        console.log("登录成功");
-
-                    } else {
-                        // 登录失败
-                        console.log("登录失败");
-                    }
+                    responsecontent = xhr.responseText;
+                    console.log(responsecontent);
+                    // response.data.code === 200? console.log("登录成功") : alert("登录失败");
                 } else {
                     // 请求失败，处理错误信息
                     console.error("请求失败，状态码：" + xhr.status);
                 }
             };
-            //将表单数据转换为JSON字符串并发送请求
+            xhr.open("POST", "/login", true);
+            // 设置请求头，以便服务器知道如何解析数据
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            //当请求完成时执行的函数
             xhr.send(JSON.stringify(resp));
+            //将表单数据转换为JSON字符串并发送请求
+
             return false; // 阻止默认 form 跳转
         });
 

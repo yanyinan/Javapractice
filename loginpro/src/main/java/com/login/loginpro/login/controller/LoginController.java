@@ -1,6 +1,7 @@
 package com.login.loginpro.login.controller;
 
 import com.login.loginpro.core.model.UserLogin;
+import com.login.loginpro.core.utils.Resp;
 import com.login.loginpro.login.service.ILoginService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,6 @@ public class LoginController {
     public LoginController(ILoginService loginService) {
         this.loginService = loginService;
     }
-
     @GetMapping({"/", "/login"})
     public ModelAndView login() {
         return new ModelAndView("/login");
@@ -36,7 +36,7 @@ public class LoginController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ModelAndView login( UserLogin userLogin, String captcha, HttpServletRequest request) {
+    public Resp login(UserLogin userLogin, String captcha, HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView("redirect:login");
         // 校验验证码
@@ -45,7 +45,7 @@ public class LoginController {
             // 验证码错误
             // 清除验证码
             CaptchaUtil.clear(request);
-            return modelAndView;
+//            return modelAndView;
         }
         // 清除验证码
         CaptchaUtil.clear(request);
@@ -62,8 +62,8 @@ public class LoginController {
                 }
             }
         }
-
-        return modelAndView;
+        return Resp.ok();
+//        return modelAndView;
     }
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {

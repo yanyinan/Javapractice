@@ -1,7 +1,7 @@
-package com.login.loginpro.core.utils;
+package com.login.loginpro.core.utils.send;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +22,8 @@ import static com.login.loginpro.login.constant.EmailConstant.MAIL_FROM;
 public class SendEmailUtil {
 
     @Autowired
-    private static JavaMailSenderImpl javaMailSender;
-    public static String SendMimeMail(String to,String from,String subject,String content) throws MessagingException {
+    private static JavaMailSender javaMailSender;
+    public static void SendMimeMail(String to, String from, String subject, String content) throws MessagingException {
         //创建一封mime邮件
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         //创建mime邮件的辅助类对象，将mime设置为muitipart类型
@@ -36,10 +36,9 @@ public class SendEmailUtil {
         helper.setFrom(from);
         //发送邮件
         javaMailSender.send(mimeMessage);
-        return null;
     }
-    public static String SendMimeMail(String to,String subject,String content) throws MessagingException {
-        return SendEmailUtil.SendMimeMail(to, MAIL_FROM, subject, content);
+    public static void SendMimeMail(String to,String subject,String content) throws MessagingException {
+         SendEmailUtil.SendMimeMail(to, MAIL_FROM, subject, content);
     }
 
 }

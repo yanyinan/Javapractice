@@ -24,6 +24,7 @@ spring:
           auth: true
           starttls:
             enable: true
+    port: 587
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml

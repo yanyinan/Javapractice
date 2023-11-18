@@ -1,7 +1,6 @@
 package com.login.loginpro.login.utils;
 
-import com.login.loginpro.core.utils.SendEmailUtil;
-import lombok.Setter;
+import com.login.loginpro.core.utils.send.SendEmailUtil;
 
 import javax.mail.MessagingException;
 
@@ -15,22 +14,32 @@ import javax.mail.MessagingException;
  * @Date: 19:18
  */
 
-public class SendCode  {
+public class SendCode {
     /**
      * code 为 0 代表登录验证 1 代表注册验证
      */
-    public static String SendMimeMail(String to,int code) throws MessagingException {
+    public static String SendMimeMail(String to, int code) throws MessagingException {
         String subject = "";
         if (code == 0) {
             subject = "登录验证码";
         } else {
             subject = "注册验证码";
         }
-        String content = "您的验证码是：123456";
+        String content = "您的验证码是："+generateCode();
         return SendEmailUtil.SendMimeMail(to, subject, content);
     }
-    public static void main(String[] args) throws MessagingException {
-        SendCode.SendMimeMail("2648179906@qq.com", 0);
+
+
+    /**
+     * 生成一个随机代码。
+     * 代码长度为6位，由数字组成。
+     * @return 生成的随机代码。
+     */
+    public static String generateCode() {
+        int code = (int) (Math.random() * 900000) + 100000;
+        return String.valueOf(code);
     }
+
+
 
 }

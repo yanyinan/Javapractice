@@ -7,7 +7,6 @@ import com.login.loginpro.login.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,18 +30,10 @@ public class LoginServiceImpl implements ILoginService {
      * @return UserLogin
      */
     @Override
-    public List<UserLogin> uselogin(UserLoginTo userLoginTo) {
+    public Boolean uselogin(UserLoginTo userLoginTo) {
         UserLogin userLogin = new UserLogin();
         //判断对象是否为空
         if (userLoginTo != null){
-            //邮箱验证登录
-            if (userLoginTo.getEmail() != null){
-                userLogin.setEmail(userLoginTo.getEmail());
-            }
-            //手机验证登录
-            if (userLoginTo.getPhone()!= null){
-                userLogin.setPhone(userLoginTo.getPhone());
-            }
             //密码登录
             if (userLoginTo.getLid()!= null && userLoginTo.getPassword()!= null){
                 String lid = userLoginTo.getLid();
@@ -54,10 +45,31 @@ public class LoginServiceImpl implements ILoginService {
                     userLogin.setLid(lid);
                 }
                 userLogin.setPassword(userLoginTo.getPassword());
+                //查询用户是否存在
+                if (userLoginMapper.selectBy(userLogin).size() == 1){
+                    //返回成功
+                    return true;
+                }
             }
-            //查询用户
-            return userLoginMapper.selectBy(userLogin);
+            //邮箱验证登录
+            if (userLoginTo.getEmail() != null){
+                userLogin.setEmail(userLoginTo.getEmail());
+            }
+            //手机验证登录
+            if (userLoginTo.getPhone()!= null){
+                userLogin.setPhone(userLoginTo.getPhone());
+            }
+            //查询用户是否存在
+            if (userLoginMapper.selectBy(userLogin).size() == 1){
+                //返回成功
+                return true;
+            }
         }
+        return false;
+    }
+
+    @Override
+    public UserLogin getUserLogin(UserLoginTo userLoginTo) {
         return null;
     }
 

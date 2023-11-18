@@ -15,8 +15,8 @@ spring:
       max-active: 20
       max-wait: 60000
   mail:
-    username: 2648179906@qq.com               #发邮件地址，改成你的发邮件地址
-    password: sunshine010305W           #授权码，改成你的授权码
+    username: 2521415655@qq.com              #发邮件地址，改成你的发邮件地址
+    password: xhkdklcyncpidhje           #授权码，改成你的授权码
     host: smtp.qq.com                       #smpt服务器
 
 mybatis:

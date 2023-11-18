@@ -1,8 +1,9 @@
 package com.login.loginpro.login.controller;
 
 import com.login.loginpro.core.model.UserLogin;
+import com.login.loginpro.core.utils.model.RespUrl;
 import com.login.loginpro.core.utils.model.UserLoginTo;
-import com.login.loginpro.core.utils.Resp;
+import com.login.loginpro.core.utils.model.Resp;
 import com.login.loginpro.login.service.ILoginService;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public Resp login(@RequestBody UserLoginTo userLoginTo, HttpServletRequest request) {
 
         if ( userLoginTo.getCaptcha()!= null && !CaptchaUtil.ver(userLoginTo.getCaptcha(), request)) {
@@ -44,9 +46,8 @@ public class LoginController {
             // 重定向到登录页面
             return Resp.fail("验证码错误");
         }
-        List<UserLogin> userLoginList = loginService.uselogin(userLoginTo);
-        if (userLoginList.size() == 1) {
-            return Resp.ok(userLoginList.get(0));
+        if (loginService.uselogin(userLoginTo)) {
+            return Resp.ok(new RespUrl("/index","登录成功"));
         }else {
             return Resp.fail("用户名或密码错误");
         }
@@ -54,5 +55,14 @@ public class LoginController {
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
         CaptchaUtil.out(request, response);
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/login";
+    }
+    @GetMapping("/index")
+    public String index() {
+        return "/index";
     }
 }

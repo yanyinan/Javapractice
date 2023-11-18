@@ -14,5 +14,6 @@ import java.util.List;
  * @Date: 2023/11/14
  */
 public interface ILoginService {
-    List<UserLogin> uselogin(UserLoginTo userLoginTo);
+    Boolean uselogin(UserLoginTo userLoginTo);
+    UserLogin getUserLogin(UserLoginTo userLoginTo);
 }

@@ -1,4 +1,4 @@
-package com.login.loginpro.core.utils;
+package com.login.loginpro.core.utils.model;
 
 import java.util.HashMap;
 
@@ -13,7 +13,7 @@ public class Resp extends HashMap<String, Object> {
     public static Resp ok(String msg){
         Resp resp = new Resp();
         resp.put("code", 200);
-        resp.put("msg", msg);
+        resp.put("message", msg);
         return resp;
     }
 
@@ -27,7 +27,7 @@ public class Resp extends HashMap<String, Object> {
     public static Resp fail(String msg){
         Resp resp = new Resp();
         resp.put("code", 500);
-        resp.put("msg", msg);
+        resp.put("message", msg);
         return resp;
     }
 

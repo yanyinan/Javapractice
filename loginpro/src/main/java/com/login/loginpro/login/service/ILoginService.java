@@ -1,9 +1,8 @@
 package com.login.loginpro.login.service;
 
 import com.login.loginpro.core.model.UserLogin;
-import com.login.loginpro.core.utils.model.UserLoginTo;
-
-import java.util.List;
+import com.login.loginpro.login.model.UserLoginTo;
+import com.login.loginpro.login.model.UserRegisterTo;
 
 /**
  * @project: loginpro
@@ -16,4 +15,6 @@ import java.util.List;
 public interface ILoginService {
     Boolean uselogin(UserLoginTo userLoginTo);
     UserLogin getUserLogin(UserLoginTo userLoginTo);
+
+    Boolean register(UserRegisterTo userRegisterTo);
 }

@@ -29,5 +29,8 @@ public class SendCode  {
         String content = "您的验证码是：123456";
         return SendEmailUtil.SendMimeMail(to, subject, content);
     }
+    public static void main(String[] args) throws MessagingException {
+        SendCode.SendMimeMail("2648179906@qq.com", 0);
+    }
 
 }

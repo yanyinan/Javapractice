@@ -1,8 +1,9 @@
 package com.login.loginpro.login.service.impl;
 
 import com.login.loginpro.core.model.UserLogin;
-import com.login.loginpro.core.utils.model.UserLoginTo;
+import com.login.loginpro.login.model.UserLoginTo;
 import com.login.loginpro.login.mapper.UserLoginMapper;
+import com.login.loginpro.login.model.UserRegisterTo;
 import com.login.loginpro.login.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,6 +71,28 @@ public class LoginServiceImpl implements ILoginService {
 
     @Override
     public UserLogin getUserLogin(UserLoginTo userLoginTo) {
+        return null;
+    }
+
+    @Override
+    public Boolean register(UserRegisterTo userRegisterTo) {
+        if (userRegisterTo!= null){
+            UserLogin userLogin = new UserLogin();
+            if (userRegisterTo.getLid()!= null ){
+                userLogin.setLid(userRegisterTo.getLid());
+            }
+            if ( userRegisterTo.getEmail()!= null){
+                userLogin.setEmail(userRegisterTo.getEmail());
+            }
+            if (userRegisterTo.getPhone()!= null){
+                userLogin.setPhone(userRegisterTo.getPhone());
+            }
+            if (userLoginMapper.selectBy(userLogin).size() == 0){
+                userLogin.setPassword(userRegisterTo.getPassword());
+                userLoginMapper.insertSelective(userLogin);
+                return true;
+            }
+        }
         return null;
     }
 

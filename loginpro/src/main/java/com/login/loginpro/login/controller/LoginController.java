@@ -1,8 +1,7 @@
 package com.login.loginpro.login.controller;
 
-import com.login.loginpro.core.model.UserLogin;
 import com.login.loginpro.core.utils.model.RespUrl;
-import com.login.loginpro.core.utils.model.UserLoginTo;
+import com.login.loginpro.login.model.UserLoginTo;
 import com.login.loginpro.core.utils.model.Resp;
 import com.login.loginpro.login.service.ILoginService;
 import com.wf.captcha.utils.CaptchaUtil;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * @project: loginpro
@@ -38,7 +36,6 @@ public class LoginController {
     @PostMapping("/login")
     @ResponseBody
     public Resp login(@RequestBody UserLoginTo userLoginTo, HttpServletRequest request) {
-
         if ( userLoginTo.getCaptcha()!= null && !CaptchaUtil.ver(userLoginTo.getCaptcha(), request)) {
             // 验证码错误
             // 清除验证码

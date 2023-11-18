@@ -15,9 +15,15 @@ spring:
       max-active: 20
       max-wait: 60000
   mail:
-    username: 2521415655@qq.com              #发邮件地址，改成你的发邮件地址
-    password: xhkdklcyncpidhje           #授权码，改成你的授权码
+    username: 2521415655@qq.com             #发邮件地址，改成你的发邮件地址
+    password: nmhxgknudfqteabd           #授权码，改成你的授权码
     host: smtp.qq.com                       #smpt服务器
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml

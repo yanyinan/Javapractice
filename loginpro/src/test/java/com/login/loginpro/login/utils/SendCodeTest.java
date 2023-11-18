@@ -1,52 +1,34 @@
 package com.login.loginpro.login.utils;
 
-import com.login.loginpro.core.utils.SendEmailUtil;
+
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
-
+@SpringBootTest
 public class SendCodeTest {
 
+    @Autowired
+    private JavaMailSender javaMailSender;
     @Test
-    public void testSendMimeMailForLoginVerification() throws MessagingException {
-        // Arrange
-        String to = "example@example.com";
-        int code = 0;
-        String expectedSubject = "登录验证码";
-        String expectedContent = "您的验证码是：123456";
-
-        SendEmailUtil sendEmailUtil = mock(SendEmailUtil.class);
-
-        when(sendEmailUtil.SendMimeMail(to, expectedSubject, expectedContent)).thenReturn("mocked result");
-
-        // Act
-        String result = SendCode.SendMimeMail(to, code);
-
-        // Assert
-        assertEquals("mocked result", result);
-        verify(sendEmailUtil).SendMimeMail(to, expectedSubject, expectedContent);
-    }
-
-    @Test
-    public void testSendMimeMailForRegistrationVerification() throws MessagingException {
-        // Arrange
-        String to = "example@example.com";
-        int code = 1;
-        String expectedSubject = "注册验证码";
-        String expectedContent = "您的验证码是：123456";
-
-        SendEmailUtil sendEmailUtil = mock(SendEmailUtil.class);
-
-        when(sendEmailUtil.SendMimeMail(to, expectedSubject, expectedContent)).thenReturn("mocked result");
-
-        // Act
-        String result = SendCode.SendMimeMail(to, code);
-
-        // Assert
-        assertEquals("mocked result", result);
-        verify(sendEmailUtil).SendMimeMail(to, expectedSubject, expectedContent);
+    public void testSendMimeMail() throws MessagingException {
+        System.out.println(javaMailSender);
+        //创建一封mime邮件
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        //创建mime邮件的辅助类对象，将mime设置为muitipart类型
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+        //设置邮件标题和内容
+        helper.setSubject("开发喵用户激活邮件");
+        helper.setText("<a href='http://0.0.0.0:80/active?sid=xxxxxx'>点击这里激活开发喵账号</a>");
+        //设置发件人和收件人
+        helper.setTo("2648179906@qq.com");
+        helper.setFrom("2521415655@qq.com");
+        //发送邮件
+        javaMailSender.send(mimeMessage);
     }
 }

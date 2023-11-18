@@ -41,4 +41,5 @@ public class SendEmailUtil {
     public static String SendMimeMail(String to,String subject,String content) throws MessagingException {
         return SendEmailUtil.SendMimeMail(to, MAIL_FROM, subject, content);
     }
+
 }

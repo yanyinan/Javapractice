@@ -87,13 +87,15 @@ public class LoginServiceImpl implements ILoginService {
             if (userRegisterTo.getPhone()!= null){
                 userLogin.setPhone(userRegisterTo.getPhone());
             }
+            // 判断用户是否存在
             if (userLoginMapper.selectBy(userLogin).size() == 0){
                 userLogin.setPassword(userRegisterTo.getPassword());
+                //插入用户
                 userLoginMapper.insertSelective(userLogin);
                 return true;
             }
         }
-        return null;
+        return false;
     }
 
     /**

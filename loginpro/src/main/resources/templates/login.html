@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords"
           content="Easy Subscribe Form Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
-     <!-- layui css 导入-->
+    <!-- layui css 导入-->
     <link href="css/layui.css" rel="stylesheet">
     <style>
         .login-main {
@@ -136,8 +136,10 @@
                                                         <div class="layui-input-prefix">
                                                             <i class="layui-icon layui-icon-email"></i>
                                                         </div>
-                                                        <input type="email" name="email" value="" lay-verify="required|email"
-                                                               placeholder="邮箱" lay-reqtext="请填写邮箱" autocomplete="off"
+                                                        <input type="email" name="email" value=""
+                                                               lay-verify="required|email"
+                                                               placeholder="邮箱" lay-reqtext="请填写邮箱"
+                                                               autocomplete="off"
                                                                class="layui-input" id="login-email">
                                                     </div>
                                                 </div>
@@ -157,7 +159,8 @@
                                                     <i class="layui-icon layui-icon-vercode"></i>
                                                 </div>
                                                 <input type="text" name="code" value="" lay-verify="required"
-                                                       placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off"
+                                                       placeholder="验证码" lay-reqtext="请填写验证码"
+                                                       autocomplete="off"
                                                        class="layui-input">
                                             </div>
                                         </div>
@@ -198,37 +201,40 @@
                             </div>
                             <div class="layui-tab-item">
                                 <!--手机号码登录-->
-                                <form class="layui-form" >
+                                <form class="layui-form">
                                     <div class="login-main">
                                         <div class="layui-form-item">
-                                        <div class="layui-row">
-                                            <div class="layui-col-xs7">
-                                                <div class="layui-input-wrap">
-                                                    <div class="layui-input-prefix">
-                                                        <i class="layui-icon layui-icon-cellphone"></i>
+                                            <div class="layui-row">
+                                                <div class="layui-col-xs7">
+                                                    <div class="layui-input-wrap">
+                                                        <div class="layui-input-prefix">
+                                                            <i class="layui-icon layui-icon-cellphone"></i>
+                                                        </div>
+                                                        <input type="text" name="phone" value=""
+                                                               lay-verify="required|phone"
+                                                               placeholder="手机号码" lay-reqtext="请填写手机号码"
+                                                               autocomplete="off"
+                                                               class="layui-input" id="login-phone">
                                                     </div>
-                                                    <input type="text" name="phone" value="" lay-verify="required|phone"
-                                                           placeholder="手机号码" lay-reqtext="请填写手机号码" autocomplete="off"
-                                                           class="layui-input" id="login-phone">
                                                 </div>
-                                            </div>
-                                            <div class="layui-col-xs5">
-                                                <div style="margin-left: 11px;">
-                                                    <button type="button"
-                                                            class="layui-btn layui-btn-fluid layui-btn-primary"
-                                                            lay-on="reg-get-vercode">获取验证码
-                                                    </button>
+                                                <div class="layui-col-xs5">
+                                                    <div style="margin-left: 11px;">
+                                                        <button type="button"
+                                                                class="layui-btn layui-btn-fluid layui-btn-primary"
+                                                                lay-on="reg-get-vercode">获取验证码
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                         <div class="layui-form-item">
                                             <div class="layui-input-wrap">
                                                 <div class="layui-input-prefix">
                                                     <i class="layui-icon layui-icon-vercode"></i>
                                                 </div>
                                                 <input type="text" name="code" value="" lay-verify="required"
-                                                       placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off"
+                                                       placeholder="验证码" lay-reqtext="请填写验证码"
+                                                       autocomplete="off"
                                                        class="layui-input">
                                             </div>
                                         </div>
@@ -274,11 +280,14 @@
                             <div class="login-main">
                                 <label>其他登录</label>
                                 <ul class="layui-tab-title">
-                                    <li class="layui-this" onclick="clearAllForms()"><i  class="layui-icon layui-icon-username"
-                                                              style="color: #4daf29;"></i></i>
+                                    <li class="layui-this" onclick="clearAllForms()"><i
+                                            class="layui-icon layui-icon-username"
+                                            style="color: #4daf29;"></i></i>
                                     </li>
-                                    <li onclick="clearAllForms()"><i class="layui-icon layui-icon-email" style="color: #4daf29;"></i></li>
-                                    <li onclick="clearAllForms()"><i class="layui-icon layui-icon-cellphone" style="color: #4daf29;"></i></li>
+                                    <li onclick="clearAllForms()"><i class="layui-icon layui-icon-email"
+                                                                     style="color: #4daf29;"></i></li>
+                                    <li onclick="clearAllForms()"><i class="layui-icon layui-icon-cellphone"
+                                                                     style="color: #4daf29;"></i></li>
                                 </ul>
                             </div>
                         </div>
@@ -286,7 +295,7 @@
                 </div>
                 <div class="layui-tab-item">
                     <h1 style="text-align: center">注册</h1>
-                    <div class="layui-tab" >
+                    <div class="layui-tab">
                         <div class="layui-tab-content">
                             <div class="layui-tab-item layui-show">
                                 <form class="layui-form">
@@ -307,7 +316,8 @@
                                                     <div class="layui-input-prefix">
                                                         <i class="layui-icon layui-icon-password"></i>
                                                     </div>
-                                                    <input type="password" name="password" value="" lay-verify="required"
+                                                    <input type="password" name="password" value=""
+                                                           lay-verify="required"
                                                            placeholder="密码" autocomplete="off" class="layui-input"
                                                            lay-affix="eye">
                                                 </div>
@@ -323,15 +333,19 @@
                                                 </div>
                                             </div>
                                             <div class="layui-form-item">
-                                                <input type="checkbox" name="agreement" lay-verify="required" lay-skin="primary"
+                                                <input type="checkbox" name="agreement" lay-verify="required"
+                                                       lay-skin="primary"
                                                        title="同意">
-                                                <a href="#terms" target="_blank" style="position: relative; top: 6px; left: -15px;">
+                                                <a href="#terms" target="_blank"
+                                                   style="position: relative; top: 6px; left: -15px;">
                                                     <ins>用户协议</ins>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
-                                            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">注册</button>
+                                            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">
+                                                注册
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -347,9 +361,11 @@
                                                             <div class="layui-input-prefix">
                                                                 <i class="layui-icon layui-icon-email"></i>
                                                             </div>
-                                                            <input type="email" name="email" value="" lay-verify="required|email"
-                                                                   placeholder="邮箱" lay-reqtext="请填写邮箱" autocomplete="off"
-                                                                   class="layui-input" >
+                                                            <input type="email" name="email" value=""
+                                                                   lay-verify="required|email"
+                                                                   placeholder="邮箱" lay-reqtext="请填写邮箱"
+                                                                   autocomplete="off"
+                                                                   class="layui-input">
                                                         </div>
                                                     </div>
                                                     <div class="layui-col-xs5">
@@ -368,7 +384,8 @@
                                                         <i class="layui-icon layui-icon-vercode"></i>
                                                     </div>
                                                     <input type="text" name="verCode" value="" lay-verify="required"
-                                                           placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off"
+                                                           placeholder="验证码" lay-reqtext="请填写验证码"
+                                                           autocomplete="off"
                                                            class="layui-input">
                                                 </div>
                                             </div>
@@ -377,7 +394,8 @@
                                                     <div class="layui-input-prefix">
                                                         <i class="layui-icon layui-icon-password"></i>
                                                     </div>
-                                                    <input type="password" name="password" value="" lay-verify="required"
+                                                    <input type="password" name="password" value=""
+                                                           lay-verify="required"
                                                            placeholder="密码" autocomplete="off" class="layui-input"
                                                            lay-affix="eye">
                                                 </div>
@@ -394,15 +412,19 @@
                                             </div>
 
                                             <div class="layui-form-item">
-                                                <input type="checkbox" name="agreement" lay-verify="required" lay-skin="primary"
+                                                <input type="checkbox" name="agreement" lay-verify="required"
+                                                       lay-skin="primary"
                                                        title="同意">
-                                                <a href="#terms" target="_blank" style="position: relative; top: 6px; left: -15px;">
+                                                <a href="#terms" target="_blank"
+                                                   style="position: relative; top: 6px; left: -15px;">
                                                     <ins>用户协议</ins>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
-                                            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">注册</button>
+                                            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">
+                                                注册
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -418,9 +440,11 @@
                                                             <div class="layui-input-prefix">
                                                                 <i class="layui-icon layui-icon-email"></i>
                                                             </div>
-                                                            <input type="text" name="phone" value="" lay-verify="required|phone"
-                                                                   placeholder="手机号码" lay-reqtext="请填写手机号码" autocomplete="off"
-                                                                   class="layui-input" >
+                                                            <input type="text" name="phone" value=""
+                                                                   lay-verify="required|phone"
+                                                                   placeholder="手机号码" lay-reqtext="请填写手机号码"
+                                                                   autocomplete="off"
+                                                                   class="layui-input">
                                                         </div>
                                                     </div>
                                                     <div class="layui-col-xs5">
@@ -439,7 +463,8 @@
                                                         <i class="layui-icon layui-icon-vercode"></i>
                                                     </div>
                                                     <input type="text" name="verCode" value="" lay-verify="required"
-                                                           placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off"
+                                                           placeholder="验证码" lay-reqtext="请填写验证码"
+                                                           autocomplete="off"
                                                            class="layui-input">
                                                 </div>
                                             </div>
@@ -448,7 +473,8 @@
                                                     <div class="layui-input-prefix">
                                                         <i class="layui-icon layui-icon-password"></i>
                                                     </div>
-                                                    <input type="password" name="password" value="" lay-verify="required"
+                                                    <input type="password" name="password" value=""
+                                                           lay-verify="required"
                                                            placeholder="密码" autocomplete="off" class="layui-input"
                                                            lay-affix="eye">
                                                 </div>
@@ -465,35 +491,42 @@
                                             </div>
 
                                             <div class="layui-form-item">
-                                                <input type="checkbox" name="agreement" lay-verify="required" lay-skin="primary"
+                                                <input type="checkbox" name="agreement" lay-verify="required"
+                                                       lay-skin="primary"
                                                        title="同意">
-                                                <a href="#terms" target="_blank" style="position: relative; top: 6px; left: -15px;">
+                                                <a href="#terms" target="_blank"
+                                                   style="position: relative; top: 6px; left: -15px;">
                                                     <ins>用户协议</ins>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
-                                            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">注册</button>
+                                            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">
+                                                注册
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    <div class="design">
-                        <img src="images/design.png">
-                    </div>
-                    <div class="layui-form-item demo-login-other">
-                        <div class="login-main">
-                            <label>其他注册</label>
-                            <ul class="layui-tab-title">
-                                <li class="layui-this" onclick="clearAllForms()"><i  class="layui-icon layui-icon-username"
-                                                                                     style="color: #4daf29;"></i></i>
-                                </li>
-                                <li onclick="clearAllForms()"><i class="layui-icon layui-icon-email" style="color: #4daf29;"></i></li>
-                                <li onclick="clearAllForms()"><i class="layui-icon layui-icon-cellphone" style="color: #4daf29;"></i></li>
-                            </ul>
+                        <div class="design">
+                            <img src="images/design.png">
                         </div>
-                    </div>
+                        <div class="layui-form-item demo-login-other">
+                            <div class="login-main">
+                                <label>其他注册</label>
+                                <ul class="layui-tab-title">
+                                    <li class="layui-this" onclick="clearAllForms()"><i
+                                            class="layui-icon layui-icon-username"
+                                            style="color: #4daf29;"></i></i>
+                                    </li>
+                                    <li onclick="clearAllForms()"><i class="layui-icon layui-icon-email"
+                                                                     style="color: #4daf29;"></i></li>
+                                    <li onclick="clearAllForms()"><i class="layui-icon layui-icon-cellphone"
+                                                                     style="color: #4daf29;"></i></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -564,13 +597,13 @@
 
         });
 
-        // 提交事件
+        // 提交登录事件
         form.on('submit(demo-login)', function (data) {
             var resp = data.field; // 获取表单字段值
             // 创建一个新的XMLHttpRequest对象
             var xhr = new XMLHttpRequest();
             // 设置请求方法和URL
-            xhr.open("POST", "/login",true);
+            xhr.open("POST", "/login", true);
             // 设置请求头，以便服务器知道如何解析数据
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             //当请求完成时执行的函数
@@ -597,38 +630,16 @@
             xhr.send(JSON.stringify(resp));
             return false; // 阻止默认 form 跳转
         });
-// 提交事件
+
+        // 提交注册事件
         form.on('submit(demo-reg)', function (data) {
             var resp = data.field; // 获取表单字段值
             // 创建一个新的XMLHttpRequest对象
             var xhr = new XMLHttpRequest();
             // 设置请求方法和URL
-            xhr.open("POST", "/register",true);
+            xhr.open("POST", "/register", true);
             // 设置请求头，以便服务器知道如何解析数据
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            //当请求完成时执行的函数
-            xhr.onload = function () {
-                if (xhr.status === 200 && xhr.readyState === 4) {
-                    // 请求成功，处理响应数据
-                    //操作
-                    var responseData = JSON.parse(xhr.response);
-                    if (responseData.code === 200) {
-                        // 登录成功
-                        layui.layer.msg(responseData.data.message);
-                        window.location.href = responseData.data.url;
-                        // window.location.href = "/index";
-                    } else {
-                        // 登录失败
-                        layui.layer.msg(responseData.message);
-                    }
-                } else {
-                    // 请求失败，处理错误信息
-                    console.error("请求失败，状态码：" + xhr.status);
-                }
-            };
-            //将表单数据转换为JSON字符串并发送请求
-            xhr.send(JSON.stringify(resp));
-            return false; // 阻止默认 form 跳转
         });
     })
 </script>

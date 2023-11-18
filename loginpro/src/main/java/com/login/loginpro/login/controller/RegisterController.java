@@ -24,7 +24,10 @@ public class RegisterController {
     }
     @PostMapping("/register")
     public Resp register(@RequestBody UserRegisterTo userRegisterTo) {
-        loginService.register(userRegisterTo);
-        return null;
+        if(loginService.register(userRegisterTo)){
+            return Resp.fail("注册成功");
+        } else {
+            return Resp.fail("注册失败");
+        }
     }
 }

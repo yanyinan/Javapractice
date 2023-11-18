@@ -45,10 +45,10 @@ public class LoginController {
             return Resp.fail("验证码错误");
         }
         List<UserLogin> userLoginList = loginService.uselogin(userLoginTo);
-        if (userLoginList.size() != 1) {
-            return Resp.fail("用户名或密码错误");
+        if (userLoginList.size() == 1) {
+            return Resp.ok(userLoginList.get(0));
         }else {
-            return Resp.ok("用户登录成功");
+            return Resp.fail("用户名或密码错误");
         }
     }
     @GetMapping("/captcha")

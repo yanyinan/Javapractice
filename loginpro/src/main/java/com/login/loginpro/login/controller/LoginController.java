@@ -59,6 +59,10 @@ public class LoginController {
         request.getSession().invalidate();
         return "redirect:/login";
     }
+    @GetMapping("/register")
+    public String register() {
+        return "/register";
+    }
     @GetMapping("/index")
     public String index() {
         return "/index";

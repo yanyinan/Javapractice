@@ -14,18 +14,50 @@
     </button>
 </div>
 <style>
-    .class-demo-layer-lockscreen{background: url(https://unpkg.com/outeres@0.0.12/img/wallpaper/001.jpg) #16b777; background-size: cover; color: rgba(255,255,255,1);}
-    .class-demo-layer-lockscreen .layui-form{position: absolute; top: 50%; left: 50%; width: 300px; transform: translate(-50%, -50%);}
-    .class-demo-layer-lockscreen .layui-form > div{margin-bottom: 8px;}
-    .class-demo-layer-pin{width: 100%; height: 38px; padding: 0 8px; background-color: rgba(255,255,255,.8); border: none; border-radius: 3px; box-sizing: border-box;}
-    .class-demo-layer-lockscreen .layui-input-suffix{pointer-events: auto; background-color: rgba(0,0,0,.5); border-radius: 0 3px 3px 0;}
-    .class-demo-layer-lockscreen .layui-input-suffix .layui-icon-right{cursor: pointer; color: #fff;}
+    .class-demo-layer-lockscreen {
+        background: url(https://unpkg.com/outeres@0.0.12/img/wallpaper/001.jpg) #16b777;
+        background-size: cover;
+        color: rgba(255, 255, 255, 1);
+    }
+
+    .class-demo-layer-lockscreen .layui-form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        transform: translate(-50%, -50%);
+    }
+
+    .class-demo-layer-lockscreen .layui-form > div {
+        margin-bottom: 8px;
+    }
+
+    .class-demo-layer-pin {
+        width: 100%;
+        height: 38px;
+        padding: 0 8px;
+        background-color: rgba(255, 255, 255, .8);
+        border: none;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    .class-demo-layer-lockscreen .layui-input-suffix {
+        pointer-events: auto;
+        background-color: rgba(0, 0, 0, .5);
+        border-radius: 0 3px 3px 0;
+    }
+
+    .class-demo-layer-lockscreen .layui-input-suffix .layui-icon-right {
+        cursor: pointer;
+        color: #fff;
+    }
 </style>
 
 <!-- 请勿在项目正式环境中引用该 layui.js 地址 -->
 <script src="//unpkg.com/layui@2.8.18/dist/layui.js"></script>
 <script>
-    layui.use(function(){
+    layui.use(function () {
         var layer = layui.layer;
         var util = layui.util;
         var form = layui.form;
@@ -33,7 +65,7 @@
         // 事件
         util.on('lay-on', {
 
-            'test-more-lockscreen': function(){
+            'test-more-lockscreen': function () {
                 layer.open({
                     type: 1,
                     title: false, // 禁用标题栏
@@ -44,45 +76,25 @@
                     isOutAnim: false, // 禁用关闭动画
                     id: 'ID-layer-demo-inst',
                     skin: 'class-demo-layer-lockscreen', // className
-                    content:[
-                        <div className="layui-form-item">
-                            <div className="layui-row">
-                                <div className="layui-col-xs7">
-                                    <div className="layui-input-wrap">
-                                        <div className="layui-input-prefix">
-                                            <i className="layui-icon layui-icon-vercode"></i>
-                                        </div>
-                                        <input type="text"
-                                               name="captcha"
-                                               id="login-captcha"
-                                               value=""
-                                               lay-verify="required"
-                                               placeholder="验证码"
-                                               lay-reqtext="请填写验证码"
-                                               autoComplete="off"
-                                               className="layui-input"
-                                               lay-affix="clear">
-                                    </div>
-                                </div>
-                                <div className="layui-col-xs5">
-                                    <div style="margin-left: 10px;">
-                                        <img th:src="@{/captcha}"
-                                             onClick="this.src = this.src  +'?'+ Math.random();">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ]
-                    // content: ['<div class="layui-form">',
-                    //     '<div class="layui-input-wrap">',
-                    //     '<input type="password" class="class-demo-layer-pin" lay-affix="eye">',
-                    //     '<div class="layui-input-suffix">',
-                    //     '<i class="layui-icon layui-icon-right" id="ID-layer-demo-unlock"></i>',
-                    //     '</div>',
-                    //     '</div>',
-                    //     '<div>输入 111111 后回车，即可退出锁屏示例</div>',
-                    //     '</div>'].join(''),
-                    success: function(layero, index){
+                    content: [
+                        '<div className="layui-form-item">',
+                        '<div className="layui-row">',
+                        '<div className="layui-col-xs7">',
+                        '<div className="layui-input-wrap">',
+                        '<div className="layui-input-prefix">',
+                        '   <i className="layui-icon layui-icon-vercode"></i>',
+                        '</div>',
+                        ' <input type="text" name="captcha" id="login-captcha" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autoComplete="off" className="layui-input"lay-affix="clear">',
+                        ' </div>',
+                        '</div>',
+                        '<div className="layui-col-xs5">',
+                        '<div style="margin-left: 10px;"><img th:src="@{/captcha}" onClick="this.src = this.src  +' ? '+ Math.random();"> </div>',
+                        '</div>',
+                        '</div>',
+                        '</div>'
+                    ].join('')
+             
+                    success: function (layero, index) {
                         var input = layero.find('input');
                         var PASS = '111111';
 
@@ -90,8 +102,8 @@
                         input.focus();
                         // 点击解锁按钮
                         var elemUnlock = layero.find('#ID-layer-demo-unlock');
-                        elemUnlock.on('click', function(){
-                            if($.trim(input[0].value) === PASS){
+                        elemUnlock.on('click', function () {
+                            if ($.trim(input[0].value) === PASS) {
                                 layer.close(index);
                                 layer.closeLast('dialog'); // 关闭最新打开的信息框
                             } else {
@@ -100,10 +112,10 @@
                             }
                         });
                         // 回车
-                        input.on('keyup', function(e){
+                        input.on('keyup', function (e) {
                             var elem = this;
                             var keyCode = e.keyCode;
-                            if(keyCode === 13){
+                            if (keyCode === 13) {
                                 elemUnlock.trigger('click');
                             }
                         });
@@ -111,7 +123,8 @@
                 })
             }
         });
-    });
+    })
+    ;
 </script>
 
 </body>

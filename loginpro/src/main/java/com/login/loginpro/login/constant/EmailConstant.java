@@ -14,6 +14,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailConstant {
     @Value("${spring.mail.username}")
-    public static final String MAIL_FROM = null;
+    public static final String MAIL_FROM = "2521415655@qq.com";
 
 }

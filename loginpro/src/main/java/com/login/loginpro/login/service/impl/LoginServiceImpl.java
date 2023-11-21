@@ -8,6 +8,7 @@ import com.login.loginpro.login.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -96,6 +97,25 @@ public class LoginServiceImpl implements ILoginService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<UserLogin> selectByMsg(UserLoginTo userLoginto) {
+        if (userLoginto!= null){
+            UserLogin userLogin = new UserLogin();
+            if (userLoginto.getLid()!= null ){
+                userLogin.setLid(userLoginto.getLid());
+            }
+            if ( userLoginto.getEmail()!= null){
+                userLogin.setEmail(userLoginto.getEmail());
+            }
+            if (userLoginto.getPhone()!= null){
+                userLogin.setPhone(userLoginto.getPhone());
+            }
+            return userLoginMapper.selectBy(userLogin);
+        }else {
+            return null;
+        }
     }
 
     /**

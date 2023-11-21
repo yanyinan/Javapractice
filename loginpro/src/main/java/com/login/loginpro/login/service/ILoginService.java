@@ -4,6 +4,8 @@ import com.login.loginpro.core.model.UserLogin;
 import com.login.loginpro.login.model.UserLoginTo;
 import com.login.loginpro.login.model.UserRegisterTo;
 
+import java.util.List;
+
 /**
  * @project: loginpro
  * @title: ILoginService （默认）
@@ -17,4 +19,5 @@ public interface ILoginService {
     UserLogin getUserLogin(UserLoginTo userLoginTo);
 
     Boolean register(UserRegisterTo userRegisterTo);
+    List<UserLogin> selectByMsg(UserLoginTo userLoginto);
 }

@@ -2,6 +2,7 @@ package com.login.loginpro.login.utils;
 
 
 
+import com.login.loginpro.core.utils.send.SendEmailUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,29 +15,22 @@ import javax.mail.internet.MimeMessage;
 
 @SpringBootTest
 public class SendCodeTest {
-
     @Autowired
-    private JavaMailSender javaMailSender;
+    private SendCode sendCode;
     @Test
-    public void testSendMimeMail() throws MessagingException {
-        System.out.println(javaMailSender);
-        //创建一封mime邮件
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        //创建mime邮件的辅助类对象，将mime设置为muitipart类型
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-        //设置邮件标题和内容
-        helper.setSubject("开发喵用户激活邮件");
-        helper.setText(SendCode.generateCode());
-        //设置发件人和收件人
-        helper.setTo("2648179906@qq.com");
-        helper.setFrom("2521415655@qq.com");
-        //发送邮件
-        javaMailSender.send(mimeMessage);
+    public void testSendMimeMailForLoginVerification() throws MessagingException {
+        String to = "2648179906@qq.com";
+        int code = 0;
+        sendCode.SendMimeMail(to, code);
+
     }
 
     @Test
-    public void testGenerateCode() {
-        String code = SendCode.generateCode();
-        System.out.println(code);
+    public void testSendMimeMailForRegistrationVerification() throws MessagingException {
+        String to = "test@example.com";
+        int code = 1;
+
+        sendCode.SendMimeMail(to, code);
+
     }
 }

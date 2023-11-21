@@ -8,5 +8,6 @@ package com.login.loginpro.core.utils.send;
  * @version: v0.0.1
  * @Date: 16:29
  */
-public class SendPhoneUtil {
+public class SendPhoneUtil  {
+
 }

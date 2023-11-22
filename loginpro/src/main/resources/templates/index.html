@@ -71,23 +71,22 @@
                     isOutAnim: false, // 禁用关闭动画
                     id: 'ID-layer-demo-inst',
                     skin: 'class-demo-layer-lockscreen', // className
-                    content: [
-                        '<div className="layui-form-item">',
-                        '<div className="layui-row">',
-                        '<div className="layui-col-xs7">',
-                        '<div className="layui-input-wrap">',
-                        '<div className="layui-input-prefix">',
-                        '   <i className="layui-icon layui-icon-vercode"></i>',
+                    content: ['<div class="layui-form">',
+                        '<div class="layui-input-wrap">',
+                        ' <input type="text" name="captcha"' +
+                        ' id="login-captcha" value="" ' +
+                        'lay-verify="required" placeholder="验证码"' +
+                        ' lay-reqtext="请填写验证码" autoComplete="off"' +
+                        ' className="layui-input"lay-affix="clear"' +
+                        'id="ID-layer-demo-unlock">',
+                        '<div class="layui-input-suffix">',
+                        '<i class="layui-icon layui-icon-right" id="ID-layer-demo-unlock"></i>',
                         '</div>',
-                        ' <input type="text" name="captcha" id="login-captcha" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autoComplete="off" className="layui-input"lay-affix="clear">',
-                        ' </div>',
-                        '</div>',
-                        '<div className="layui-col-xs5">',
-                        '<div style="margin-left: 10px;"><img th:src="@{/captcha}" onClick="this.src = this.src  +' ? '+ Math.random();"> </div>',
+                        '<div style="margin-left: 10px;">' +
+                        '<img th:src="@{/captcha}" onClick="this.src = this.src  +` ? `+ Math.random();"> </div>',
                         '</div>',
                         '</div>',
-                        '</div>'
-                    ].join(''),
+                        '</div>'].join(''),
 
                     success: function (layero, index) {
                         var input = layero.find('input');

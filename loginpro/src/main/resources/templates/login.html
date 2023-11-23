@@ -371,11 +371,9 @@
                     layer.msg('验证码发送中');
                     var email = "2648179906@qq.com";
                     var xhr = new XMLHttpRequest();
-                    xhr.open("GET", "/getCode", true);
+                    xhr.open("POST", "/getCode", true);
                     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                    xhr.send(JSON.stringify({
-                        "email": email
-                    }));
+                    xhr.send(JSON.stringify({ "email": "2648179906@qq.com" }));
                     xhr.onreadystatechange = function () {
                         if (xhr.status === 200 && xhr.readyState === 4) {
                             // 请求成功，处理响应数据

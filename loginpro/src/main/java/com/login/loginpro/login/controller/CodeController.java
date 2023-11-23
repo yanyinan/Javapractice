@@ -31,7 +31,7 @@ public class CodeController {
     public CodeController(ILoginService loginService) {
         this.loginService = loginService;
     }
-    @GetMapping ("/getCode")
+    @PostMapping ("/getCode")
     public Resp getCode(@RequestParam String email) throws MessagingException {
         int code = 0;
 //        if (userLoginto != null && loginService.selectByMsg(userLoginto) != null) {

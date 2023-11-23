@@ -369,9 +369,10 @@
                 // 验证通过
                 if (isvalid) {
                     layer.msg('验证码发送中');
-                    var email = $('#login-email').val();
+                    var email = "2648179906@qq.com";
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/login/getMailCode", true);
+                    xhr.open("GET", "/getCode", true);
+                    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                     xhr.send(JSON.stringify({
                         "email": email
                     }));

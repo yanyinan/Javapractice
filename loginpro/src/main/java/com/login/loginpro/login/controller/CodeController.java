@@ -5,9 +5,12 @@ import com.login.loginpro.core.utils.model.Resp;
 import com.login.loginpro.login.model.UserLoginTo;
 import com.login.loginpro.login.service.ILoginService;
 import com.login.loginpro.login.utils.SendCode;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
 
@@ -28,15 +31,18 @@ public class CodeController {
     public CodeController(ILoginService loginService) {
         this.loginService = loginService;
     }
-    @PostMapping("/getCode")
-    public Resp getCode(UserLoginTo userLoginto) throws MessagingException {
+    @GetMapping ("/getCode")
+    public Resp getCode(@RequestParam String email) throws MessagingException {
         int code = 0;
-        if (userLoginto != null && loginService.selectByMsg(userLoginto) != null) {
-            if (userLoginto.getPhone() != null) {
-                sendCode.SendMimeMail(userLoginto.getEmail(),0);
-            } else if (userLoginto.getEmail() != null) {
-                sendCode.SendMimeMail(userLoginto.getEmail(),0);
-            }
+//        if (userLoginto != null && loginService.selectByMsg(userLoginto) != null) {
+//            if (userLoginto.getPhone() != null) {
+//                sendCode.SendMimeMail(userLoginto.getEmail(),0);
+//            } else if (userLoginto.getEmail() != null) {
+//                sendCode.SendMimeMail(userLoginto.getEmail(),0);
+//            }
+//        }
+        if (email!= null) {
+            sendCode.SendMimeMail(email,code);
         }
         return null;
     }

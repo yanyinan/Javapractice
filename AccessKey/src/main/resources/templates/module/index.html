@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>仪表盘</title>
+
+    <!-- 引入layui样式文件 -->
+    <link rel="stylesheet" href="/layui/css/layui.css">
+
+    <!-- 自定义样式 -->
+    <style>
+        /* 在这里可以添加自定义的样式 */
+    </style>
+</head>
+<body class="layui-layout-body">
+
+<!-- 构架容器 -->
+<div class="layui-layout layui-layout-admin">
+
+    <!-- 顶部区域 -->
+    <div class="layui-header">
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <!-- 在这里可以添加头部内容 -->
+    </div>
+
+    <!-- 侧边导航栏 -->
+    <div class="layui-side layui-bg-black">
+        <!-- 侧边导航区域（可配合layui已有的垂直导航） -->
+        <!-- 在这里可以添加侧边导航内容 -->
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <!-- 在这里可以添加仪表盘的内容 -->
+            <div class="layui-card">
+                <div class="layui-card-header">仪表盘</div>
+                <div class="layui-card-body">
+                    <!-- 在这里放置仪表盘的具体内容 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部信息 -->
+    <div class="layui-footer">
+        <!-- 底部区域 -->
+        <!-- 在这里可以添加底部内容 -->
+    </div>
+</div>
+
+<!-- 引入layui.js -->
+<script src="/layui/layui.js"></script>
+
+<!-- 在这里放置你的JavaScript代码 -->
+<script>
+    // 在这里可以添加自定义的JavaScript代码
+    layui.use(['element', 'layer'], function(){
+        // 在这里可以使用Layui的组件
+    });
+</script>
+
+</body>
+</html>

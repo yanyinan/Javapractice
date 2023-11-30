@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+</head>
+
+<body>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column; /* 添加这一行，使子元素在垂直方向上排列 */
+
+    }
+
+
+    .layui-input-wrap {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .layui-input-wrap .layui-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .layui-input-wrap input {
+        width: 100%; /* 确保输入框占满 .layui-input-wrap 的宽度 */
+        padding-left: 30px;
+        box-sizing: border-box;
+    }
+
+    .demo-reg-container {
+        width: 320px;
+        margin: 21px auto 0;
+    }
+
+    .demo-reg-container .layui-form-item {
+        margin-bottom: 20px;
+    }
+
+    .demo-reg-other .layui-icon {
+        position: relative;
+        display: inline-block;
+        margin: 0 2px;
+        top: 2px;
+        font-size: 26px;
+    }
+
+    h1 {
+        font-size: 30px; /* 自定义字体大小 */
+        color: #009688; /* 自定义字体颜色 */
+        font-family: '微软雅黑', sans-serif; /* 自定义字体样式 */
+        margin-bottom: 20px; /* 调整标题与表单之间的间距 */
+    }
+</style>
+<h1 class="layui-form-label">注册</h1>
+<form class="layui-form" id="username-form" action="javascript:void(0)">
+    <div class="demo-reg-container">
+        <!-- 用户名注册表单元素 -->
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-username"></i>
+                </div>
+                <input type="text" name="username" value="" lay-verify="required|username" placeholder="用户名"
+                       lay-reqtext="请输入您的用户名" autocomplete="off" class="layui-input"
+                       lay-filter="username-filter">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="password" value="" lay-verify="required|password" placeholder="密码"
+                       autocomplete="off" class="layui-input" id="reg-password-username" lay-affix="eye|always">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="confirmPassword" value="" lay-verify="required|confirmPassword"
+                       placeholder="确认密码" autocomplete="off" class="layui-input" lay-affix="eye|always">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-xs7">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-vercode"></i>
+                        </div>
+                        <input type="text" name="captcha" value="" lay-verify="required" placeholder="验证码"
+                               lay-reqtext="请填写验证码" autocomplete="off" class="layui-input" lay-affix="clear">
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <div style="margin-left: 10px;">
+                        <img th:src="@{captcha}" id="captchaImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">注册</button>
+        </div>
+        <div class="layui-form-item demo-reg-other">
+            <label>其他注册方式</label>
+            <span style="padding: 0 21px 0 6px;">
+                    <a href="javascript:;" class="icon-toggle" data-target="phone-form"><i
+                            class="layui-icon layui-icon-cellphone" style="color: #3492ed;"></i></a>
+                    <a href="javascript:;" class="icon-toggle" data-target="email-form"><i
+                            class="layui-icon layui-icon-email" style="color: #3498db;"></i></a>
+                </span>
+            <a th:href="@{/login}">登录已有帐号</a>
+        </div>
+    </div>
+</form>
+
+<!-- 手机号注册表单 -->
+<form class="layui-form" id="phone-form" style="display: none;" action="javascript:void(0)">
+    <div class="demo-reg-container">
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-xs7">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-cellphone"></i>
+                        </div>
+                        <input type="text" name="cellphone" value="" lay-verify="required|cellphone"
+                               placeholder="手机号" lay-reqtext="请填写手机号" autocomplete="off" class="layui-input"
+                               id="reg-cellphone">
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <div style="margin-left: 11px;">
+                        <button type="button" class="layui-btn layui-btn-fluid layui-btn-primary"
+                                lay-on="reg-get-vercode" id="send-registration-phone">获取验证码
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-vercode"></i>
+                </div>
+                <input type="text" name="vercode" value="" lay-verify="required" placeholder="验证码"
+                       lay-reqtext="请填写验证码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="password" value="" lay-verify="required|password" placeholder="密码"
+                       autocomplete="off" class="layui-input" id="reg-password-phone" lay-affix="eye|always">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="confirmPassword" value="" lay-verify="required|confirmPassword"
+                       placeholder="确认密码" autocomplete="off" class="layui-input" lay-affix="eye|always">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">注册</button>
+        </div>
+        <div class="layui-form-item demo-reg-other">
+            <label>邮箱或手机注册</label>
+            <span style="padding: 0 21px 0 6px;">
+                    <a href="javascript:;" class="icon-toggle" data-target="email-form"><i
+                            class="layui-icon layui-icon-email" style="color: #3498db;"></i></a>
+                    <a href="javascript:;" class="icon-toggle" data-target="username-form"><i
+                            class="layui-icon layui-icon-user" style="color: #3498db;"></i></a>
+                </span>
+            <a th:href="@{/login}">登录已有帐号</a>
+        </div>
+    </div>
+</form>
+
+<!-- 邮箱注册表单 -->
+<form class="layui-form" id="email-form" style="display: none;" action="javascript:void(0)">
+    <div class="demo-reg-container">
+        <div class="layui-form-item">
+
+            <div class="layui-row">
+                <div class="layui-col-xs7">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-email"></i>
+                        </div>
+                        <input type="text" name="email" value="" lay-verify="required|email" placeholder="邮箱"
+                               lay-reqtext="请填写邮箱" autocomplete="off" class="layui-input" id="reg-email">
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <div style="margin-left: 11px;">
+                        <button type="button" class="layui-btn layui-btn-fluid layui-btn-primary"
+                                lay-on="reg-get-vercode" id="send-registration-email">发送注册链接
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="password" value="" lay-verify="required|password" placeholder="密码"
+                       autocomplete="off" class="layui-input" id="reg-password-email" lay-affix="eye|always">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" name="confirmPassword" value="" lay-verify="required|confirmPassword"
+                       placeholder="确认密码" autocomplete="off" class="layui-input" lay-affix="eye|always">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">注册</button>
+        </div>
+        <div class="layui-form-item demo-reg-other">
+            <label>社交账号注册</label>
+            <span style="padding: 0 21px 0 6px;">
+                    <a href="javascript:;" class="icon-toggle" data-target="phone-form"><i
+                            class="layui-icon layui-icon-cellphone" style="color: #3492ed;"></i></a>
+                    <a href="javascript:;" class="icon-toggle" data-target="username-form"><i
+                            class="layui-icon layui-icon-user" style="color: #3498db;"></i></a>
+                </span>
+            <a th:href="@{/login}">登录已有帐号</a>
+        </div>
+    </div>
+</form>
+<script th:src="@{/js/jQuery.js}"></script>
+<script th:src="@{/js/anxious.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+
+<script type="text/javascript" th:inline="javascript">
+
+    const ctx = /*[[@{/}]]*/''; // 项目路径
+    // 当前窗口 不是最外层窗口
+    if (window != window.top) {
+        // 父窗口 window.parent，最外层窗口 window.top
+        window.top.location.href = ctx;
+    }
+
+</script>
+<script th:src="@{/service/register.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Demo</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <script th:src="@{/js/jQuery.js}"></script>
+    <script th:src="@{/js/anxious.js}"></script>
+</head>
+
+<body>
+<style>
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column; /* 添加这一行，使子元素在垂直方向上排列 */
+    }
+
+    .layui-input-wrap {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .layui-input-wrap .layui-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .layui-input-wrap input {
+        width: 100%;
+        padding-left: 30px;
+        box-sizing: border-box;
+    }
+
+    .demo-login-container {
+        width: 320px;
+        margin: 21px auto 0;
+    }
+
+    .demo-login-container .layui-form-item {
+        margin-bottom: 20px;
+    }
+
+    .demo-login-other .layui-icon {
+        position: relative;
+        display: inline-block;
+        margin: 0 2px;
+        top: 2px;
+        font-size: 26px;
+    }
+    h1 {
+        font-size: 30px; /* 自定义字体大小 */
+        color: #009688; /* 自定义字体颜色 */
+        font-family: '微软雅黑', sans-serif; /* 自定义字体样式 */
+        margin-bottom: 20px; /* 调整标题与表单之间的间距 */
+    }
+</style>
+
+
+<!-- 用户名登录表单 -->
+<h1 class="layui-form-label">登录</h1>
+<form class="layui-form" id="username-form">
+
+    <div class="demo-login-container">
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-username"></i>
+                </div>
+                <input type="text" name="username" value="" lay-verify="required|username" placeholder="用户名"
+                       lay-reqtext="请输入您的用户名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-password"></i>
+                </div>
+
+                <input type="password" name="password" value="" lay-verify="required|password" placeholder="密码"
+                       autocomplete="off" class="layui-input" lay-affix="eye|always">
+
+            </div>
+        </div>
+        <div class="layui-form-item" th:if="${#session.getAttribute('showCaptcha')}">
+            <div class="layui-row">
+                <div class="layui-col-xs7">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-vercode"></i>
+                        </div>
+                        <input type="text" name="captcha" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input" lay-affix="clear">
+
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <div style="margin-left: 10px;">
+                        <img th:src="@{captcha}"  class="captchaImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-form-item">
+                <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                <a th:href="@{/forget}" style="float: right; margin-top: 7px;">忘记密码？</a>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">登录</button>
+        </div>
+        <div class="layui-form-item demo-login-other">
+            <label>其他登录方式</label>
+            <span style="padding: 0 21px 0 6px;">
+                    <a href="javascript:;" class="icon-toggle" data-target="phone-form"><i
+                            class="layui-icon layui-icon-cellphone" style="color: #3492ed;"></i></a>
+                    <a href="javascript:;" class="icon-toggle" data-target="email-form"><i
+                            class="layui-icon layui-icon-email" style="color: #3498db;"></i></a>
+                </span>
+            <a th:href="@{/register}">没有帐号,去注册</a>
+        </div>
+    </div>
+</form>
+
+<!-- 手机号登录表单 -->
+<form class="layui-form" id="phone-form" style="display: none;">
+    <div class="demo-login-container">
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-xs7">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-cellphone"></i>
+                        </div>
+                        <input type="text" name="cellphone" value="" lay-verify="required|cellphone"
+                               placeholder="手机号" lay-reqtext="请填写手机号" autocomplete="off" class="layui-input"
+                               id="reg-cellphone">
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <div style="margin-left: 11px;">
+                        <button type="button" class="layui-btn layui-btn-fluid layui-btn-primary"
+                                lay-on="reg-get-vercode" id="send-login-phone">获取验证码
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-vercode"></i>
+                </div>
+                <input type="text" name="vercode" value="" lay-verify="required" placeholder="验证码"
+                       lay-reqtext="请填写验证码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" th:if="${#session.getAttribute('showCaptcha')}">
+            <div class="layui-row">
+                <div class="layui-col-xs7">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-vercode"></i>
+                        </div>
+                        <input type="text" name="captcha" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input" lay-affix="clear">
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <div style="margin-left: 10px;">
+                        <img th:src="@{captcha}"  class="captchaImg" id="captchaIMGPhone">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-form-item">
+                <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                <a th:href="@{/forget}" style="float: right; margin-top: 7px;">忘记密码？</a>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">登录</button>
+        </div>
+        <div class="layui-form-item demo-login-other">
+            <label>其他登录方式</label>
+            <span style="padding: 0 21px 0 6px;">
+                    <a href="javascript:;" class="icon-toggle" data-target="email-form"><i
+                            class="layui-icon layui-icon-email" style="color: #3498db;"></i></a>
+                    <a href="javascript:;" class="icon-toggle" data-target="username-form"><i
+                            class="layui-icon layui-icon-user" style="color: #3498db;"></i></a>
+                </span>
+            <a th:href="@{/register}">没有帐号,去注册</a>
+        </div>
+    </div>
+</form>
+
+<!-- 邮箱登录表单 -->
+<form class="layui-form" id="email-form" style="display: none;">
+    <div class="demo-login-container">
+        <div class="layui-form-item">
+
+            <div class="layui-row">
+                <div class="layui-col-xs7">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-email"></i>
+                        </div>
+                        <input type="text" name="email" value="" lay-verify="required|email" placeholder="邮箱"
+                               lay-reqtext="请填写邮箱" autocomplete="off" class="layui-input" id="reg-email">
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <div style="margin-left: 11px;">
+                        <button type="button" class="layui-btn layui-btn-fluid layui-btn-primary"
+                                lay-on="reg-get-vercode" id="send-login-email">发送验证码
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-vercode"></i>
+                </div>
+                <input type="text" name="vercode" value="" lay-verify="required" placeholder="验证码"
+                       lay-reqtext="请填写验证码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" th:if="${#session.getAttribute('showCaptcha')}">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-vercode"></i>
+                </div>
+                <input type="text" name="vercode" value="" lay-verify="required" placeholder="验证码"
+                       lay-reqtext="请填写验证码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-form-item">
+                <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                <a th:href="@{/forget}" style="float: right; margin-top: 7px;">忘记密码？</a>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">登录</button>
+        </div>
+        <div class="layui-form-item demo-login-other">
+            <label>其他登录方式</label>
+            <span style="padding: 0 21px 0 6px;">
+                    <a href="javascript:;" class="icon-toggle" data-target="phone-form"><i
+                            class="layui-icon layui-icon-cellphone" style="color: #3492ed;"></i></a>
+                    <a href="javascript:;" class="icon-toggle" data-target="username-form"><i
+                            class="layui-icon layui-icon-user" style="color: #3498db;"></i></a>
+                </span>
+            <a th:href="@{/register}">没有帐号,去注册</a>
+        </div>
+    </div>
+</form>
+<script th:src="@{/js/jQuery.js}"></script>
+<script th:src="@{/js/anxious.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<!--<script th:src="@{/js/jsencrypt.min.js}"></script>-->
+<script type="text/javascript" th:inline="javascript">
+
+    const ctx = /*[[@{/}]]*/''; // 项目路径
+    // 当前窗口 不是最外层窗口
+    if (window !== window.top) {
+        // 父窗口 window.parent，最外层窗口 window.top
+        window.top.location.href = ctx;
+    }
+
+</script>
+<script th:src="@{/service/login.js}">
+
+</script>
+</body>
+
+</html>
